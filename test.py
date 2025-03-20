@@ -9,7 +9,7 @@ from io import BytesIO
 def create_test_data():
     # Testdaten für Stundenplandaten aus Untis
     timetable_data = {
-        'Klasse': ['10A', '10B', 'Abschluss 11', '10A'],
+        'Klasse': ['10AB', '10B', 'Abschluss 11', '10A'],
         'Datum': ['2024-05-10', '2024-05-10', '2024-05-10', '2024-05-11'],
         'Uhrzeit': ['08:00', '09:00', '10:00', '11:00'],
         'Lehrkraft': ['Herr Müller', 'Frau Schmidt', 'Herr Meier', 'Frau Schulze'],

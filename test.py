@@ -1,130 +1,185 @@
+import json
+import requests
 import pandas as pd
 import datetime
 import qrcode
 from io import BytesIO
+import os
+import logging
+
+# Konfiguration
+logging.basicConfig(level=logging.INFO)
+WEBUNTIS_BASE_URL = "https://www.htl-steyr.ac.at/intern/webuntis/execute.php"
+KV_DEPARTMENT_IDS = [34]  # Anpassen nach tatsächlichen KV-DIDs
+WL_DEPARTMENT_IDS = [35]  # Anpassen nach tatsächlichen WL-DIDs
+
 
 # -------------------------------
-# Testdaten erzeugen und speichern
+# WebUntis Datenabfrage
 # -------------------------------
-def create_test_data():
-    # Testdaten für Stundenplandaten aus Untis
-    timetable_data = {
-        'Klasse': ['10A', '10B', 'Abschluss 11', '10A'],
-        'Datum': ['2024-05-10', '2024-05-10', '2024-05-10', '2024-05-11'],
-        'Uhrzeit': ['08:00', '09:00', '10:00', '11:00'],
-        'Lehrkraft': ['Herr Müller', 'Frau Schmidt', 'Herr Meier', 'Frau Schulze'],
-        'Raum_Klasse': ['Raum 101', 'Raum 102', 'Raum 103', 'Raum 101'],
-        'Raum_KV': ['Raum 201', 'Raum 202', 'Raum 203', 'Raum 201'],
-        'Benachrichtigung': ['ja', 'ja', 'nein', 'ja']
-    }
-    timetable_df = pd.DataFrame(timetable_data)
-    timetable_file = 'timetable.csv'
-    timetable_df.to_csv(timetable_file, index=False, sep=';')
-    print(f"Testdaten für Stundenplan wurden als {timetable_file} gespeichert.")
+def fetch_webuntis_teachers():
+    """Holt Lehrerliste von WebUntis"""
+    url = f"{WEBUNTIS_BASE_URL}/getTeachers"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        logging.error(f"Fehler beim Abrufen der Lehrer: {e}")
+        return []
 
-    # Testdaten für Lehrkräfte- und Verantwortlichkeitsliste
-    teacher_data = {
-        'Name': ['Herr Müller', 'Frau Schmidt', 'Herr Meier', 'Frau Schulze', 'Herr Becker'],
-        'Rolle': ['KV', 'Lehrer', 'WL', 'KV', 'Lehrer']
-    }
-    teacher_df = pd.DataFrame(teacher_data)
-    teacher_file = 'teacher_info.csv'
-    teacher_df.to_csv(teacher_file, index=False, sep=';')
-    print(f"Testdaten für Lehrkräfte wurden als {teacher_file} gespeichert.")
+
+def fetch_webuntis_timetable(class_id):
+    """Holt Stundenplan für eine Klasse"""
+    params = json.dumps({"id": str(class_id), "type": 2})
+    url = f"{WEBUNTIS_BASE_URL}/getTimeTable/{params}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        logging.error(f"Fehler beim Abrufen des Stundenplans für Klasse {class_id}: {e}")
+        return []
+
+
+def transform_teacher_data(teachers):
+    """Transformiert Rohdaten in DataFrame"""
+    transformed = []
+    for teacher in teachers:
+        transformed.append({
+            'id': teacher['id'],
+            'Name': f"{teacher['title']} {teacher['longName']}",
+            'dids': [d['id'] for d in teacher.get('dids', [])]
+        })
+    return pd.DataFrame(transformed)
+
+
+def transform_timetable_data(timetable):
+    """Transformiert Stundenplandaten"""
+    transformed = []
+    for entry in timetable:
+        date = datetime.datetime.fromtimestamp(entry['date'] / 1000).strftime('%Y-%m-%d')
+        start = datetime.datetime.fromtimestamp(entry['startTime'] / 1000).strftime('%H:%M')
+        end = datetime.datetime.fromtimestamp(entry['endTime'] / 1000).strftime('%H:%M')
+
+        transformed.append({
+            'Klasse': entry.get('className', ''),
+            'Datum': date,
+            'Startzeit': start,
+            'Endzeit': end,
+            'Lehrkräfte': ', '.join([str(t.get('id', '')) for t in entry.get('teachers', [])]),
+            'Raum': entry.get('rooms', [''])[0]
+        })
+    return pd.DataFrame(transformed)
+
 
 # -------------------------------
-# Funktionen zur Terminplanung
+# Terminplanungslogik
 # -------------------------------
-def load_data(timetable_file, teacher_file):
-    timetable_df = pd.read_csv(timetable_file, delimiter=';')
-    teacher_df = pd.read_csv(teacher_file, delimiter=';')
-    return timetable_df, teacher_df
+def is_preferred_teacher(teacher_id, teachers_df):
+    """Prüft ob Lehrer KV/WL ist"""
+    teacher = teachers_df[teachers_df['id'] == teacher_id]
+    if not teacher.empty:
+        dids = teacher.iloc[0]['dids']
+        return any(d in KV_DEPARTMENT_IDS + WL_DEPARTMENT_IDS for d in dids)
+    return False
 
-def is_preferred_teacher(lehrkraft, teacher_df):
-    preferred_roles = ['KV', 'WL']
-    return not teacher_df[(teacher_df['Name'] == lehrkraft) & (teacher_df['Rolle'].isin(preferred_roles))].empty
 
-def calculate_photo_time(row, duration_minutes=10):
-    lesson_time = datetime.datetime.strptime(row['Uhrzeit'], '%H:%M')
-    if row['preferred']:
-        photo_time = lesson_time
-    else:
-        photo_time = lesson_time + datetime.timedelta(minutes=5)
-    if 'Abschluss' in row['Klasse']:
-        duration_minutes = 15
-    return photo_time.strftime('%H:%M'), duration_minutes
+def find_best_slot(timetable_df, teachers_df, klasse):
+    """Findet den besten Termin für Klassenfotos"""
+    preferred_slots = []
+    other_slots = []
 
-def schedule_class_photos(timetable_df, teacher_df):
-    timetable_df['preferred'] = timetable_df['Lehrkraft'].apply(lambda x: is_preferred_teacher(x, teacher_df))
-    schedule = []
-    for index, row in timetable_df.iterrows():
-        photo_time, duration = calculate_photo_time(row)
-        entry = {
-            'Klasse': row['Klasse'],
-            'Datum': row['Datum'],
-            'Fototermin': photo_time,
-            'Dauer (Min.)': duration,
-            'Raum': row['Raum_Klasse'],
-            'Lehrkraft': row['Lehrkraft'],
-            'Priorität': '1' if row['preferred'] else '2'
+    for _, lesson in timetable_df.iterrows():
+        teachers = [int(t) for t in lesson['Lehrkräfte'].split(', ') if t]
+        preferred = any(is_preferred_teacher(t, teachers_df) for t in teachers)
+
+        slot = {
+            'Datum': lesson['Datum'],
+            'Start': lesson['Startzeit'],
+            'Ende': lesson['Endzeit'],
+            'Raum': lesson['Raum'],
+            'Priorität': 1 if preferred else 2
         }
-        schedule.append(entry)
-    schedule_df = pd.DataFrame(schedule)
-    return schedule_df
 
-def generate_email_text(schedule_df):
-    email_text = ("Liebe Kolleginnen und Kollegen,\n\n"
-                  "anbei erhalten Sie die Terminliste für die anstehenden Klassenfotos.\n"
-                  "Bitte beachten Sie die folgenden Hinweise:\n"
-                  "- Termin: Datum, Uhrzeit und Raum laut angehängter Liste\n"
-                  "- Bei Rückfragen wenden Sie sich bitte an die Verwaltung.\n\n"
-                  "Viele Grüße\nIhr Fototeam\n\n"
-                  "Terminübersicht:\n")
+        if preferred:
+            preferred_slots.append(slot)
+        else:
+            other_slots.append(slot)
+
+    # Priorisierte Slots zuerst
+    return preferred_slots + other_slots
+
+
+# -------------------------------
+# Ausgabegenerierung
+# -------------------------------
+def generate_schedule(slots, klasse):
+    """Erstellt den Fototerminplan"""
+    schedule = []
+    duration = 15 if 'Abschluss' in klasse else 10
+
+    for slot in slots[:1]:  # Nimm den ersten passenden Slot
+        schedule.append({
+            'Klasse': klasse,
+            'Datum': slot['Datum'],
+            'Zeit': slot['Start'],
+            'Dauer': duration,
+            'Raum': slot['Raum'],
+            'Priorität': slot['Priorität']
+        })
+
+    return pd.DataFrame(schedule)
+
+
+def generate_email_content(schedule_df):
+    """Generiert E-Mail Text mit Terminliste"""
+    email_text = """Sehr geehrte Lehrkräfte,
+
+im Anhang finden Sie die Terminliste für die Klassenfotos:
+
+"""
     for _, row in schedule_df.iterrows():
-        email_text += (f"{row['Datum']} - Klasse {row['Klasse']} um {row['Fototermin']} in Raum {row['Raum']} "
-                       f"(Priorität: {row['Priorität']})\n")
+        email_text += f"{row['Datum']} {row['Zeit']} - Klasse {row['Klasse']} ({row['Dauer']} Min.) in {row['Raum']}\n"
+
+    email_text += "\nBitte beachten Sie die Termine!\n\nFreundliche Grüße\nFototeam"
     return email_text
 
-def generate_qr_code(data, filename='qr_bestellung.png'):
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(data)
-    qr.make(fit=True)
-    img = qr.make_image(fill='black', back_color='white')
-    img.save(filename)
-    print(f"QR-Code gespeichert als {filename}")
 
 # -------------------------------
-# Hauptfunktion
+# Hauptprogramm
 # -------------------------------
 def main():
-    # Erstelle Testdaten
-    create_test_data()
-    
-    # Dateinamen der Testdaten
-    timetable_file = 'timetable.csv'
-    teacher_file = 'teacher_info.csv'
-    
-    # Daten laden
-    timetable_df, teacher_df = load_data(timetable_file, teacher_file)
-    
-    # Terminplanung durchführen
-    schedule_df = schedule_class_photos(timetable_df, teacher_df)
-    
-    # Speichern der finalen Terminliste als CSV
-    output_csv = 'einteilung_fotos_final.csv'
-    schedule_df.to_csv(output_csv, index=False, sep=';')
-    print(f"Terminliste wurde als {output_csv} gespeichert.")
-    
-    # E-Mail Text generieren und speichern
-    email_text = generate_email_text(schedule_df)
-    with open('email_text.txt', 'w', encoding='utf-8') as f:
+    # Daten abrufen
+    teachers = fetch_webuntis_teachers()
+    teachers_df = transform_teacher_data(teachers)
+
+    # Beispielklassen (in Produktion alle Klassen holen)
+    sample_classes = ['10A', '11B', 'Abschluss 12C']
+
+    all_schedules = []
+
+    for klasse in sample_classes:
+        # Stundenplan für Klasse holen
+        timetable = fetch_webuntis_timetable(523)  # ID muss angepasst werden
+        timetable_df = transform_timetable_data(timetable)
+
+        # Terminplanung
+        slots = find_best_slot(timetable_df, teachers_df, klasse)
+        class_schedule = generate_schedule(slots, klasse)
+        all_schedules.append(class_schedule)
+
+    # Gesamtplan erstellen
+    final_schedule = pd.concat(all_schedules)
+    final_schedule.to_excel('Klassenfoto_Plan.xlsx', index=False)
+
+    # E-Mail generieren
+    email_text = generate_email_content(final_schedule)
+    with open('Email_Versand.txt', 'w') as f:
         f.write(email_text)
-    print("E-Mail Text wurde als email_text.txt gespeichert.")
-    
-    # QR-Code generieren (Beispiel-Daten)
-    bestell_data = "Bestellung Klassenfoto, Termin: siehe Anhang, Klasse: Beispielklasse, KV: Mustermann"
-    generate_qr_code(bestell_data)
+
+    logging.info("Planung erfolgreich abgeschlossen!")
+
 
 if __name__ == "__main__":
     main()
-

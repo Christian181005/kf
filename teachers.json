@@ -1,0 +1,2214 @@
+[
+    {
+        "id": 429,
+        "name": "ACHE",
+        "foreName": "Evelyn",
+        "longName": "ACHLEITNER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 430,
+        "name": "AIGS",
+        "foreName": "Simone",
+        "longName": "AIGLSTORFER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 720,
+        "name": "aigne",
+        "foreName": "Johann",
+        "longName": "AIGNER",
+        "title": "Schulwart",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 670,
+        "name": "AMOT",
+        "foreName": "Thomas",
+        "longName": "AMON",
+        "title": "Prof. Mag. BSc",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 896,
+        "name": "ARTC",
+        "foreName": "Christina",
+        "longName": "ARTMAYR",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 431,
+        "name": "BACR",
+        "foreName": "Reinhard",
+        "longName": "BACHNER",
+        "title": "Prof. OStR DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 800,
+        "name": "BAIS",
+        "foreName": "Sandra",
+        "longName": "BAIREDER",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 570,
+        "name": "BAUU",
+        "foreName": "Ursula",
+        "longName": "BAUERNSCHMIEDT",
+        "title": "Prof. MMag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 660,
+        "name": "BENT",
+        "foreName": "Timea",
+        "longName": "BENEDEK",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 434,
+        "name": "BENE",
+        "foreName": "Alfred",
+        "longName": "BENEDETTO",
+        "title": "Prof. OStR DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 730,
+        "name": "hbrandhuber",
+        "foreName": "Helga",
+        "longName": "BRANDHUBER",
+        "title": "Administration",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 437,
+        "name": "BREU",
+        "foreName": "Karl",
+        "longName": "BREURATHER",
+        "title": "Prof. OStR Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 439,
+        "name": "CATD",
+        "foreName": "Doris",
+        "longName": "CATEL",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 735,
+        "name": "rdamhofer",
+        "foreName": "Robert",
+        "longName": "DAMHOFER",
+        "title": "IT-Systembetreuer",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 442,
+        "name": "DERM",
+        "foreName": "Markus",
+        "longName": "DERFLINGER",
+        "title": "FOL DP BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 805,
+        "name": "ECKC",
+        "foreName": "Christian",
+        "longName": "ECKER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            }
+        ]
+    },
+    {
+        "id": 443,
+        "name": "EGLG",
+        "foreName": "G\u00fcnter",
+        "longName": "EGLSEER",
+        "title": "FOL DP",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 444,
+        "name": "EGLR",
+        "foreName": "Robert",
+        "longName": "EGLSEER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 446,
+        "name": "EICA",
+        "foreName": "Andreas",
+        "longName": "EICHLER",
+        "title": "prov. AV DI Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 903,
+        "name": "EINF",
+        "foreName": "Franziska",
+        "longName": "EINZINGER",
+        "title": "Prof. Mag. BA",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 555,
+        "name": "EIPH",
+        "foreName": "Hannes",
+        "longName": "EIPELDAUER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 448,
+        "name": "FISM",
+        "foreName": "Michael",
+        "longName": "FISCHER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 449,
+        "name": "FOES",
+        "foreName": "Stefan",
+        "longName": "F\u00d6DERL-H\u00d6BENREICH",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 450,
+        "name": "FORA",
+        "foreName": "Andreas",
+        "longName": "FORSTER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 631,
+        "name": "FREP",
+        "foreName": "Philipp",
+        "longName": "FREISCHLAG",
+        "title": "Prof. DI (FH)",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 451,
+        "name": "FUCH",
+        "foreName": "Hubert",
+        "longName": "FUCHS",
+        "title": "FOL OSR DP Ing.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 558,
+        "name": "GABE",
+        "foreName": "Elisabeth",
+        "longName": "GABLER",
+        "title": "Prof. Mag. Dr. BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 675,
+        "name": "GARM",
+        "foreName": "Mathias",
+        "longName": "GARSTENAUER",
+        "title": "Prof. BSc",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            }
+        ]
+    },
+    {
+        "id": 452,
+        "name": "GAUS",
+        "foreName": "Siegfried",
+        "longName": "GAUGL",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 455,
+        "name": "GIRF",
+        "foreName": "Franz Peter",
+        "longName": "GIRKINGER",
+        "title": "FOL OSR DP Ing. BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 456,
+        "name": "GOSS",
+        "foreName": "Hermann",
+        "longName": "GOSSENREITER",
+        "title": "FOL OSR DP BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 810,
+        "name": "GRAJ",
+        "foreName": "Jakob",
+        "longName": "GRASSERBAUER",
+        "title": "Prof. DI Dr. BSc",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 458,
+        "name": "GRUJ",
+        "foreName": "Johann",
+        "longName": "GRUBER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 794,
+        "name": "kgrub",
+        "foreName": "Karl",
+        "longName": "GRUBER",
+        "title": "Schulwart",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 680,
+        "name": "GRUK",
+        "foreName": "Karin",
+        "longName": "GRUNENBERG",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 459,
+        "name": "HAGE",
+        "foreName": "Dietmar",
+        "longName": "HAGER",
+        "title": "Prof. OStR DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            }
+        ]
+    },
+    {
+        "id": 899,
+        "name": "HAMB",
+        "foreName": "Barbara",
+        "longName": "HAMMERL",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": []
+    },
+    {
+        "id": 460,
+        "name": "HAMT",
+        "foreName": "Thomas",
+        "longName": "HAMMERL",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 547,
+        "name": "HANC",
+        "foreName": "Clemens",
+        "longName": "HANSERL",
+        "title": "prov. AV Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 462,
+        "name": "HESD",
+        "foreName": "Daniela",
+        "longName": "HESSMANN",
+        "title": "Prof. Mag. Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 815,
+        "name": "HIEM",
+        "foreName": "Michael",
+        "longName": "HIESBERGER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 717,
+        "name": "jhilger",
+        "foreName": "Julia",
+        "longName": "HILGER",
+        "title": "Administration",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 463,
+        "name": "HILS",
+        "foreName": "Stefan",
+        "longName": "HILLBRAND",
+        "title": "Prof. MMag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 465,
+        "name": "HOFE",
+        "foreName": "B\u00e4rbel",
+        "longName": "HOFER-POSTUVANSCHITZ",
+        "title": "FOL OSR DP BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 893,
+        "name": "HOLJ",
+        "foreName": "Johannes",
+        "longName": "HOLZINGER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": []
+    },
+    {
+        "id": 567,
+        "name": "HORF",
+        "foreName": "Florian",
+        "longName": "HORNBACHNER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 820,
+        "name": "HOTA",
+        "foreName": "Amela",
+        "longName": "HOTA",
+        "title": "Prof. BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 469,
+        "name": "KALH",
+        "foreName": "Hannes",
+        "longName": "KALTENB\u00d6CK",
+        "title": "FOL OSR DP BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 470,
+        "name": "KAPG",
+        "foreName": "Gerald",
+        "longName": "KAPELLER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 825,
+        "name": "KAPL",
+        "foreName": "Lisa",
+        "longName": "KAPFERER-WELSER",
+        "title": "Prof. MEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 740,
+        "name": "bkast",
+        "foreName": "Beate",
+        "longName": "KASTENHOFER",
+        "title": "Magazin",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 785,
+        "name": "jkieweg",
+        "foreName": "Julia",
+        "longName": "KIEWEG",
+        "title": "Magazin",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 471,
+        "name": "KIMB",
+        "foreName": "Christoph",
+        "longName": "KIMBACHER",
+        "title": "Prof. OStR Mag. MA",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 690,
+        "name": "KLAS",
+        "foreName": "Stefan",
+        "longName": "KLANER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 572,
+        "name": "KLAM",
+        "foreName": "Marlene",
+        "longName": "KLAUSNER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 783,
+        "name": "tkuehn",
+        "foreName": "Thomas",
+        "longName": "K\u00dcHN",
+        "title": "Schularzt Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 475,
+        "name": "KUEC",
+        "foreName": "Christoph",
+        "longName": "K\u00dcLLINGER",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 745,
+        "name": "ekunze",
+        "foreName": "Eva",
+        "longName": "KUNZE",
+        "title": "Sekretariat",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 476,
+        "name": "LEBR",
+        "foreName": "Roland",
+        "longName": "LEBLHUBER",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 901,
+        "name": "lehrer",
+        "foreName": "Lehrer",
+        "longName": "Lehrer",
+        "title": "",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 50
+            }
+        ]
+    },
+    {
+        "id": 477,
+        "name": "LINA",
+        "foreName": "Angelika",
+        "longName": "LINDNER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 479,
+        "name": "LOSA",
+        "foreName": "Sandra",
+        "longName": "LOSBICHLER",
+        "title": "Dir. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 480,
+        "name": "LOVB",
+        "foreName": "Beate",
+        "longName": "LOVASZ",
+        "title": "FL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 890,
+        "name": "dmader",
+        "foreName": "Doris",
+        "longName": "MADER",
+        "title": "Schul\u00e4rztin Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            }
+        ]
+    },
+    {
+        "id": 906,
+        "name": "MAIM",
+        "foreName": "Matthias",
+        "longName": "MAIR",
+        "title": "Prof. DI (FH)",
+        "active": true,
+        "dids": []
+    },
+    {
+        "id": 636,
+        "name": "MITE",
+        "foreName": "Eirini",
+        "longName": "MITSEA",
+        "title": "Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 695,
+        "name": "MITM",
+        "foreName": "Mario",
+        "longName": "MITTERBAUER",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 830,
+        "name": "MITG",
+        "foreName": "Gerrit",
+        "longName": "MITTERHUEMER",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 700,
+        "name": "MUHW",
+        "foreName": "Walter",
+        "longName": "M\u00dcHLBACHER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 483,
+        "name": "NIET",
+        "foreName": "Bernhard",
+        "longName": "NIETROST",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 487,
+        "name": "OBEA",
+        "foreName": "Andreas",
+        "longName": "OBERAUER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 641,
+        "name": "OBEL",
+        "foreName": "Lisa",
+        "longName": "OBERNEDER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 553,
+        "name": "OPPK",
+        "foreName": "Klaus",
+        "longName": "OPPENAUER",
+        "title": "Prof. Mag. DI Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 489,
+        "name": "ORGI",
+        "foreName": "Helga",
+        "longName": "ORGILL",
+        "title": "Prof. OStR Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 490,
+        "name": "PAIG",
+        "foreName": "Gerhard",
+        "longName": "PAIRLEITNER",
+        "title": "FOL Ing. BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 491,
+        "name": "PANG",
+        "foreName": "Gerald",
+        "longName": "PANHUBER",
+        "title": "Prof. Mag. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            }
+        ]
+    },
+    {
+        "id": 492,
+        "name": "PARZ",
+        "foreName": "Franz",
+        "longName": "PARZER",
+        "title": "AV OStR DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 493,
+        "name": "PFAK",
+        "foreName": "Kurt",
+        "longName": "PFAFFENEDER",
+        "title": "Prof. MEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 494,
+        "name": "PFAS",
+        "foreName": "Susanne",
+        "longName": "PFALLER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 497,
+        "name": "POLR",
+        "foreName": "Roland",
+        "longName": "POLLAK",
+        "title": "Prof. Mag. Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 498,
+        "name": "POLZ",
+        "foreName": "Gertrud",
+        "longName": "P\u00d6LZL",
+        "title": "FOL OSR DP BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 603,
+        "name": "PRAG",
+        "foreName": "Gerald",
+        "longName": "PRACHERSTORFER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 499,
+        "name": "PRAC",
+        "foreName": "Christian",
+        "longName": "PRAMESBERGER",
+        "title": "FOL OSR DP BEd MA",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 500,
+        "name": "PROE",
+        "foreName": "Margit",
+        "longName": "PR\u00d6MER",
+        "title": "Prof. OStR Mag. Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 501,
+        "name": "PUSC",
+        "foreName": "Wolfgang",
+        "longName": "PUSCH",
+        "title": "Prof. OStR DI Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 422,
+        "name": "RABS",
+        "foreName": "Stefan",
+        "longName": "RABERGER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 502,
+        "name": "RAFR",
+        "foreName": "Regina",
+        "longName": "RAFFEZEDER",
+        "title": "Prof. OStR Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 503,
+        "name": "RAMM",
+        "foreName": "Markus",
+        "longName": "RAMMER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 423,
+        "name": "RATP",
+        "foreName": "Peter",
+        "longName": "RATHGEB",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 646,
+        "name": "RATS",
+        "foreName": "Silvia",
+        "longName": "RATHMAIR",
+        "title": "FL",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 505,
+        "name": "REIB",
+        "foreName": "Burkhard",
+        "longName": "REICHL",
+        "title": "prov. AV DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 705,
+        "name": "REIL",
+        "foreName": "Lorenz",
+        "longName": "REISENZAHN",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 506,
+        "name": "REWO",
+        "foreName": "Wolfgang",
+        "longName": "REISINGER",
+        "title": "FOL OSR BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 509,
+        "name": "REHA",
+        "foreName": "Hannes",
+        "longName": "REITZENBERGER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 510,
+        "name": "RIEL",
+        "foreName": "Ludwig",
+        "longName": "RIEDL",
+        "title": "FOL DP",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 626,
+        "name": "RIEC",
+        "foreName": "Christof",
+        "longName": "RIESENHUBER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 835,
+        "name": "ROCG",
+        "foreName": "Georg",
+        "longName": "ROCKENSCHAUB",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 511,
+        "name": "ROHM",
+        "foreName": "Markus",
+        "longName": "ROHRAUER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 710,
+        "name": "ROMO",
+        "foreName": "Monika",
+        "longName": "ROHRWECK",
+        "title": "Prof. MSc MA",
+        "active": true,
+        "dids": [
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 755,
+        "name": "rrudolf",
+        "foreName": "Richard",
+        "longName": "RUDOLF",
+        "title": "Schulwart",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 513,
+        "name": "RUMG",
+        "foreName": "Gerhard",
+        "longName": "RUMPELSBERGER",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 651,
+        "name": "SAMC",
+        "foreName": "Christian",
+        "longName": "SAMEGM\u00dcLLER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 515,
+        "name": "SANC",
+        "foreName": "Christian",
+        "longName": "SANDMAIER",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 760,
+        "name": "fschaff",
+        "foreName": "Ferdinand",
+        "longName": "SCHAFFHAUSER",
+        "title": "Schulwart",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 517,
+        "name": "SCGE",
+        "foreName": "Gerhard",
+        "longName": "SCHEDLBERGER",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 519,
+        "name": "SCAN",
+        "foreName": "Anja",
+        "longName": "SCHNEIDERBAUER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 520,
+        "name": "SARN",
+        "foreName": "Arnold",
+        "longName": "SCHOPF",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            }
+        ]
+    },
+    {
+        "id": 522,
+        "name": "SCHW",
+        "foreName": "Gottfried",
+        "longName": "SCHWARZLM\u00dcLLER",
+        "title": "FOL OSR DP",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 523,
+        "name": "SCHH",
+        "foreName": "Heinz",
+        "longName": "SCHWEIGER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 765,
+        "name": "pschweiger",
+        "foreName": "Petra",
+        "longName": "SCHWEIGER",
+        "title": "Sekretariat",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 886,
+        "name": "SCHM",
+        "foreName": "Michaela",
+        "longName": "SCHWINGHAMMER",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": []
+    },
+    {
+        "id": 562,
+        "name": "SONM",
+        "foreName": "Michael",
+        "longName": "SONNLEITNER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 775,
+        "name": "stein",
+        "foreName": "Renate",
+        "longName": "STEINWENDER",
+        "title": "Sekretariat",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 656,
+        "name": "STOW",
+        "foreName": "Wolfgang",
+        "longName": "ST\u00d6CHER",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 524,
+        "name": "STCH",
+        "foreName": "Christian",
+        "longName": "STOCKINGER",
+        "title": "Prof. OStR Mag. Dr.",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 527,
+        "name": "STRJ",
+        "foreName": "Joachim",
+        "longName": "STRAUCH",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 529,
+        "name": "THEG",
+        "foreName": "Georg",
+        "longName": "THEUERKAUF",
+        "title": "FOL DP",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 427,
+        "name": "UHLT",
+        "foreName": "Thomas",
+        "longName": "UHL",
+        "title": "Prof. DI (FH) MSc",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 530,
+        "name": "UHLW",
+        "foreName": "Wolfgang",
+        "longName": "UHL",
+        "title": "FOL OSR DP BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 531,
+        "name": "ULLH",
+        "foreName": "Hansj\u00f6rg",
+        "longName": "ULLMANN",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 532,
+        "name": "UNGR",
+        "foreName": "Rudolf",
+        "longName": "UNGER",
+        "title": "Prof. OStR DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 533,
+        "name": "VIEH",
+        "foreName": "Herwig",
+        "longName": "VIEHB\u00d6CK",
+        "title": "FOL OSR DP Ing.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 840,
+        "name": "WAHH",
+        "foreName": "Hannes",
+        "longName": "WAHL",
+        "title": "Prof.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 54
+            }
+        ]
+    },
+    {
+        "id": 780,
+        "name": "rwald",
+        "foreName": "Rudolf",
+        "longName": "WALD",
+        "title": "Schulwart",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 535,
+        "name": "WEID",
+        "foreName": "Dieter",
+        "longName": "WEINSTABL",
+        "title": "FOL DP Ing.",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 52
+            }
+        ]
+    },
+    {
+        "id": 593,
+        "name": "WEIN",
+        "foreName": "Nicole",
+        "longName": "WEISKOPF",
+        "title": "Prof. Mag. Bakk. MA",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 845,
+        "name": "WEPS",
+        "foreName": "Sebastian",
+        "longName": "WEPPRICH",
+        "title": "Prof. Dipl.-Inf.",
+        "active": true,
+        "dids": [
+            {
+                "id": 38
+            }
+        ]
+    },
+    {
+        "id": 537,
+        "name": "WILW",
+        "foreName": "Wolfgang",
+        "longName": "WILFINGER",
+        "title": "FOL BEd",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 37
+            },
+            {
+                "id": 38
+            },
+            {
+                "id": 57
+            }
+        ]
+    },
+    {
+        "id": 428,
+        "name": "WILD",
+        "foreName": "Dominik",
+        "longName": "WILTSCHNIG",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 35
+            },
+            {
+                "id": 37
+            }
+        ]
+    },
+    {
+        "id": 797,
+        "name": "fwimm",
+        "foreName": "Franz",
+        "longName": "WIMMER",
+        "title": "Schulwart",
+        "active": true,
+        "dids": [
+            {
+                "id": 47
+            }
+        ]
+    },
+    {
+        "id": 538,
+        "name": "WITT",
+        "foreName": "Michael",
+        "longName": "WITTNER",
+        "title": "WL DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            },
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 715,
+        "name": "ZACT",
+        "foreName": "Tobias",
+        "longName": "ZACHL",
+        "title": "Prof. Mag. (FH)",
+        "active": true,
+        "dids": [
+            {
+                "id": 36
+            }
+        ]
+    },
+    {
+        "id": 850,
+        "name": "ZAHF",
+        "foreName": "Fatima",
+        "longName": "ZAHIROVIC",
+        "title": "Prof. DI",
+        "active": true,
+        "dids": [
+            {
+                "id": 35
+            }
+        ]
+    },
+    {
+        "id": 539,
+        "name": "ZELC",
+        "foreName": "Claudia",
+        "longName": "ZELENKA-DEDEYAN",
+        "title": "Prof. Mag.",
+        "active": true,
+        "dids": [
+            {
+                "id": 34
+            },
+            {
+                "id": 38
+            }
+        ]
+    }
+]

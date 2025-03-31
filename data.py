@@ -5,23 +5,40 @@ teacherURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTeache
 klassenURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getKlassen"
 timetable_base_URL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTimetable"
 
-with open("json-files/timetable.json", "r") as file:
-    ttData = json.load(file)  # Convert JSON string to a Python object
+# with open("json-files/timetable.json", "r") as file:
+#     ttData = json.load(file)
 
 try:
+    import requests
+    import json
+
     response = requests.get(roomURL)
     response.raise_for_status()
-    room_data = response.json()
+    d1 = response.json()
+    room_data = json.dumps(d1)
+    print(room_data)
 
     response = requests.get(teacherURL)
     response.raise_for_status()
-    teacher_data = response.json()
+    d2 = response.json()
+    teacher_data = json.dumps(d2)
+    print(teacher_data)
 
     response = requests.get(klassenURL)
     response.raise_for_status()
-    klassen_data = response.json()
+    d3 = response.json()
+    klassen_data = json.dumps(d3)
+    print(klassen_data)
 
-    timetable_data = ttData  # Already parsed JSON, no need to load again
+    timetable_data = []
+    for teacher in teacher_data:
+        query_string = f'{{"id":"{teacher["id"]}","type":"2"}}'
+        encoded_query = urllib.parse.quote(query_string)
+        url = f"{timetable_base_URL}/{encoded_query}"
+
+        response = requests.get(url)
+        response.raise_for_status()
+        timetable_data.append(response.json())
 
     for sublist in timetable_data:
         if isinstance(sublist, list):

@@ -1,0 +1,541 @@
+[
+  {
+    'id': 1958,
+    'name': '1AFMBZ',
+    'longName': '1AFMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 50,
+    'teacher1': 434
+  },
+  {
+    'id': 1963,
+    'name': '2AFMBZ',
+    'longName': '2AFMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 50,
+    'teacher1': 476,
+    'teacher2': 469
+  },
+  {
+    'id': 1968,
+    'name': '3AFMBZ',
+    'longName': '3AFMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 50,
+    'teacher1': 810
+  },
+  {
+    'id': 1973,
+    'name': '4AFMBZ',
+    'longName': '4AFMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 50,
+    'teacher1': 442
+  },
+  {
+    'id': 1978,
+    'name': '1AHME',
+    'longName': '1AHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 820
+  },
+  {
+    'id': 1983,
+    'name': '1BHME',
+    'longName': '1BHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'd7ffd7',
+    'did': 38,
+    'teacher1': 430
+  },
+  {
+    'id': 1988,
+    'name': '2AHME',
+    'longName': '2AHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 690
+  },
+  {
+    'id': 1993,
+    'name': '2BHME',
+    'longName': '2BHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 502
+  },
+  {
+    'id': 1998,
+    'name': '3AHME',
+    'longName': '3AHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 641
+  },
+  {
+    'id': 2003,
+    'name': '3BHME',
+    'longName': '3BHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 452
+  },
+  {
+    'id': 2008,
+    'name': '4AHME',
+    'longName': '4AHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 471
+  },
+  {
+    'id': 2013,
+    'name': '4BHME',
+    'longName': '4BHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 524
+  },
+  {
+    'id': 2018,
+    'name': '5AHME',
+    'longName': '5AHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 539
+  },
+  {
+    'id': 2023,
+    'name': '5BHME',
+    'longName': '5BHME',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'dfffdf',
+    'did': 38,
+    'teacher1': 500
+  },
+  {
+    'id': 2028,
+    'name': '1YHKUG',
+    'longName': 'GRAVIERTECHNIK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 570
+  },
+  {
+    'id': 2033,
+    'name': '1YHKUJ',
+    'longName': 'SCHMUCK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 570
+  },
+  {
+    'id': 2038,
+    'name': '1YHKUP',
+    'longName': 'KUNSTSCHMIEDE U. METALLPLASTIKER',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 570
+  },
+  {
+    'id': 2043,
+    'name': '2YHKUG',
+    'longName': 'GRAVIERTECHNIK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 670
+  },
+  {
+    'id': 2048,
+    'name': '2YHKUJ',
+    'longName': 'SCHMUCK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 670
+  },
+  {
+    'id': 2053,
+    'name': '2YHKUP',
+    'longName': 'KUNSTSCHMIEDE U. METALLPLASTIKER',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 670
+  },
+  {
+    'id': 2058,
+    'name': '3YHKUG',
+    'longName': 'GRAVIERTECHNIK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 660
+  },
+  {
+    'id': 2063,
+    'name': '3YHKUJ',
+    'longName': 'SCHMUCK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 660
+  },
+  {
+    'id': 2068,
+    'name': '3YHKUP',
+    'longName': 'KUNSTSCHMIEDE U. METALLPLASTIKER',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 660
+  },
+  {
+    'id': 2073,
+    'name': '4YHKUG',
+    'longName': 'GRAVIERTECHNIK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 547
+  },
+  {
+    'id': 2078,
+    'name': '4YHKUJ',
+    'longName': 'SCHMUCK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 547
+  },
+  {
+    'id': 2083,
+    'name': '4YHKUP',
+    'longName': 'KUNSTSCHMIEDE U. METALLPLASTIKER',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 547
+  },
+  {
+    'id': 2088,
+    'name': '5YHKUG',
+    'longName': 'GRAVIERTECHNIK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 499
+  },
+  {
+    'id': 2093,
+    'name': '5YHKUJ',
+    'longName': 'SCHMUCK',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 499
+  },
+  {
+    'id': 2098,
+    'name': '5YHKUP',
+    'longName': 'KUNSTSCHMIEDE U. METALLPLASTIKER',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffc58a',
+    'did': 37,
+    'teacher1': 499
+  },
+  {
+    'id': 2103,
+    'name': '1AHITN',
+    'longName': '1AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffa4',
+    'did': 36,
+    'teacher1': 422
+  },
+  {
+    'id': 2108,
+    'name': '2AHITN',
+    'longName': '2AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffa4',
+    'did': 36,
+    'teacher1': 423
+  },
+  {
+    'id': 2113,
+    'name': '3AHITN',
+    'longName': '3AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffa4',
+    'did': 36,
+    'teacher1': 523
+  },
+  {
+    'id': 2118,
+    'name': '4AHITN',
+    'longName': '4AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffa4',
+    'did': 36,
+    'teacher1': 603
+  },
+  {
+    'id': 2123,
+    'name': '5AHITN',
+    'longName': '5AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffa4',
+    'did': 36,
+    'teacher1': 567
+  },
+  {
+    'id': 2128,
+    'name': '1AHEL',
+    'longName': '1AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffc3',
+    'did': 35,
+    'teacher1': 491
+  },
+  {
+    'id': 2133,
+    'name': '2AHEL',
+    'longName': '2AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffc3',
+    'did': 35,
+    'teacher1': 503
+  },
+  {
+    'id': 2138,
+    'name': '3AHEL',
+    'longName': '3AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffc3',
+    'did': 35,
+    'teacher1': 446
+  },
+  {
+    'id': 2143,
+    'name': '4AHEL',
+    'longName': '4AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffc3',
+    'did': 35,
+    'teacher1': 480
+  },
+  {
+    'id': 2148,
+    'name': '5AHEL',
+    'longName': '5AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffffc3',
+    'did': 35,
+    'teacher1': 538
+  },
+  {
+    'id': 2153,
+    'name': '1AHMBZ',
+    'longName': '1AHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 431
+  },
+  {
+    'id': 2158,
+    'name': '1BHMBZ',
+    'longName': '1BHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 527
+  },
+  {
+    'id': 2163,
+    'name': '2AHMBZ',
+    'longName': '2AHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 428
+  },
+  {
+    'id': 2168,
+    'name': '2BHMBZ',
+    'longName': '2BHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 427
+  },
+  {
+    'id': 2173,
+    'name': '3AHMBZ',
+    'longName': '3AHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 593
+  },
+  {
+    'id': 2178,
+    'name': '3BHMBZ',
+    'longName': '3BHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 631
+  },
+  {
+    'id': 2183,
+    'name': '4AHMBZ',
+    'longName': '4AHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 562
+  },
+  {
+    'id': 2188,
+    'name': '5AHMBZ',
+    'longName': '5AHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 520
+  },
+  {
+    'id': 2193,
+    'name': '5BHMBZ',
+    'longName': '5BHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 483
+  },
+  {
+    'id': 2198,
+    'name': 'HsRDP',
+    'longName': 'sRDP',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'b4e7d0'
+  },
+  {
+    'id': 2229,
+    'name': '4BHMBZ',
+    'longName': '4BHMBZ',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'c1e0ff',
+    'did': 34,
+    'teacher1': 487
+  },
+  {
+    'id': 2248,
+    'name': 'HSki',
+    'longName': '4AHEL,4AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': '8787ff'
+  },
+  {
+    'id': 2251,
+    'name': 'HSwo',
+    'longName': '4AHMBZ,4AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': '7e7467'
+  },
+  {
+    'id': 2252,
+    'name': 'HGED',
+    'longName': '1AHEL,2AHEL,3AHEL',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': '8da3c7'
+  },
+  {
+    'id': 2255,
+    'name': 'HFreig',
+    'longName': '4AHEL,4AHITN',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'ffb5b5'
+  },
+  {
+    'id': 2259,
+    'name': 'HErsatz',
+    'longName': 'HErsatz',
+    'active': True,
+    'foreColor': '000000',
+    'backColor': 'aad6ff'
+  }
+]

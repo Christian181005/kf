@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="api data processing started">
+    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="getting the data from the api probably done">
+      <change afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_03_2025_08_17_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_03_2025_08_17__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/klasse.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files/klasse.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/room.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files/room.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/teacher.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files/teacher.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saveForLaterUse.py" beforeDir="false" afterPath="$PROJECT_DIR$/saveForLaterUse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files/klasse.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/klasse.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files/room.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/room.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files/teacher.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/teacher.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files/timetable.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/timetable.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saveForLaterUse.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +102,11 @@
       <workItem from="1743059820077" duration="63000" />
       <workItem from="1743059892700" duration="4112000" />
       <workItem from="1743066576982" duration="149000" />
-      <workItem from="1743401083293" duration="5397000" />
+      <workItem from="1743401083293" duration="5622000" />
+      <workItem from="1743506854936" duration="12000" />
+      <workItem from="1743660389469" duration="3846000" />
+      <workItem from="1743781232923" duration="24000" />
+      <workItem from="1744006718395" duration="2225000" />
     </task>
     <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
@@ -116,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743405816971</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="getting the data from the api probably done">
+      <option name="closed" value="true" />
+      <created>1743406612145</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1743406612145</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,10 +141,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="git commit" />
     <MESSAGE value="api data processing started" />
-    <option name="LAST_COMMIT_MESSAGE" value="api data processing started" />
+    <MESSAGE value="getting the data from the api probably done" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting the data from the api probably done" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1743406504599" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1744008194129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -81,6 +81,9 @@ class WeekdayApp(App):
     def build(self):
         main_layout = BoxLayout(orientation="vertical")
 
+        data = get_data()
+
+
         # Kopfzeile: Uhrzeit + Wochentage
         header = BoxLayout(orientation="horizontal", size_hint=(1, 0.1))
         header.add_widget(Label(text="Uhrzeit", bold=True))
@@ -115,6 +118,8 @@ class WeekdayApp(App):
             "2AHMBZ", "2BHMBZ", "3AHMBZ", "3BHMBZ", "4AHMBZ", "5AHMBZ", "5BHMBZ"
         ]
 
+
+
         # Gemeinsamer Speicher für den Klassenindex
         shared_data = {"class_index": 0}
         schedule = {}  # Hier werden alle Fototermine samt Details gespeichert
@@ -132,4 +137,6 @@ class WeekdayApp(App):
 
 
 if __name__ == '__main__':
+    # App starten
     WeekdayApp().run()
+

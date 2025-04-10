@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="getData funktion von mp1 branch importiert">
+    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;">
+      <change afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="mw1" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -31,22 +32,19 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;AishiDaBoi&quot;
+    &quot;assignee&quot;: &quot;qwertz1234567890&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Christian181005/kf&quot;,
-    &quot;accountId&quot;: &quot;a69e40df-fe6e-4418-95bb-7d0fc6ae8bc8&quot;
+    &quot;url&quot;: &quot;https://github.com/Christian181005/kf.git&quot;,
+    &quot;accountId&quot;: &quot;ea9dabd0-a90c-4dea-a6f5-a3b5754f08c4&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
-  <component name="ProjectId" id="2uZd7TEwKGobW5fCNKYUdsv2tmJ" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2uZh3ZygpFQQKeQFjEsTXOb3xZI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -54,141 +52,104 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.data.executor&quot;: &quot;Run&quot;,
-    &quot;Python.getData.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.testing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ui.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ui-mw1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/PycharmProjects/kf&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mp1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pichl/Documents/ITP2/4AHITN/kf/json-files&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\micha\PycharmProjects\kf" />
+      <recent name="C:\Users\pichl\Documents\ITP2\4AHITN\kf\json-files" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pichl\Documents\ITP2\4AHITN\kf\json-files" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PY-243.22562.220" />
-        <option value="bundled-python-sdk-0fc6c617c4bd-9a18a617cbe4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.22562.220" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PY-243.23654.177" />
+        <option value="bundled-python-sdk-91d3a02ef49d-43b77aa2d136-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.23654.177" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="" />
-      <created>1742459863120</created>
+      <changelist id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="" />
+      <created>1742461805544</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1742459863120</updated>
-      <workItem from="1742459864692" duration="373000" />
-      <workItem from="1742800262011" duration="503000" />
-      <workItem from="1742800772485" duration="1891000" />
-      <workItem from="1743060118198" duration="3460000" />
-      <workItem from="1743401522770" duration="4646000" />
-      <workItem from="1743660449502" duration="5361000" />
-      <workItem from="1744006054649" duration="3420000" />
-      <workItem from="1744267191414" duration="1373000" />
+      <updated>1742461805544</updated>
+      <workItem from="1742461807022" duration="1538000" />
+      <workItem from="1742905619000" duration="42000" />
+      <workItem from="1743059820077" duration="63000" />
+      <workItem from="1743059892700" duration="4112000" />
+      <workItem from="1743066576982" duration="149000" />
+      <workItem from="1743401083293" duration="5622000" />
+      <workItem from="1743506854936" duration="12000" />
+      <workItem from="1743660389469" duration="3846000" />
+      <workItem from="1743781232923" duration="24000" />
+      <workItem from="1744006718395" duration="4261000" />
+      <workItem from="1744111758301" duration="19000" />
+      <workItem from="1744267449905" duration="1135000" />
     </task>
-    <task id="LOCAL-00001" summary="new branch created mw1">
+    <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
-      <created>1742459943214</created>
+      <created>1743060112214</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1742459943214</updated>
+      <updated>1743060112214</updated>
     </task>
-    <task id="LOCAL-00002" summary="init mw1">
+    <task id="LOCAL-00002" summary="api data processing started">
       <option name="closed" value="true" />
-      <created>1743401723600</created>
+      <created>1743405816971</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1743401723600</updated>
+      <updated>1743405816971</updated>
     </task>
-    <task id="LOCAL-00003" summary="init mw1">
+    <task id="LOCAL-00003" summary="getting the data from the api probably done">
       <option name="closed" value="true" />
-      <created>1743401747574</created>
+      <created>1743406612145</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1743401747574</updated>
+      <updated>1743406612145</updated>
     </task>
-    <task id="LOCAL-00004" summary="init mw1">
+    <task id="LOCAL-00004" summary="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;">
       <option name="closed" value="true" />
-      <created>1743662524654</created>
+      <created>1744009476990</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1743662524654</updated>
+      <updated>1744009476990</updated>
     </task>
-    <task id="LOCAL-00005" summary="ui update">
-      <option name="closed" value="true" />
-      <created>1743672862136</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1743672862136</updated>
-    </task>
-    <task id="LOCAL-00006" summary="ui update">
-      <option name="closed" value="true" />
-      <created>1744009561675</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1744009561675</updated>
-    </task>
-    <task id="LOCAL-00007" summary="getData funktion von mp1 branch importiert">
-      <option name="closed" value="true" />
-      <created>1744009979134</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1744009979134</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new branch created mw1" />
-    <MESSAGE value="init mw1" />
-    <MESSAGE value="ui update" />
-    <MESSAGE value="getData funktion von mp1 branch importiert" />
-    <option name="LAST_COMMIT_MESSAGE" value="getData funktion von mp1 branch importiert" />
+    <MESSAGE value="git commit" />
+    <MESSAGE value="api data processing started" />
+    <MESSAGE value="getting the data from the api probably done" />
+    <MESSAGE value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1744267358693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$main.coverage" NAME="main Coverage Results" MODIFIED="1744009425065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$testing.coverage" NAME="testing Coverage Results" MODIFIED="1743060413575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1743063352869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$ui.coverage" NAME="ui Coverage Results" MODIFIED="1744268079954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$getData.coverage" NAME="getData Coverage Results" MODIFIED="1743064442491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060139341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1744268482264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

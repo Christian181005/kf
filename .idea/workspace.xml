@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="getting the data from the api probably done">
-      <change afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_03_2025_08_17_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_03_2025_08_17__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;">
+      <change afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/klasse.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/klasse.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/room.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/room.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/teacher.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/teacher.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files/timetable.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/timetable.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saveForLaterUse.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +99,9 @@
       <workItem from="1743506854936" duration="12000" />
       <workItem from="1743660389469" duration="3846000" />
       <workItem from="1743781232923" duration="24000" />
-      <workItem from="1744006718395" duration="2225000" />
+      <workItem from="1744006718395" duration="4261000" />
+      <workItem from="1744111758301" duration="19000" />
+      <workItem from="1744267449905" duration="1135000" />
     </task>
     <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
@@ -132,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743406612145</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;">
+      <option name="closed" value="true" />
+      <created>1744009476990</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744009476990</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,10 +145,11 @@
     <MESSAGE value="git commit" />
     <MESSAGE value="api data processing started" />
     <MESSAGE value="getting the data from the api probably done" />
-    <option name="LAST_COMMIT_MESSAGE" value="getting the data from the api probably done" />
+    <MESSAGE value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1744008194129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1744268482264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

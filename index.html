@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassenfotos Planungstool</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
+    <script type="mpy" src="data.py"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -25,16 +28,23 @@
         .schedule-item {
             transition: all 0.3s ease;
         }
+
         .schedule-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
+
         .loading-spinner {
             animation: spin 1s linear infinite;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -48,7 +58,8 @@
                 <p class="text-gray-600">Automatisierte Terminplanung für Klassenfotos</p>
             </div>
             <div class="flex items-center space-x-4">
-                <button id="refreshBtn" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
+                <button id="refreshBtn"
+                        class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
                     <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
                 </button>
                 <div class="relative">
@@ -69,11 +80,13 @@
                 <h3 class="font-medium text-gray-700 mb-2">Datenquellen</h3>
                 <div class="space-y-3">
                     <div class="flex items-center">
-                        <input type="checkbox" id="webuntisData" checked class="mr-2 rounded text-primary focus:ring-primary">
+                        <input type="checkbox" id="webuntisData" checked
+                               class="mr-2 rounded text-primary focus:ring-primary">
                         <label for="webuntisData">WebUntis Daten</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="teacherList" checked class="mr-2 rounded text-primary focus:ring-primary">
+                        <input type="checkbox" id="teacherList" checked
+                               class="mr-2 rounded text-primary focus:ring-primary">
                         <label for="teacherList">Lehrkräfte-Liste</label>
                     </div>
                 </div>
@@ -84,11 +97,14 @@
                 <div class="space-y-3">
                     <div>
                         <label for="photoDuration" class="block text-sm text-gray-600 mb-1">Standard Dauer (min)</label>
-                        <input type="number" id="photoDuration" value="10" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                        <input type="number" id="photoDuration" value="10"
+                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                     </div>
                     <div>
-                        <label for="gradDuration" class="block text-sm text-gray-600 mb-1">Abschlussklassen Dauer (min)</label>
-                        <input type="number" id="gradDuration" value="15" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                        <label for="gradDuration" class="block text-sm text-gray-600 mb-1">Abschlussklassen Dauer
+                            (min)</label>
+                        <input type="number" id="gradDuration" value="15"
+                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                     </div>
                 </div>
             </div>
@@ -97,21 +113,25 @@
                 <h3 class="font-medium text-gray-700 mb-2">Benachrichtigungen</h3>
                 <div class="space-y-3">
                     <div class="flex items-center">
-                        <input type="checkbox" id="notifyKV" checked class="mr-2 rounded text-primary focus:ring-primary">
+                        <input type="checkbox" id="notifyKV" checked
+                               class="mr-2 rounded text-primary focus:ring-primary">
                         <label for="notifyKV">Klassenvorstände</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="notifyWL" checked class="mr-2 rounded text-primary focus:ring-primary">
+                        <input type="checkbox" id="notifyWL" checked
+                               class="mr-2 rounded text-primary focus:ring-primary">
                         <label for="notifyWL">Werkstättenleiter</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="notifyClass" checked class="mr-2 rounded text-primary focus:ring-primary">
+                        <input type="checkbox" id="notifyClass" checked
+                               class="mr-2 rounded text-primary focus:ring-primary">
                         <label for="notifyClass">Klassen</label>
                     </div>
                 </div>
             </div>
 
-            <button id="generateScheduleBtn" class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
+            <button id="generateScheduleBtn"
+                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
                 <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
             </button>
         </div>
@@ -160,13 +180,16 @@
                 <div class="px-6 py-4 border-b flex justify-between items-center">
                     <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
                     <div class="flex space-x-2">
-                        <button id="exportCSVBtn" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                        <button id="exportCSVBtn"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
                             <i class="fas fa-file-csv mr-1"></i> CSV
                         </button>
-                        <button id="exportPDFBtn" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                        <button id="exportPDFBtn"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
                             <i class="fas fa-file-pdf mr-1"></i> PDF
                         </button>
-                        <button id="sendEmailsBtn" class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
+                        <button id="sendEmailsBtn"
+                                class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
                             <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
                         </button>
                     </div>
@@ -175,12 +198,30 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Klasse</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Datum</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uhrzeit</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ort</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Verantwortlich</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aktionen</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Klasse
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Datum
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Uhrzeit
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ort
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Verantwortlich
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Aktionen
+                            </th>
                         </tr>
                         </thead>
                         <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
@@ -199,7 +240,8 @@
             </div>
 
             <!-- Email Preview Modal (hidden by default) -->
-            <div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div id="emailModal"
+                 class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
                 <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
                     <div class="px-6 py-4 border-b flex justify-between items-center">
                         <h2 class="text-xl font-semibold text-dark">E-Mail Vorbereitung</h2>
@@ -230,12 +272,14 @@
                                         </button>
                                     </span>
                             </div>
-                            <input type="text" placeholder="Weitere Empfänger hinzufügen" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                            <input type="text" placeholder="Weitere Empfänger hinzufügen"
+                                   class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Betreff</label>
-                            <input type="text" value="Termin für Klassenfotos - 5AHITM" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                            <input type="text" value="Termin für Klassenfotos - 5AHITM"
+                                   class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
 
                         <div class="mb-6">
@@ -243,14 +287,20 @@
                             <div class="border rounded-lg overflow-hidden">
                                 <div class="bg-gray-50 px-4 py-2 border-b">
                                     <div class="flex space-x-2">
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-bold"></i></button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-italic"></i></button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-underline"></i></button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ul"></i></button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ol"></i></button>
+                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-bold"></i>
+                                        </button>
+                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-italic"></i>
+                                        </button>
+                                        <button class="text-gray-600 hover:text-gray-900"><i
+                                                class="fas fa-underline"></i></button>
+                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ul"></i>
+                                        </button>
+                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ol"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none" placeholder="E-Mail Text hier eingeben...">
+                                <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
+                                          placeholder="E-Mail Text hier eingeben...">
 Sehr geehrte Schülerinnen und Schüler der 5AHITM,
 
 hiermit möchten wir Sie über den Termin für die Klassenfotos informieren:
@@ -295,8 +345,10 @@ Ihr Fotografieteam
                         </div>
                     </div>
                     <div class="px-6 py-4 border-t flex justify-end space-x-3">
-                        <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern</button>
-                        <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden</button>
+                        <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
+                        </button>
+                        <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
+                        </button>
                     </div>
                 </div>
             </div>
@@ -304,41 +356,119 @@ Ihr Fotografieteam
     </div>
 </div>
 
+
+<py-script>
+    import urllib
+
+    import requests, json
+
+    roomURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getRooms"
+    teacherURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTeachers"
+    klassenURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getKlassen"
+    timetable_base_URL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTimetable"
+
+
+    def get_data():
+    try:
+    # notation = year + month + date
+    startDate = "20250407"
+    endDate = "20250409"
+
+    response = requests.get(roomURL)
+    response.raise_for_status()
+    d1 = response.json()
+    room_data = d1
+    print(room_data)
+
+    response = requests.get(teacherURL)
+    response.raise_for_status()
+    d2 = response.json()
+    teacher_data = d2
+    print(teacher_data)
+
+    response = requests.get(klassenURL)
+    response.raise_for_status()
+    d3 = response.json()
+    klassen_data = d3
+    print(klassen_data)
+
+    timetable_data = []
+    for teacher in teacher_data:
+    query_string = f'{{"id":"{teacher["id"]}","type":"2","startDate":"{startDate}","endDate":"{endDate}"}}'
+    encoded_query = urllib.parse.quote(query_string)
+    url = f"{timetable_base_URL}/{encoded_query}"
+
+    response = requests.get(url)
+    response.raise_for_status()
+    timetable_data.append(response.json())
+    d4 = json.dumps(timetable_data)
+    timetable_data = json.loads(d4)
+
+    for sublist in timetable_data:
+    if isinstance(sublist, list):
+    for entry in sublist:
+    if isinstance(entry, dict):
+    kl_ids = [kl['id'] for kl in entry.get('kl', [])]
+    te_ids = [te['id'] for te in entry.get('te', [])]
+    ro_ids = [ro['id'] for ro in entry.get('ro', [])]
+    for teacher in teacher_data:
+    for te_id in te_ids:
+    if te_id == teacher['id']:
+    entry['te'] = teacher
+    for room in room_data:
+    for ro_id in ro_ids:
+    if ro_id == room['id']:
+    entry['ro'] = room
+    for klasse in klassen_data:
+    for kl_id in kl_ids:
+    if kl_id == klasse['id']:
+    entry['kl'] = klasse
+
+    with open("entire-API-Data/data.json", "w", encoding="utf-8") as f:
+    json.dump(timetable_data, f, ensure_ascii=False, indent=2)
+
+    print("file saved correctly (probably)")
+
+    except requests.exceptions.RequestException as e:
+    print(":(", e)
+</py-script>
+
+
 <script>
     // Sample data - in a real app this would come from the API
     const sampleData = [
         {
-            class: "5AHITM",
+            class: "5AHITN",
             date: "15.10.2024",
             time: "09:30 - 09:45",
             location: "Fotostudio (A101)",
-            responsible: "Hr. Müller (KV)",
+            responsible: "Herr Reisinger (REWO)",
             isGraduating: true,
             kvEmail: "kv5ahitm@htl-steyr.ac.at",
             wlEmail: "wl5ahitm@htl-steyr.ac.at",
             classEmail: "klasse5ahitm@htl-steyr.ac.at"
         },
         {
-            class: "3BHET",
+            class: "3BHEL",
             date: "16.10.2024",
             time: "08:15 - 08:25",
             location: "Fotostudio (A101)",
-            responsible: "Fr. Schmidt",
+            responsible: "Frau Orgill (ORGI)",
             isGraduating: false,
             kvEmail: "kv3bhet@htl-steyr.ac.at",
             wlEmail: "wl3bhet@htl-steyr.ac.at",
             classEmail: "klasse3bhet@htl-steyr.ac.at"
         },
         {
-            class: "2CHIT",
+            class: "2AHITN",
             date: "16.10.2024",
             time: "10:30 - 10:40",
             location: "Fotostudio (A101)",
-            responsible: "Hr. Wagner (WL)",
+            responsible: "Herr Pusch (PUSC)",
             isGraduating: false,
-            kvEmail: "kv2chit@htl-steyr.ac.at",
-            wlEmail: "wl2chit@htl-steyr.ac.at",
-            classEmail: "klasse2chit@htl-steyr.ac.at"
+            kvEmail: "kv2ahitn@htl-steyr.ac.at",
+            wlEmail: "wl2ahitn@htl-steyr.ac.at",
+            classEmail: "klasse2ahitn@htl-steyr.ac.at"
         },
         {
             class: "4DHET",

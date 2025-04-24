@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;">
-      <change afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
+    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="getting the data from the API - DONE">
+      <change afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entire-API-Data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +53,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.algorithm.executor&quot;: &quot;Run&quot;,
     &quot;Python.data.executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -101,7 +104,10 @@
       <workItem from="1743781232923" duration="24000" />
       <workItem from="1744006718395" duration="4261000" />
       <workItem from="1744111758301" duration="19000" />
-      <workItem from="1744267449905" duration="1135000" />
+      <workItem from="1744267449905" duration="1965000" />
+      <workItem from="1744272153597" duration="2460000" />
+      <workItem from="1745321227119" duration="43000" />
+      <workItem from="1745475122911" duration="6645000" />
     </task>
     <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
@@ -135,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744009476990</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="getting the data from the API - DONE">
+      <option name="closed" value="true" />
+      <created>1744268646490</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744268646490</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,10 +160,12 @@
     <MESSAGE value="api data processing started" />
     <MESSAGE value="getting the data from the api probably done" />
     <MESSAGE value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
+    <MESSAGE value="getting the data from the API - DONE" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting the data from the API - DONE" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1744268482264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1745481985505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1745481804231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

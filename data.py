@@ -10,7 +10,7 @@ timetable_base_URL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/g
 
 def get_data():
     try:
-        # notation = year + month + date
+        # notation: year, month, date
         startDate = "20250407"
         endDate = "20250409"
 
@@ -33,8 +33,8 @@ def get_data():
         print(klassen_data)
 
         timetable_data = []
-        for teacher in teacher_data:
-            query_string = f'{{"id":"{teacher["id"]}","type":"2","startDate":"{startDate}","endDate":"{endDate}"}}'
+        for klasse in klassen_data:
+            query_string = f'{{"id":"{klasse["id"]}","type":"1","startDate":"{startDate}","endDate":"{endDate}"}}'
             encoded_query = urllib.parse.quote(query_string)
             url = f"{timetable_base_URL}/{encoded_query}"
 
@@ -63,11 +63,22 @@ def get_data():
                             for kl_id in kl_ids:
                                 if kl_id == klasse['id']:
                                     entry['kl'] = klasse
+                                    for teacher in teacher_data:
+                                       if teacher['id'] == entry['kl']['teacher1']:
+                                           entry['kl']['teacher1'] = teacher['name']
+
+
+
+        json_str = json.dumps(timetable_data, ensure_ascii=False, indent=2)
+        json_str = json_str.replace("'", '"')
 
         with open("entire-API-Data/data.json", "w", encoding="utf-8") as f:
-            json.dump(timetable_data, f, ensure_ascii=False, indent=2)
+            f.write(json_str)
 
         print("file saved correctly (probably)")
 
     except requests.exceptions.RequestException as e:
         print(":(", e)
+
+if __name__ == "__main__":
+    get_data()

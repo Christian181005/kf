@@ -6,6 +6,7 @@
     <title>Klassenfotos Planungstool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
+    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -63,7 +64,7 @@
                     <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
                 </button>
                 <div class="relative">
-                    <img src="https://via.placeholder.com/40" alt="User" class="rounded-full h-10 w-10 cursor-pointer">
+                    <img src="https://i.imgur.com/HKI1L8w.jpeg" alt="User" class="rounded-full h-10 w-10 cursor-pointer">
                     <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
             </div>
@@ -375,72 +376,44 @@ The data.py generates 4 json files with the above information.
 
 <py-script>
 
-print("Du Sack")
-
-
+    print("Du Sack")
 
 
 </py-script>
 
 <script>
-    // Sample data - in a real app this would come from the API
-    const sampleData = [
-        {
-            class: "5AHITN",
-            date: "15.10.2024",
-            time: "09:30 - 09:45",
-            location: "Fotostudio (A101)",
-            responsible: "Herr Reisinger (REWO)",
-            isGraduating: true,
-            kvEmail: "kv5ahitm@htl-steyr.ac.at",
-            wlEmail: "wl5ahitm@htl-steyr.ac.at",
-            classEmail: "klasse5ahitm@htl-steyr.ac.at"
-        },
-        {
-            class: "3BHEL",
-            date: "16.10.2024",
-            time: "08:15 - 08:25",
-            location: "Fotostudio (A101)",
-            responsible: "Frau Orgill (ORGI)",
-            isGraduating: false,
-            kvEmail: "kv3bhet@htl-steyr.ac.at",
-            wlEmail: "wl3bhet@htl-steyr.ac.at",
-            classEmail: "klasse3bhet@htl-steyr.ac.at"
-        },
-        {
-            class: "2AHITN",
-            date: "16.10.2024",
-            time: "10:30 - 10:40",
-            location: "Fotostudio (A101)",
-            responsible: "Herr Pusch (PUSC)",
-            isGraduating: false,
-            kvEmail: "kv2ahitn@htl-steyr.ac.at",
-            wlEmail: "wl2ahitn@htl-steyr.ac.at",
-            classEmail: "klasse2ahitn@htl-steyr.ac.at"
-        },
-        {
-            class: "4DHET",
-            date: "17.10.2024",
-            time: "11:20 - 11:35",
-            location: "Fotostudio (A101)",
-            responsible: "Fr. Bauer (KV)",
-            isGraduating: true,
-            kvEmail: "kv4dhet@htl-steyr.ac.at",
-            wlEmail: "wl4dhet@htl-steyr.ac.at",
-            classEmail: "klasse4dhet@htl-steyr.ac.at"
-        },
-        {
-            class: "1EHIT",
-            date: "18.10.2024",
-            time: "07:45 - 07:55",
-            location: "Fotostudio (A101)",
-            responsible: "Hr. Huber",
-            isGraduating: false,
-            kvEmail: "kv1ehit@htl-steyr.ac.at",
-            wlEmail: "wl1ehit@htl-steyr.ac.at",
-            classEmail: "klasse1ehit@htl-steyr.ac.at"
-        }
+    // Generate similar data for other classes
+    const classNames = [
+        "1AFMBZ", "2AFMBZ", "3AFMBZ", "4AFMBZ", "1AHME", "1BHME", "2AHME", "2BHME", "3AHME", "3BHME",
+        "4AHME", "4BHME", "5AHME", "5BHME", "1YHKUG", "1YHKUJ", "1YHKUP", "2YHKUG", "2YHKUJ", "2YHKUP",
+        "3YHKUG", "3YHKUJ", "3YHKUP", "4YHKUG", "4YHKUJ", "4YHKUP", "5YHKUG", "5YHKUJ", "5YHKUP",
+        "1AHITN", "2AHITN", "3AHITN", "4AHITN", "5AHITN", "1AHEL", "2AHEL", "3AHEL", "4AHEL", "5AHEL",
+        "1AHMBZ", "1BHMBZ", "2AHMBZ", "2BHMBZ", "3AHMBZ", "3BHMBZ", "4AHMBZ", "5AHMBZ", "5BHMBZ", "4BHMBZ"
     ];
+
+    const getRandomDate = () => {
+        const startDate = new Date(2024, 9, 15); // 15th October 2024
+        const randomOffset = Math.floor(Math.random() * 5); // Random date offset
+        const newDate = new Date(startDate);
+        newDate.setDate(newDate.getDate() + randomOffset);
+        return `${newDate.getDate().toString().padStart(2, '0')}.${(newDate.getMonth() + 1).toString().padStart(2, '0')}.${newDate.getFullYear()}`;
+    };
+
+    const generateTestData = () => {
+        return classNames.map((className, index) => ({
+            class: className,
+            date: getRandomDate(),
+            time: `${(8 + Math.floor(index % 5))}:00 - ${(8 + Math.floor(index % 5) + 1)}:00`, // Random time slot
+            location: "Fotostudio (A101)",
+            responsible: `Herr Pusch (${className[0]})`, // Responsible name based on class
+            isGraduating: index % 5 === 0, // Alternate between graduating and not
+            kvEmail: `kv${className.toLowerCase()}@htl-steyr.ac.at`,
+            wlEmail: `wl${className.toLowerCase()}@htl-steyr.ac.at`,
+            classEmail: `klasse${className.toLowerCase()}@htl-steyr.ac.at`
+        }));
+    };
+
+    const sampleData = generateTestData();
 
     // DOM elements
     const scheduleTableBody = document.getElementById('scheduleTableBody');

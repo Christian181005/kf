@@ -6,7 +6,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
-from data import get_data
 
 
 class WeekdayColumn(BoxLayout):
@@ -81,7 +80,7 @@ class WeekdayApp(App):
     def build(self):
         main_layout = BoxLayout(orientation="vertical")
 
-        data = get_data()
+        #data = get_data()
 
 
         # Kopfzeile: Uhrzeit + Wochentage
@@ -117,6 +116,9 @@ class WeekdayApp(App):
             "4AHITN", "5AHITN", "1AHEL", "2AHEL", "3AHEL", "4AHEL", "5AHEL", "1AHMBZ", "1BHMBZ",
             "2AHMBZ", "2BHMBZ", "3AHMBZ", "3BHMBZ", "4AHMBZ", "5AHMBZ", "5BHMBZ"
         ]
+
+        # Klassennamen aus der JSON-Datei extrahieren
+        
 
 
 

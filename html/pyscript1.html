@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>PyScript lokal</title>
+
+    <!-- Lokale PyScript-Dateien -->
+    <link rel="stylesheet" href="core.css" />
+    <script defer type="module" src="core.js"></script>
+</head>
+<body>
+
+    <h1 id="output">Hallo Welt</h1>
+
+    <button onclick="changeTextJS()">JavaScript ändern</button>
+    <button id="pyButton">PyScript ändern</button>
+
+    <script>
+        function changeTextJS() {
+            document.getElementById("output").innerText = "Text von JavaScript geändert!";
+        }
+    </script>
+
+    <py-script>
+        def change_text_py(event):
+            Element("output").element.innerText = "Text von PyScript geändert!"
+
+        Element("pyButton").element.onclick = change_text_py
+    </py-script>
+
+</body>
+</html>

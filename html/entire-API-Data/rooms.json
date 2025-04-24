@@ -1,0 +1,944 @@
+[
+  {
+    "id": 2,
+    "name": "A001",
+    "longName": "A001",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 36,
+    "building": ""
+  },
+  {
+    "id": 3,
+    "name": "A002",
+    "longName": "A002",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 4,
+    "name": "A003",
+    "longName": "A003",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 5,
+    "name": "A004",
+    "longName": "A004",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 6,
+    "name": "A005",
+    "longName": "A005",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 36,
+    "building": ""
+  },
+  {
+    "id": 7,
+    "name": "A006",
+    "longName": "A006",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 36,
+    "building": ""
+  },
+  {
+    "id": 8,
+    "name": "A007",
+    "longName": "Labor Elektrotechnik Diplomarbeiten",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffff",
+    "building": ""
+  },
+  {
+    "id": 9,
+    "name": "A008",
+    "longName": "Labor für Metallographie Schleifraum",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 10,
+    "name": "A009",
+    "longName": "Festigkeitslabor",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 11,
+    "name": "A010",
+    "longName": "FEM-Labor",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 12,
+    "name": "A011",
+    "longName": "Maschinenbau-Fahrzeugtechnik und Mechatronik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 13,
+    "name": "A016",
+    "longName": "Automatisierungslabor",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 115,
+    "name": "A016-2",
+    "longName": "Optik Labor",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 95,
+    "name": "A101",
+    "longName": "EDV1",
+    "active": true,
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 96,
+    "name": "A102",
+    "longName": "EDV2",
+    "active": true,
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 99,
+    "name": "A103",
+    "longName": "Konstruktionssaal Elektronik",
+    "active": true,
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 15,
+    "name": "A104",
+    "longName": "Labor für Nachrichtentechnik und Regelungstechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 16,
+    "name": "A106",
+    "longName": "Labor für Digitaltechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 17,
+    "name": "A107",
+    "longName": "Labor für Grundlagen und Messtechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 18,
+    "name": "A109",
+    "longName": "Labor für Grundlagen und Netzwerktechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 19,
+    "name": "B034",
+    "longName": "Werkstätte für Computergestützte Fertigung, Leiterplattenfertigung",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 128,
+    "name": "B035",
+    "longName": "Werkstätte für Leiterplattenfertigung",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 20,
+    "name": "B038",
+    "longName": "Werkstätte für Elektronik 1",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 21,
+    "name": "B039",
+    "longName": "Werkstätte für Kommunikationstechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 22,
+    "name": "B040",
+    "longName": "W EL, IT",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "e1e1e1",
+    "building": ""
+  },
+  {
+    "id": 23,
+    "name": "B041",
+    "longName": "Werkstätte für Elektromechanik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 24,
+    "name": "B042",
+    "longName": "Werkstätte für Gerätebau",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 25,
+    "name": "B043",
+    "longName": "Werkstätte für Computertechnik, Leiterplattenentwicklung",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 26,
+    "name": "B044",
+    "longName": "Werkstätte für Elektroinstallation",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 27,
+    "name": "B045",
+    "longName": "Werkstätte für Elektromechanik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 28,
+    "name": "B046",
+    "longName": "Werkstätte für Industrielle Elektronik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 29,
+    "name": "B055",
+    "longName": "Werkstätte für Arbeitsvorbereitung",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 30,
+    "name": "B057",
+    "longName": "Werkstätte für Werkzeug- und Vorrichtungsbau",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 31,
+    "name": "B058",
+    "longName": "Grundausbildung",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 32,
+    "name": "B059",
+    "longName": "Grundausbildung Elektronik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 33,
+    "name": "B060",
+    "longName": "Werkstätte für Messtechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 34,
+    "name": "B060-Nord",
+    "longName": "PC/CNC Werkstätte",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 35,
+    "name": "B060-Süd",
+    "longName": "CNC Programmierung",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 36,
+    "name": "B062",
+    "longName": "Labor für Verbrennungsmaschinen",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 37,
+    "name": "B063",
+    "longName": "Rollenleistungsprüfstand",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 38,
+    "name": "B064",
+    "longName": "Ottomotorentechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 39,
+    "name": "B065",
+    "longName": "Dieselmotorentechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 40,
+    "name": "B066",
+    "longName": "Fahrwerkstechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 41,
+    "name": "B067",
+    "longName": "KFZ-Elektrik, Elektronik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 113,
+    "name": "B069-Ost",
+    "longName": "Mechanische Werkstätte",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 42,
+    "name": "B069-West",
+    "longName": "Werkstätte für Kunststofftechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 43,
+    "name": "B078",
+    "longName": "Spenglerei und Stahlbau",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 44,
+    "name": "B080",
+    "longName": "Karosserietechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 45,
+    "name": "B081",
+    "longName": "Schmiede",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 46,
+    "name": "B083",
+    "longName": "Oberflächentechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 47,
+    "name": "B084",
+    "longName": "Kunstschmiede",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 48,
+    "name": "B085",
+    "longName": "Schweißerei",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 50,
+    "name": "B089A",
+    "longName": "Modelltischlerei",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 49,
+    "name": "B089B",
+    "longName": "Kunststofftechnik",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 116,
+    "name": "B110",
+    "longName": "CAD1",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffff",
+    "building": ""
+  },
+  {
+    "id": 51,
+    "name": "B135",
+    "longName": "B135",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 52,
+    "name": "B137",
+    "longName": "B137",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 53,
+    "name": "B138",
+    "longName": "Besprechungszimmer",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "e1e1e1",
+    "building": ""
+  },
+  {
+    "id": 54,
+    "name": "B144",
+    "longName": "B144",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 55,
+    "name": "B145",
+    "longName": "B145",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 56,
+    "name": "B146",
+    "longName": "B146",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 57,
+    "name": "B147",
+    "longName": "B147",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 58,
+    "name": "C013",
+    "longName": "C013",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 36,
+    "building": ""
+  },
+  {
+    "id": 59,
+    "name": "C014",
+    "longName": "C014",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 687,
+    "name": "C015",
+    "longName": "C015",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 36,
+    "building": ""
+  },
+  {
+    "id": 133,
+    "name": "C017",
+    "longName": "C017",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 61,
+    "name": "C018 Ost",
+    "longName": "C018 Ost",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 63,
+    "name": "C030",
+    "longName": "C030",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 64,
+    "name": "C032",
+    "longName": "C032",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 145,
+    "name": "C033",
+    "longName": "Schulbibliothek, ORGI",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "e1e1e1",
+    "building": ""
+  },
+  {
+    "id": 65,
+    "name": "C115",
+    "longName": "C115",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 66,
+    "name": "C116",
+    "longName": "C116",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 67,
+    "name": "C117",
+    "longName": "C117",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffffc3",
+    "did": 35,
+    "building": ""
+  },
+  {
+    "id": 68,
+    "name": "C129",
+    "longName": "C129",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 69,
+    "name": "C130",
+    "longName": "C130",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 118,
+    "name": "C131",
+    "longName": "EDV3",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 120,
+    "name": "C131-LA",
+    "longName": "EDV3",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 70,
+    "name": "C201",
+    "longName": "EDV5",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 71,
+    "name": "C202",
+    "longName": "C202",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 72,
+    "name": "C203",
+    "longName": "C203",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 73,
+    "name": "C204",
+    "longName": "C204",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 74,
+    "name": "C207",
+    "longName": "C207",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 75,
+    "name": "C211",
+    "longName": "C211",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 76,
+    "name": "C213",
+    "longName": "C213",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 77,
+    "name": "C214",
+    "longName": "C214",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 78,
+    "name": "C215",
+    "longName": "C215",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 79,
+    "name": "C216",
+    "longName": "C216",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c3ffc3",
+    "did": 38,
+    "building": ""
+  },
+  {
+    "id": 81,
+    "name": "C302",
+    "longName": "C302",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 82,
+    "name": "C304",
+    "longName": "C304",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 83,
+    "name": "C305",
+    "longName": "C305",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 84,
+    "name": "C306",
+    "longName": "C306",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 85,
+    "name": "C307",
+    "longName": "C307",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 117,
+    "name": "C310",
+    "longName": "CAD2",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 86,
+    "name": "C311",
+    "longName": "C311",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 119,
+    "name": "C312",
+    "longName": "EDV4",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 87,
+    "name": "C314",
+    "longName": "C314",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
+  },
+  {
+    "id": 90,
+    "name": "CS1",
+    "longName": "Chemiesaal1",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 91,
+    "name": "E003",
+    "longName": "EDV-StGb",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 92,
+    "name": "E004",
+    "longName": "E004",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 158,
+    "name": "E102",
+    "longName": "E102",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 93,
+    "name": "E103",
+    "longName": "E103",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 94,
+    "name": "E104",
+    "longName": "E104",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "ffdba7",
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 101,
+    "name": "PS1",
+    "longName": "Physiksaal1",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 102,
+    "name": "PS2",
+    "longName": "Physiksaal2",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 104,
+    "name": "TS1",
+    "longName": "Turnsaal 1",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 105,
+    "name": "TS2",
+    "longName": "Turnsaal 2",
+    "active": true,
+    "building": ""
+  },
+  {
+    "id": 106,
+    "name": "V001",
+    "longName": "Graveuratelier",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 107,
+    "name": "V002",
+    "longName": "Mechanische Werkstätte",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 108,
+    "name": "V103",
+    "longName": "Graveuratelier",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 109,
+    "name": "V104",
+    "longName": "Goldschmiedatelier",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 110,
+    "name": "V106",
+    "longName": "Gürtlerei",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 111,
+    "name": "V201",
+    "longName": "Goldschmiedeatelier",
+    "active": true,
+    "did": 37,
+    "building": ""
+  },
+  {
+    "id": 112,
+    "name": "V203",
+    "longName": "Gussraum",
+    "active": true,
+    "did": 37,
+    "building": ""
+  }
+]

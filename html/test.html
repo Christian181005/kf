@@ -6,8 +6,6 @@
     <title>Klassenfotos Planungstool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
-    <script type="mpy" src="data.py"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -45,6 +43,16 @@
             100% {
                 transform: rotate(360deg);
             }
+        }
+
+        .graduating-badge {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .regular-badge {
+            background-color: #3b82f6;
+            color: white;
         }
     </style>
 </head>
@@ -252,33 +260,16 @@
                     <div class="p-6 overflow-y-auto max-h-[70vh]">
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Empfänger</label>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                                        klasse5ahitm@htl-steyr.ac.at
-                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </span>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                                        kv5ahitm@htl-steyr.ac.at
-                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </span>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                                        wl5ahitm@htl-steyr.ac.at
-                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </span>
+                            <div id="recipientsContainer" class="flex flex-wrap gap-2 mb-4">
+                                <!-- Recipients will be added here dynamically -->
                             </div>
-                            <input type="text" placeholder="Weitere Empfänger hinzufügen"
+                            <input type="text" id="addRecipientInput" placeholder="Weitere Empfänger hinzufügen"
                                    class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Betreff</label>
-                            <input type="text" value="Termin für Klassenfotos - 5AHITM"
+                            <input type="text" id="emailSubject" value="Termin für Klassenfotos"
                                    class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
 
@@ -299,55 +290,28 @@
                                         </button>
                                     </div>
                                 </div>
-                                <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
-                                          placeholder="E-Mail Text hier eingeben...">
-Sehr geehrte Schülerinnen und Schüler der 5AHITM,
-
-hiermit möchten wir Sie über den Termin für die Klassenfotos informieren:
-
-Datum: 15. Oktober 2024
-Uhrzeit: 09:30 - 09:45 Uhr
-Ort: Fotostudio (Raum A101)
-
-Bitte erscheinen Sie pünktlich und in angemessener Kleidung.
-
-Mit freundlichen Grüßen,
-Ihr Fotografieteam
-                                    </textarea>
+                                <textarea id="emailMessage" class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
+                                          placeholder="E-Mail Text hier eingeben..."></textarea>
                             </div>
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Anhänge</label>
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>
-                                        <span>Terminliste_5AHITM.pdf</span>
-                                    </div>
-                                    <button class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-qrcode text-blue-500 mr-2"></i>
-                                        <span>Bestellformular_QR.pdf</span>
-                                    </div>
-                                    <button class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+                            <div id="attachmentsContainer" class="border rounded-lg p-4">
+                                <!-- Attachments will be added here -->
+                                <div class="text-center text-gray-500">
+                                    Keine Anhänge hinzugefügt
                                 </div>
                             </div>
-                            <button class="mt-2 text-primary hover:text-secondary flex items-center">
+                            <button id="addAttachmentBtn" class="mt-2 text-primary hover:text-secondary flex items-center">
                                 <i class="fas fa-plus mr-1"></i> Anhang hinzufügen
                             </button>
                         </div>
                     </div>
                     <div class="px-6 py-4 border-t flex justify-end space-x-3">
-                        <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
+                        <button id="saveDraftBtn" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
                         </button>
-                        <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
+                        <button id="sendEmailBtn" class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
                         </button>
                     </div>
                 </div>
@@ -356,144 +320,123 @@ Ihr Fotografieteam
     </div>
 </div>
 
-
 <py-script>
-    import urllib
+import json
+from datetime import datetime, timedelta
+import random
 
-    import requests, json
-
-    roomURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getRooms"
-    teacherURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTeachers"
-    klassenURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getKlassen"
-    timetable_base_URL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTimetable"
-
-
-    def get_data():
+# Function to load JSON data
+def load_json_data(filename):
     try:
-    # notation = year + month + date
-    startDate = "20250407"
-    endDate = "20250409"
+        with open(f'entire-API-Data/{filename}', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Error loading {filename}: {str(e)}")
+        return []
 
-    response = requests.get(roomURL)
-    response.raise_for_status()
-    d1 = response.json()
-    room_data = d1
-    print(room_data)
+# Load all data
+classes_data = load_json_data('classes.json')
+teachers_data = load_json_data('teachers.json')
+rooms_data = load_json_data('rooms.json')
+timetable_data = load_json_data('timetable.json')
 
-    response = requests.get(teacherURL)
-    response.raise_for_status()
-    d2 = response.json()
-    teacher_data = d2
-    print(teacher_data)
+# Function to generate photo schedule
+def generate_photo_schedule():
+    schedule = []
 
-    response = requests.get(klassenURL)
-    response.raise_for_status()
-    d3 = response.json()
-    klassen_data = d3
-    print(klassen_data)
+    # Get settings from UI
+    photo_duration = int(Element('photoDuration').value)
+    grad_duration = int(Element('gradDuration').value)
 
-    timetable_data = []
-    for teacher in teacher_data:
-    query_string = f'{{"id":"{teacher["id"]}","type":"2","startDate":"{startDate}","endDate":"{endDate}"}}'
-    encoded_query = urllib.parse.quote(query_string)
-    url = f"{timetable_base_URL}/{encoded_query}"
+    # Get current date and time
+    now = datetime.now()
 
-    response = requests.get(url)
-    response.raise_for_status()
-    timetable_data.append(response.json())
-    d4 = json.dumps(timetable_data)
-    timetable_data = json.loads(d4)
+    # Find photo studio room (or use first available room)
+    photo_room = next((room for room in rooms_data if "foto" in room['name'].lower()), rooms_data[0])
 
-    for sublist in timetable_data:
-    if isinstance(sublist, list):
-    for entry in sublist:
-    if isinstance(entry, dict):
-    kl_ids = [kl['id'] for kl in entry.get('kl', [])]
-    te_ids = [te['id'] for te in entry.get('te', [])]
-    ro_ids = [ro['id'] for ro in entry.get('ro', [])]
-    for teacher in teacher_data:
-    for te_id in te_ids:
-    if te_id == teacher['id']:
-    entry['te'] = teacher
-    for room in room_data:
-    for ro_id in ro_ids:
-    if ro_id == room['id']:
-    entry['ro'] = room
-    for klasse in klassen_data:
-    for kl_id in kl_ids:
-    if kl_id == klasse['id']:
-    entry['kl'] = klasse
+    # Process each class
+    for class_info in classes_data:
+        # Determine if it's a graduating class (5th year)
+        is_graduating = class_info['name'][0] == '5' if class_info['name'] and class_info['name'][0].isdigit() else False
 
-    with open("entire-API-Data/data.json", "w", encoding="utf-8") as f:
-    json.dump(timetable_data, f, ensure_ascii=False, indent=2)
+        # Find class teacher (KV)
+        class_teacher = next((teacher for teacher in teachers_data
+                            if teacher['id'] == class_info.get('teacherId')), None)
 
-    print("file saved correctly (probably)")
+        # Find workshop leader (WL) - simplified logic
+        workshop_leader = next((teacher for teacher in teachers_data
+                              if teacher['name'].startswith('WL')), None)
 
-    except requests.exceptions.RequestException as e:
-    print(":(", e)
+        # Generate random date in the next 2 weeks
+        random_days = random.randint(1, 14)
+        photo_date = now + timedelta(days=random_days)
+
+        # Generate random time between 8:00 and 15:00
+        random_hour = random.randint(8, 14)
+        random_minute = random.choice([0, 15, 30, 45])
+
+        # Calculate duration
+        duration = grad_duration if is_graduating else photo_duration
+
+        # Format time
+        start_time = f"{random_hour:02d}:{random_minute:02d}"
+        end_hour = random_hour + (random_minute + duration) // 60
+        end_minute = (random_minute + duration) % 60
+        end_time = f"{end_hour:02d}:{end_minute:02d}"
+
+        # Create schedule item
+        schedule_item = {
+            'class': class_info['name'],
+            'date': photo_date.strftime('%d.%m.%Y'),
+            'time': f"{start_time} - {end_time}",
+            'location': photo_room['name'],
+            'responsible': class_teacher['name'] if class_teacher else "Nicht zugewiesen",
+            'isGraduating': is_graduating,
+            'kvEmail': f"kv{class_info['name'].lower()}@htl-steyr.ac.at" if class_info['name'] else "",
+            'wlEmail': f"wl{class_info['name'].lower()}@htl-steyr.ac.at" if class_info['name'] else "",
+            'classEmail': f"klasse{class_info['name'].lower()}@htl-steyr.ac.at" if class_info['name'] else ""
+        }
+
+        schedule.append(schedule_item)
+
+    return schedule
+
+# Function to update the UI with schedule data
+def update_schedule_ui(schedule_data):
+    js_code = f"""
+    renderScheduleTable({json.dumps(schedule_data)});
+    """
+    js.eval(js_code)
+
+# Event handlers for buttons
+def on_generate_schedule(*args):
+    schedule = generate_photo_schedule()
+    update_schedule_ui(schedule)
+
+def on_refresh_data(*args):
+    # In a real app, this would reload the data from the API
+    js_code = """
+    showNotification('Daten werden aktualisiert...', 'info');
+    setTimeout(() => {
+        showNotification('Daten erfolgreich aktualisiert!', 'success');
+    }, 1500);
+    """
+    js.eval(js_code)
+
+# Set up event listeners
+Element('generateScheduleBtn').element.onclick = on_generate_schedule
+Element('refreshBtn').element.onclick = on_refresh_data
+
+# Initial load
+js_code = """
+document.addEventListener('DOMContentLoaded', () => {
+    showNotification('System bereit. Klicken Sie auf "Terminplan generieren"', 'info');
+});
+"""
+js.eval(js_code)
 </py-script>
 
-
 <script>
-    // Sample data - in a real app this would come from the API
-    const sampleData = [
-        {
-            class: "5AHITN",
-            date: "15.10.2024",
-            time: "09:30 - 09:45",
-            location: "Fotostudio (A101)",
-            responsible: "Herr Reisinger (REWO)",
-            isGraduating: true,
-            kvEmail: "kv5ahitm@htl-steyr.ac.at",
-            wlEmail: "wl5ahitm@htl-steyr.ac.at",
-            classEmail: "klasse5ahitm@htl-steyr.ac.at"
-        },
-        {
-            class: "3BHEL",
-            date: "16.10.2024",
-            time: "08:15 - 08:25",
-            location: "Fotostudio (A101)",
-            responsible: "Frau Orgill (ORGI)",
-            isGraduating: false,
-            kvEmail: "kv3bhet@htl-steyr.ac.at",
-            wlEmail: "wl3bhet@htl-steyr.ac.at",
-            classEmail: "klasse3bhet@htl-steyr.ac.at"
-        },
-        {
-            class: "2AHITN",
-            date: "16.10.2024",
-            time: "10:30 - 10:40",
-            location: "Fotostudio (A101)",
-            responsible: "Herr Pusch (PUSC)",
-            isGraduating: false,
-            kvEmail: "kv2ahitn@htl-steyr.ac.at",
-            wlEmail: "wl2ahitn@htl-steyr.ac.at",
-            classEmail: "klasse2ahitn@htl-steyr.ac.at"
-        },
-        {
-            class: "4DHET",
-            date: "17.10.2024",
-            time: "11:20 - 11:35",
-            location: "Fotostudio (A101)",
-            responsible: "Fr. Bauer (KV)",
-            isGraduating: true,
-            kvEmail: "kv4dhet@htl-steyr.ac.at",
-            wlEmail: "wl4dhet@htl-steyr.ac.at",
-            classEmail: "klasse4dhet@htl-steyr.ac.at"
-        },
-        {
-            class: "1EHIT",
-            date: "18.10.2024",
-            time: "07:45 - 07:55",
-            location: "Fotostudio (A101)",
-            responsible: "Hr. Huber",
-            isGraduating: false,
-            kvEmail: "kv1ehit@htl-steyr.ac.at",
-            wlEmail: "wl1ehit@htl-steyr.ac.at",
-            classEmail: "klasse1ehit@htl-steyr.ac.at"
-        }
-    ];
-
     // DOM elements
     const scheduleTableBody = document.getElementById('scheduleTableBody');
     const loadingRow = document.getElementById('loadingRow');
@@ -507,11 +450,19 @@ Ihr Fotografieteam
     const scheduledClasses = document.getElementById('scheduledClasses');
     const teachersToNotify = document.getElementById('teachersToNotify');
     const graduatingClasses = document.getElementById('graduatingClasses');
+    const recipientsContainer = document.getElementById('recipientsContainer');
+    const addRecipientInput = document.getElementById('addRecipientInput');
+    const emailSubject = document.getElementById('emailSubject');
+    const emailMessage = document.getElementById('emailMessage');
+    const attachmentsContainer = document.getElementById('attachmentsContainer');
+    const addAttachmentBtn = document.getElementById('addAttachmentBtn');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const sendEmailBtn = document.getElementById('sendEmailBtn');
 
     // Functions
     function renderScheduleTable(data) {
         // Remove loading row
-        loadingRow.remove();
+        if (loadingRow) loadingRow.remove();
 
         // Clear existing rows
         scheduleTableBody.innerHTML = '';
@@ -533,7 +484,9 @@ Ihr Fotografieteam
                             </div>
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">${item.class}</div>
-                                <div class="text-sm text-gray-500">${item.isGraduating ? 'Abschlussklasse' : 'Klasse'}</div>
+                                <div class="text-xs ${item.isGraduating ? 'graduating-badge' : 'regular-badge'} px-2 py-1 rounded-full inline-block mt-1">
+                                    ${item.isGraduating ? 'Abschlussklasse' : 'Klasse'}
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -542,12 +495,14 @@ Ihr Fotografieteam
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${item.time}</div>
+                        <div class="text-xs text-gray-500 mt-1">${item.isGraduating ? '15 min' : '10 min'}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${item.location}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${item.responsible}</div>
+                        <div class="text-xs text-gray-500 mt-1">KV</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
@@ -568,16 +523,77 @@ Ihr Fotografieteam
     }
 
     function showEmailModal(classInfo) {
-        // In a real app, we would populate the modal with actual class data
+        // Clear previous recipients
+        recipientsContainer.innerHTML = '';
+
+        // Set email subject with class name if available
+        if (classInfo && classInfo.class) {
+            emailSubject.value = `Termin für Klassenfotos - ${classInfo.class}`;
+
+            // Add default recipients
+            if (classInfo.kvEmail) {
+                addRecipient(classInfo.kvEmail);
+            }
+            if (classInfo.wlEmail) {
+                addRecipient(classInfo.wlEmail);
+            }
+            if (classInfo.classEmail) {
+                addRecipient(classInfo.classEmail);
+            }
+        }
+
+        // Set default email message
+        if (classInfo) {
+            const [date, time, location] = [classInfo.date, classInfo.time, classInfo.location];
+            emailMessage.value = `Sehr geehrte Schülerinnen und Schüler,\n\nhiermit möchten wir Sie über den Termin für die Klassenfotos informieren:\n\nDatum: ${date}\nUhrzeit: ${time}\nOrt: ${location}\n\nBitte erscheinen Sie pünktlich und in angemessener Kleidung.\n\nMit freundlichen Grüßen,\nIhr Fotografieteam`;
+        }
+
+        // Show modal
         emailModal.classList.remove('hidden');
+    }
+
+    function addRecipient(email) {
+        if (!email) return;
+
+        const recipient = document.createElement('span');
+        recipient.className = 'bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center';
+        recipient.innerHTML = `
+            ${email}
+            <button class="ml-2 text-blue-600 hover:text-blue-800 remove-recipient">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        recipientsContainer.appendChild(recipient);
+    }
+
+    function showNotification(message, type = 'info') {
+        const colors = {
+            info: 'bg-blue-500',
+            success: 'bg-green-500',
+            warning: 'bg-yellow-500',
+            error: 'bg-red-500'
+        };
+
+        const notification = document.createElement('div');
+        notification.className = `fixed bottom-4 right-4 ${colors[type]} text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-fade-in`;
+        notification.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} mr-2"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.classList.add('animate-fade-out');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
     }
 
     // Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
-        // Simulate API call with timeout
-        setTimeout(() => {
-            renderScheduleTable(sampleData);
-        }, 1000);
+        showNotification('System bereit. Klicken Sie auf "Terminplan generieren"', 'info');
     });
 
     generateScheduleBtn.addEventListener('click', () => {
@@ -594,92 +610,18 @@ Ihr Fotografieteam
                 </td>
             `;
         scheduleTableBody.appendChild(loadingRow);
-
-        // Simulate API call with timeout
-        setTimeout(() => {
-            renderScheduleTable(sampleData);
-
-            // Show success notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-            notification.innerHTML = `
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Terminplan erfolgreich generiert!</span>
-                `;
-            document.body.appendChild(notification);
-
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }, 1500);
     });
 
     refreshBtn.addEventListener('click', () => {
-        // Show loading state
-        scheduleTableBody.innerHTML = '';
-        const loadingRow = document.createElement('tr');
-        loadingRow.id = 'loadingRow';
-        loadingRow.innerHTML = `
-                <td colspan="6" class="px-6 py-8 text-center">
-                    <div class="flex flex-col items-center justify-center">
-                        <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                        <p class="text-gray-600">Aktualisiere Daten...</p>
-                    </div>
-                </td>
-            `;
-        scheduleTableBody.appendChild(loadingRow);
-
-        // Simulate API call with timeout
-        setTimeout(() => {
-            renderScheduleTable(sampleData);
-
-            // Show success notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-            notification.innerHTML = `
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Daten erfolgreich aktualisiert!</span>
-                `;
-            document.body.appendChild(notification);
-
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }, 1000);
+        showNotification('Daten werden aktualisiert...', 'info');
     });
 
     exportCSVBtn.addEventListener('click', () => {
-        // Show notification
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-        notification.innerHTML = `
-                <i class="fas fa-file-csv mr-2"></i>
-                <span>CSV wird heruntergeladen...</span>
-            `;
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
+        showNotification('CSV wird heruntergeladen...', 'info');
     });
 
     exportPDFBtn.addEventListener('click', () => {
-        // Show notification
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-        notification.innerHTML = `
-                <i class="fas fa-file-pdf mr-2"></i>
-                <span>PDF wird generiert...</span>
-            `;
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
+        showNotification('PDF wird generiert...', 'info');
     });
 
     sendEmailsBtn.addEventListener('click', () => {
@@ -690,8 +632,46 @@ Ihr Fotografieteam
         emailModal.classList.add('hidden');
     });
 
-    // Delegate event for email buttons (since they're dynamically added)
+    addRecipientInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && addRecipientInput.value) {
+            addRecipient(addRecipientInput.value);
+            addRecipientInput.value = '';
+        }
+    });
+
+    addAttachmentBtn.addEventListener('click', () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.click();
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const attachment = document.createElement('div');
+                attachment.className = 'flex items-center justify-between mb-2';
+                attachment.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas ${file.name.endsWith('.pdf') ? 'fa-file-pdf text-red-500' :
+                            file.name.endsWith('.doc') || file.name.endsWith('.docx') ? 'fa-file-word text-blue-500' :
+                            'fa-file-alt'} mr-2"></i>
+                        <span>${file.name}</span>
+                    </div>
+                    <button class="text-red-500 hover:text-red-700 remove-attachment">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+
+                if (attachmentsContainer.firstChild?.textContent === 'Keine Anhänge hinzugefügt') {
+                    attachmentsContainer.innerHTML = '';
+                }
+                attachmentsContainer.appendChild(attachment);
+            }
+        });
+    });
+
+    // Delegate events for dynamic elements
     document.addEventListener('click', (e) => {
+        // Email buttons
         if (e.target.closest('.email-btn')) {
             const btn = e.target.closest('.email-btn');
             const classInfo = {
@@ -702,6 +682,47 @@ Ihr Fotografieteam
             };
             showEmailModal(classInfo);
         }
+
+        // Remove recipient buttons
+        if (e.target.closest('.remove-recipient')) {
+            e.target.closest('.bg-blue-100').remove();
+            if (recipientsContainer.children.length === 0) {
+                recipientsContainer.innerHTML = '<div class="text-gray-500">Keine Empfänger hinzugefügt</div>';
+            }
+        }
+
+        // Remove attachment buttons
+        if (e.target.closest('.remove-attachment')) {
+            e.target.closest('.flex.items-center').remove();
+            if (attachmentsContainer.children.length === 0) {
+                attachmentsContainer.innerHTML = '<div class="text-center text-gray-500">Keine Anhänge hinzugefügt</div>';
+            }
+        }
+    });
+
+    // Send email button
+    sendEmailBtn.addEventListener('click', () => {
+        const recipients = Array.from(recipientsContainer.querySelectorAll('.bg-blue-100'))
+            .map(el => el.textContent.trim().replace('×', '').trim());
+
+        if (recipients.length === 0) {
+            showNotification('Bitte fügen Sie mindestens einen Empfänger hinzu', 'error');
+            return;
+        }
+
+        showNotification('E-Mails werden versendet...', 'info');
+        emailModal.classList.add('hidden');
+
+        // Simulate sending
+        setTimeout(() => {
+            showNotification('E-Mails erfolgreich versendet!', 'success');
+        }, 2000);
+    });
+
+    // Save draft button
+    saveDraftBtn.addEventListener('click', () => {
+        showNotification('Entwurf gespeichert', 'success');
+        emailModal.classList.add('hidden');
     });
 </script>
 </body>

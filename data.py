@@ -7,13 +7,12 @@ teacherURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTeache
 klassenURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getKlassen"
 timetable_base_URL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTimetable"
 
+# notation: year, month, date
+startDate = "20250407"
+endDate = "20250408"
 
 def get_data():
     try:
-        # notation: year, month, date
-        startDate = "20250407"
-        endDate = "20250409"
-
         response = requests.get(roomURL)
         response.raise_for_status()
         d1 = response.json()

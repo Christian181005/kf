@@ -1,51 +1,53 @@
 {
-  'id': 2391253,
-  'date': 20250408,
-  'startTime': 1325,
-  'endTime': 1415,
-  'kl': {
-    'id': 2183,
-    'name': '4AHMBZ',
-    'longName': '4AHMBZ',
-    'active': True,
-    'foreColor': '000000',
-    'backColor': 'c1e0ff',
-    'did': 34,
-    'teacher1': 562
+  "id": 2381330,
+  "date": 20250407,
+  "startTime": 955,
+  "endTime": 1045,
+  "kl": {
+    "id": 1958,
+    "name": "1AFMBZ",
+    "longName": "1AFMBZ",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "c1e0ff",
+    "did": 50,
+    "teacher1": "BENE"
   },
-  'te': {
-    'id': 429,
-    'name': 'ACHE',
-    'foreName': 'Evelyn',
-    'longName': 'ACHLEITNER',
-    'title': 'Prof. Mag.',
-    'active': True,
-    'dids': [
+  "te": {
+    "id": 480,
+    "name": "LOVB",
+    "foreName": "Beate",
+    "longName": "LOVASZ",
+    "title": "FL BEd",
+    "active": true,
+    "dids": [
       {
-        'id': 34
+        "id": 34
       },
       {
-        'id': 35
+        "id": 35
       },
       {
-        'id': 36
+        "id": 36
       }
     ]
   },
-  'su': [
+  "su": [
     {
-      'id': 90
+      "id": 28
     }
   ],
-  'ro': {
-    'id': 84,
-    'name': 'C306',
-    'longName': 'C306',
-    'active': True,
-    'foreColor': '000000',
-    'backColor': 'bbddff',
-    'did': 34,
-    'building': ''
+  "ro": {
+    "id": 52,
+    "name": "B137",
+    "longName": "B137",
+    "active": true,
+    "foreColor": "000000",
+    "backColor": "bbddff",
+    "did": 34,
+    "building": ""
   },
-  'activityType': 'Unterricht'
+  "activityType": "Unterricht"
 }
+
+

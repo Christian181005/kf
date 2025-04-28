@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="changes in API and algorithm started">
-      <change afterPath="$PROJECT_DIR$/entire-API-Data/output_data.json" afterDir="false" />
+    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="algortihm continued">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" beforeDir="false" afterPath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entire-API-Data/output_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/output_data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,24 +49,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.algorithm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;mp1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pichl/Documents/ITP2/4AHITN/kf/json-files&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.algorithm.executor": "Run",
+    "Python.data.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "mp1",
+    "last_opened_file_path": "C:/Users/pichl/Documents/ITP2/4AHITN/kf/json-files",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pichl\Documents\ITP2\4AHITN\kf\json-files" />
@@ -107,7 +105,9 @@
       <workItem from="1744267449905" duration="1965000" />
       <workItem from="1744272153597" duration="2460000" />
       <workItem from="1745321227119" duration="43000" />
-      <workItem from="1745475122911" duration="11919000" />
+      <workItem from="1745475122911" duration="11942000" />
+      <workItem from="1745527566651" duration="452000" />
+      <workItem from="1745820711831" duration="5234000" />
     </task>
     <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
@@ -157,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745482026196</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="algortihm continued">
+      <option name="closed" value="true" />
+      <created>1745487334162</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745487334162</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,11 +178,12 @@
     <MESSAGE value="API data is now combined into 1 array, you can get the data with the function &quot;data.get_data()&quot;" />
     <MESSAGE value="getting the data from the API - DONE" />
     <MESSAGE value="changes in API and algorithm started" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in API and algorithm started" />
+    <MESSAGE value="algortihm continued" />
+    <option name="LAST_COMMIT_MESSAGE" value="algortihm continued" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1745487197670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1745825945621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1745481804231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -6,6 +6,9 @@
     <title>Klassenfotos Planungstool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
+    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -44,16 +47,6 @@
                 transform: rotate(360deg);
             }
         }
-
-        .graduating-badge {
-            background-color: #8b5cf6;
-            color: white;
-        }
-
-        .regular-badge {
-            background-color: #3b82f6;
-            color: white;
-        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -71,7 +64,8 @@
                     <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
                 </button>
                 <div class="relative">
-                    <img src="https://via.placeholder.com/40" alt="User" class="rounded-full h-10 w-10 cursor-pointer">
+                    <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
+                         class="rounded-full h-10 w-10 cursor-pointer">
                     <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
             </div>
@@ -139,9 +133,12 @@
             </div>
 
             <button id="generateScheduleBtn"
-                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
+                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
+                    onclick="window.location.href='terminplan.html';"
+            >
                 <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
             </button>
+
         </div>
 
         <!-- Main Content Area -->
@@ -260,16 +257,33 @@
                     <div class="p-6 overflow-y-auto max-h-[70vh]">
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Empfänger</label>
-                            <div id="recipientsContainer" class="flex flex-wrap gap-2 mb-4">
-                                <!-- Recipients will be added here dynamically -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        klasse5ahitm@htl-steyr.ac.at
+                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        kv5ahitm@htl-steyr.ac.at
+                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        wl5ahitm@htl-steyr.ac.at
+                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </span>
                             </div>
-                            <input type="text" id="addRecipientInput" placeholder="Weitere Empfänger hinzufügen"
+                            <input type="text" placeholder="Weitere Empfänger hinzufügen"
                                    class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Betreff</label>
-                            <input type="text" id="emailSubject" value="Termin für Klassenfotos"
+                            <input type="text" value="Termin für Klassenfotos - 5AHITM"
                                    class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
 
@@ -290,28 +304,55 @@
                                         </button>
                                     </div>
                                 </div>
-                                <textarea id="emailMessage" class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
-                                          placeholder="E-Mail Text hier eingeben..."></textarea>
+                                <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
+                                          placeholder="E-Mail Text hier eingeben...">
+Sehr geehrte Schülerinnen und Schüler der 5AHITM,
+
+hiermit möchten wir Sie über den Termin für die Klassenfotos informieren:
+
+Datum: 15. Oktober 2024
+Uhrzeit: 09:30 - 09:45 Uhr
+Ort: Fotostudio (Raum A101)
+
+Bitte erscheinen Sie pünktlich und in angemessener Kleidung.
+
+Mit freundlichen Grüßen,
+Ihr Fotografieteam
+                                    </textarea>
                             </div>
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-gray-700 mb-2">Anhänge</label>
-                            <div id="attachmentsContainer" class="border rounded-lg p-4">
-                                <!-- Attachments will be added here -->
-                                <div class="text-center text-gray-500">
-                                    Keine Anhänge hinzugefügt
+                            <div class="border rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                        <span>Terminliste_5AHITM.pdf</span>
+                                    </div>
+                                    <button class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-qrcode text-blue-500 mr-2"></i>
+                                        <span>Bestellformular_QR.pdf</span>
+                                    </div>
+                                    <button class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <button id="addAttachmentBtn" class="mt-2 text-primary hover:text-secondary flex items-center">
+                            <button class="mt-2 text-primary hover:text-secondary flex items-center">
                                 <i class="fas fa-plus mr-1"></i> Anhang hinzufügen
                             </button>
                         </div>
                     </div>
                     <div class="px-6 py-4 border-t flex justify-end space-x-3">
-                        <button id="saveDraftBtn" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
+                        <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
                         </button>
-                        <button id="sendEmailBtn" class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
+                        <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
                         </button>
                     </div>
                 </div>
@@ -320,121 +361,83 @@
     </div>
 </div>
 
-<py-script>
-import json
-from datetime import datetime, timedelta
-import random
+<!--
+The following script should be included in the HTML file to automatically get:
 
-# Function to load JSON data
-def load_json_data(filename):
-    try:
-        with open(f'entire-API-Data/{filename}', 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Error loading {filename}: {str(e)}")
-        return []
+-> class names
+-> date
+-> time
+-> location
+-> responsible teacher
+-> whether it's a graduating class or not
+-> email addresses for KV, WL, and class
 
-# Load all data
-classes_data = load_json_data('classes.json')
-teachers_data = load_json_data('teachers.json')
-rooms_data = load_json_data('rooms.json')
-timetable_data = load_json_data('timetable.json')
+The data.py generates 4 json files with the above information.
 
-# Function to generate photo schedule
-def generate_photo_schedule():
-    schedule = []
+-> Folder = entire-API-Data
+-> File names = classes.json, rooms.json, teachers.json, timetable.json
+-->
 
-    # Get settings from UI
-    photo_duration = int(Element('photoDuration').value)
-    grad_duration = int(Element('gradDuration').value)
-
-    # Get current date and time
-    now = datetime.now()
-
-    # Find photo studio room (or use first available room)
-    photo_room = next((room for room in rooms_data if "foto" in room['name'].lower()), rooms_data[0])
-
-    # Process each class
-    for class_info in classes_data:
-        # Determine if it's a graduating class (5th year)
-        is_graduating = class_info['name'][0] == '5' if class_info['name'] and class_info['name'][0].isdigit() else False
-
-        # Find class teacher (KV)
-        class_teacher = next((teacher for teacher in teachers_data
-                            if teacher['id'] == class_info.get('teacherId')), None)
-
-        # Find workshop leader (WL) - simplified logic
-        workshop_leader = next((teacher for teacher in teachers_data
-                              if teacher['name'].startswith('WL')), None)
-
-        # Generate random date in the next 2 weeks
-        random_days = random.randint(1, 14)
-        photo_date = now + timedelta(days=random_days)
-
-        # Generate random time between 8:00 and 15:00
-        random_hour = random.randint(8, 14)
-        random_minute = random.choice([0, 15, 30, 45])
-
-        # Calculate duration
-        duration = grad_duration if is_graduating else photo_duration
-
-        # Format time
-        start_time = f"{random_hour:02d}:{random_minute:02d}"
-        end_hour = random_hour + (random_minute + duration) // 60
-        end_minute = (random_minute + duration) % 60
-        end_time = f"{end_hour:02d}:{end_minute:02d}"
-
-        # Create schedule item
-        schedule_item = {
-            'class': class_info['name'],
-            'date': photo_date.strftime('%d.%m.%Y'),
-            'time': f"{start_time} - {end_time}",
-            'location': photo_room['name'],
-            'responsible': class_teacher['name'] if class_teacher else "Nicht zugewiesen",
-            'isGraduating': is_graduating,
-            'kvEmail': f"kv{class_info['name'].lower()}@htl-steyr.ac.at" if class_info['name'] else "",
-            'wlEmail': f"wl{class_info['name'].lower()}@htl-steyr.ac.at" if class_info['name'] else "",
-            'classEmail': f"klasse{class_info['name'].lower()}@htl-steyr.ac.at" if class_info['name'] else ""
+<script>
+    // Function to load JSON data
+    async function loadJsonData() {
+        try {
+            const response = await fetch('entire-API-Data/output_data.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error loading JSON data:', error);
+            return null;
         }
+    }
 
-        schedule.append(schedule_item)
+    // Function to convert date format
+    function formatDate(dateStr) {
+        if (!dateStr) return "Kein Termin";
+        return `${dateStr.substr(6, 2)}.${dateStr.substr(4, 2)}.${dateStr.substr(0, 4)}`;
+    }
 
-    return schedule
+    // Function to prepare table data
+    function prepareTableData(data) {
+        return data
+            .filter(item => item.name) // Filter out items without names
+            .map(item => {
+                const isGraduating = item.name.startsWith('5');
+                const kvEmail = `kv${item.name.toLowerCase()}@htl-steyr.ac.at`;
+                const classEmail = `klasse${item.name.toLowerCase()}@htl-steyr.ac.at`;
 
-# Function to update the UI with schedule data
-def update_schedule_ui(schedule_data):
-    js_code = f"""
-    renderScheduleTable({json.dumps(schedule_data)});
-    """
-    js.eval(js_code)
+                return {
+                    class: item.name,
+                    date: formatDate(item.d1),
+                    time: item.nr1 || "Kein Termin",
+                    location: item.room_kl || "Nicht festgelegt",
+                    responsible: item.kv || "Nicht festgelegt",
+                    isGraduating: isGraduating,
+                    kvEmail: kvEmail,
+                    classEmail: classEmail,
+                    priority: item.priority
+                };
+            });
+    }
 
-# Event handlers for buttons
-def on_generate_schedule(*args):
-    schedule = generate_photo_schedule()
-    update_schedule_ui(schedule)
-
-def on_refresh_data(*args):
-    # In a real app, this would reload the data from the API
-    js_code = """
-    showNotification('Daten werden aktualisiert...', 'info');
-    setTimeout(() => {
-        showNotification('Daten erfolgreich aktualisiert!', 'success');
-    }, 1500);
-    """
-    js.eval(js_code)
-
-# Set up event listeners
-Element('generateScheduleBtn').element.onclick = on_generate_schedule
-Element('refreshBtn').element.onclick = on_refresh_data
-
-# Initial load
-js_code = """
-document.addEventListener('DOMContentLoaded', () => {
-    showNotification('System bereit. Klicken Sie auf "Terminplan generieren"', 'info');
-});
-"""
-js.eval(js_code)
-</py-script>
+    // Load and render data when DOM is ready
+    document.addEventListener('DOMContentLoaded', async () => {
+        const jsonData = await loadJsonData();
+        if (jsonData) {
+            const tableData = prepareTableData(jsonData);
+            renderScheduleTable(tableData);
+        } else {
+            // Fallback to empty table or show error message
+            scheduleTableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="px-6 py-4 text-center text-red-500">
+                    Daten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
+                </td>
+            </tr>
+        `;
+        }
+    });
+</script>
 
 <script>
     // DOM elements
@@ -450,29 +453,33 @@ js.eval(js_code)
     const scheduledClasses = document.getElementById('scheduledClasses');
     const teachersToNotify = document.getElementById('teachersToNotify');
     const graduatingClasses = document.getElementById('graduatingClasses');
-    const recipientsContainer = document.getElementById('recipientsContainer');
-    const addRecipientInput = document.getElementById('addRecipientInput');
-    const emailSubject = document.getElementById('emailSubject');
-    const emailMessage = document.getElementById('emailMessage');
-    const attachmentsContainer = document.getElementById('attachmentsContainer');
-    const addAttachmentBtn = document.getElementById('addAttachmentBtn');
-    const saveDraftBtn = document.getElementById('saveDraftBtn');
-    const sendEmailBtn = document.getElementById('sendEmailBtn');
+
+    // Function to get priority badge
+    function getPriorityBadge(priority) {
+        if (priority === 1) {
+            return '<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Priorität 1</span>';
+        } else {
+            return '<span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Priorität 2</span>';
+        }
+    }
 
     // Functions
     function renderScheduleTable(data) {
         // Remove loading row
-        if (loadingRow) loadingRow.remove();
+        loadingRow.remove();
 
         // Clear existing rows
         scheduleTableBody.innerHTML = '';
 
         // Count stats
         let graduatingCount = 0;
+        let teachersCount = 0;
 
         // Add new rows
         data.forEach(item => {
             if (item.isGraduating) graduatingCount++;
+            if (item.kvEmail) teachersCount++;
+            if (item.classEmail) teachersCount++;
 
             const row = document.createElement('tr');
             row.className = 'schedule-item hover:bg-gray-50';
@@ -484,9 +491,7 @@ js.eval(js_code)
                             </div>
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">${item.class}</div>
-                                <div class="text-xs ${item.isGraduating ? 'graduating-badge' : 'regular-badge'} px-2 py-1 rounded-full inline-block mt-1">
-                                    ${item.isGraduating ? 'Abschlussklasse' : 'Klasse'}
-                                </div>
+                                <div class="text-sm text-gray-500">${item.isGraduating ? 'Abschlussklasse' : 'Klasse'} ${getPriorityBadge(item.priority)}</div>
                             </div>
                         </div>
                     </td>
@@ -495,17 +500,15 @@ js.eval(js_code)
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${item.time}</div>
-                        <div class="text-xs text-gray-500 mt-1">${item.isGraduating ? '15 min' : '10 min'}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${item.location}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${item.responsible}</div>
-                        <div class="text-xs text-gray-500 mt-1">KV</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
+                        <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-classemail="${item.classEmail}">
                             <i class="fas fa-envelope"></i>
                         </button>
                         <button class="text-gray-600 hover:text-gray-900">
@@ -518,82 +521,29 @@ js.eval(js_code)
 
         // Update stats
         scheduledClasses.textContent = data.length;
-        teachersToNotify.textContent = data.length * 3; // KV + WL + Class
+        teachersToNotify.textContent = teachersCount;
         graduatingClasses.textContent = graduatingCount;
     }
 
     function showEmailModal(classInfo) {
-        // Clear previous recipients
-        recipientsContainer.innerHTML = '';
-
-        // Set email subject with class name if available
-        if (classInfo && classInfo.class) {
-            emailSubject.value = `Termin für Klassenfotos - ${classInfo.class}`;
-
-            // Add default recipients
-            if (classInfo.kvEmail) {
-                addRecipient(classInfo.kvEmail);
-            }
-            if (classInfo.wlEmail) {
-                addRecipient(classInfo.wlEmail);
-            }
-            if (classInfo.classEmail) {
-                addRecipient(classInfo.classEmail);
-            }
-        }
-
-        // Set default email message
-        if (classInfo) {
-            const [date, time, location] = [classInfo.date, classInfo.time, classInfo.location];
-            emailMessage.value = `Sehr geehrte Schülerinnen und Schüler,\n\nhiermit möchten wir Sie über den Termin für die Klassenfotos informieren:\n\nDatum: ${date}\nUhrzeit: ${time}\nOrt: ${location}\n\nBitte erscheinen Sie pünktlich und in angemessener Kleidung.\n\nMit freundlichen Grüßen,\nIhr Fotografieteam`;
-        }
-
-        // Show modal
+        // In a real app, we would populate the modal with actual class data
         emailModal.classList.remove('hidden');
     }
 
-    function addRecipient(email) {
-        if (!email) return;
-
-        const recipient = document.createElement('span');
-        recipient.className = 'bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center';
-        recipient.innerHTML = `
-            ${email}
-            <button class="ml-2 text-blue-600 hover:text-blue-800 remove-recipient">
-                <i class="fas fa-times"></i>
-            </button>
-        `;
-        recipientsContainer.appendChild(recipient);
-    }
-
-    function showNotification(message, type = 'info') {
-        const colors = {
-            info: 'bg-blue-500',
-            success: 'bg-green-500',
-            warning: 'bg-yellow-500',
-            error: 'bg-red-500'
-        };
-
-        const notification = document.createElement('div');
-        notification.className = `fixed bottom-4 right-4 ${colors[type]} text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-fade-in`;
-        notification.innerHTML = `
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} mr-2"></i>
-            <span>${message}</span>
-        `;
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.classList.add('animate-fade-out');
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, 3000);
-    }
-
     // Event Listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        showNotification('System bereit. Klicken Sie auf "Terminplan generieren"', 'info');
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Wait for PyScript to initialize
+        await new Promise(resolve => {
+            const checkReady = setInterval(() => {
+                if (typeof js_table_data !== 'undefined') {
+                    clearInterval(checkReady);
+                    resolve();
+                }
+            }, 100);
+        });
+
+        // Use the data from PyScript
+        renderScheduleTable(js_table_data);
     });
 
     generateScheduleBtn.addEventListener('click', () => {
@@ -610,18 +560,92 @@ js.eval(js_code)
                 </td>
             `;
         scheduleTableBody.appendChild(loadingRow);
+
+        // Simulate API call with timeout
+        setTimeout(() => {
+            renderScheduleTable(sampleData);
+
+            // Show success notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+            notification.innerHTML = `
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>Terminplan erfolgreich generiert!</span>
+                `;
+            document.body.appendChild(notification);
+
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }, 1500);
     });
 
     refreshBtn.addEventListener('click', () => {
-        showNotification('Daten werden aktualisiert...', 'info');
+        // Show loading state
+        scheduleTableBody.innerHTML = '';
+        const loadingRow = document.createElement('tr');
+        loadingRow.id = 'loadingRow';
+        loadingRow.innerHTML = `
+                <td colspan="6" class="px-6 py-8 text-center">
+                    <div class="flex flex-col items-center justify-center">
+                        <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
+                        <p class="text-gray-600">Aktualisiere Daten...</p>
+                    </div>
+                </td>
+            `;
+        scheduleTableBody.appendChild(loadingRow);
+
+        // Simulate API call with timeout
+        setTimeout(() => {
+            renderScheduleTable(sampleData);
+
+            // Show success notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+            notification.innerHTML = `
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>Daten erfolgreich aktualisiert!</span>
+                `;
+            document.body.appendChild(notification);
+
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }, 1000);
     });
 
     exportCSVBtn.addEventListener('click', () => {
-        showNotification('CSV wird heruntergeladen...', 'info');
+        // Show notification
+        const notification = document.createElement('div');
+        notification.className = 'fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+        notification.innerHTML = `
+                <i class="fas fa-file-csv mr-2"></i>
+                <span>CSV wird heruntergeladen...</span>
+            `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
     });
 
     exportPDFBtn.addEventListener('click', () => {
-        showNotification('PDF wird generiert...', 'info');
+        // Show notification
+        const notification = document.createElement('div');
+        notification.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+        notification.innerHTML = `
+                <i class="fas fa-file-pdf mr-2"></i>
+                <span>PDF wird generiert...</span>
+            `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
     });
 
     sendEmailsBtn.addEventListener('click', () => {
@@ -632,46 +656,8 @@ js.eval(js_code)
         emailModal.classList.add('hidden');
     });
 
-    addRecipientInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && addRecipientInput.value) {
-            addRecipient(addRecipientInput.value);
-            addRecipientInput.value = '';
-        }
-    });
-
-    addAttachmentBtn.addEventListener('click', () => {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.click();
-
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const attachment = document.createElement('div');
-                attachment.className = 'flex items-center justify-between mb-2';
-                attachment.innerHTML = `
-                    <div class="flex items-center">
-                        <i class="fas ${file.name.endsWith('.pdf') ? 'fa-file-pdf text-red-500' :
-                            file.name.endsWith('.doc') || file.name.endsWith('.docx') ? 'fa-file-word text-blue-500' :
-                            'fa-file-alt'} mr-2"></i>
-                        <span>${file.name}</span>
-                    </div>
-                    <button class="text-red-500 hover:text-red-700 remove-attachment">
-                        <i class="fas fa-times"></i>
-                    </button>
-                `;
-
-                if (attachmentsContainer.firstChild?.textContent === 'Keine Anhänge hinzugefügt') {
-                    attachmentsContainer.innerHTML = '';
-                }
-                attachmentsContainer.appendChild(attachment);
-            }
-        });
-    });
-
-    // Delegate events for dynamic elements
+    // Delegate event for email buttons (since they're dynamically added)
     document.addEventListener('click', (e) => {
-        // Email buttons
         if (e.target.closest('.email-btn')) {
             const btn = e.target.closest('.email-btn');
             const classInfo = {
@@ -682,48 +668,10 @@ js.eval(js_code)
             };
             showEmailModal(classInfo);
         }
-
-        // Remove recipient buttons
-        if (e.target.closest('.remove-recipient')) {
-            e.target.closest('.bg-blue-100').remove();
-            if (recipientsContainer.children.length === 0) {
-                recipientsContainer.innerHTML = '<div class="text-gray-500">Keine Empfänger hinzugefügt</div>';
-            }
-        }
-
-        // Remove attachment buttons
-        if (e.target.closest('.remove-attachment')) {
-            e.target.closest('.flex.items-center').remove();
-            if (attachmentsContainer.children.length === 0) {
-                attachmentsContainer.innerHTML = '<div class="text-center text-gray-500">Keine Anhänge hinzugefügt</div>';
-            }
-        }
-    });
-
-    // Send email button
-    sendEmailBtn.addEventListener('click', () => {
-        const recipients = Array.from(recipientsContainer.querySelectorAll('.bg-blue-100'))
-            .map(el => el.textContent.trim().replace('×', '').trim());
-
-        if (recipients.length === 0) {
-            showNotification('Bitte fügen Sie mindestens einen Empfänger hinzu', 'error');
-            return;
-        }
-
-        showNotification('E-Mails werden versendet...', 'info');
-        emailModal.classList.add('hidden');
-
-        // Simulate sending
-        setTimeout(() => {
-            showNotification('E-Mails erfolgreich versendet!', 'success');
-        }, 2000);
-    });
-
-    // Save draft button
-    saveDraftBtn.addEventListener('click', () => {
-        showNotification('Entwurf gespeichert', 'success');
-        emailModal.classList.add('hidden');
     });
 </script>
 </body>
+<footer>
+    Creators: Manuel Weinmayr, Christian Domes, Manuel Pichler
+</footer>
 </html>

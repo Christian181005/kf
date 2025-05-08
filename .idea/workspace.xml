@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="implementing some python functions from mp1">
+      <change afterPath="$PROJECT_DIR$/klassenfotos_terminplan (1).csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entire-API-Data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entire-API-Data/output_data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/entire-API-Data/te_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/te_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/delete-me.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/klasse.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/room.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/teacher.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/json-files-DELETE_THIS_FOLDER/timetable.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,8 +96,8 @@
       <recent name="C:\Users\micha\PycharmProjects\kf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\micha\PycharmProjects\kf" />
       <recent name="C:\Users\micha\PycharmProjects\kf\html" />
+      <recent name="C:\Users\micha\PycharmProjects\kf" />
       <recent name="C:\Users\micha\PycharmProjects\kf\logic" />
       <recent name="C:\Users\micha\PycharmProjects\kf\data" />
       <recent name="C:\Users\micha\PycharmProjects\kf\entire-API-Data" />
@@ -221,7 +231,7 @@
       <workItem from="1745474885711" duration="9931000" />
       <workItem from="1745820478508" duration="3837000" />
       <workItem from="1746425401328" duration="4746000" />
-      <workItem from="1746684542759" duration="213000" />
+      <workItem from="1746684542759" duration="2584000" />
     </task>
     <task id="LOCAL-00001" summary="new branch created mw1">
       <option name="closed" value="true" />
@@ -351,7 +361,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746430731389</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="implementing some python functions from mp1">
+      <option name="closed" value="true" />
+      <created>1746685095794</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1746685095794</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,11 +399,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="implementing some python functions from mp1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1746428842453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1746686834778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$main.coverage" NAME="main Coverage Results" MODIFIED="1744009425065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$testing.coverage" NAME="testing Coverage Results" MODIFIED="1745823482908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$planner.coverage" NAME="planner Coverage Results" MODIFIED="1745476446310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logic" />
-    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1746428818352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1746686993936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$main_gui.coverage" NAME="main_gui Coverage Results" MODIFIED="1745477401465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ui" />
     <SUITE FILE_PATH="coverage/kf$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1743063352869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$ui.coverage" NAME="ui Coverage Results" MODIFIED="1745478613985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -11,6 +11,23 @@ def format_time(time_int):
     return f"{hour:02d}:{minute:02d}"
 
 
+def add_minutes_to_time(time_int, minutes_to_add):
+    """Add minutes to a time integer and handle hour overflow properly.
+
+    Example: 955 (9:55) + 15 minutes = 1010 (10:10)
+    """
+    hour = time_int // 100
+    minute = time_int % 100
+
+    # Add minutes and handle overflow
+    total_minutes = minute + minutes_to_add
+    new_hour = hour + (total_minutes // 60)
+    new_minute = total_minutes % 60
+
+    # Return new time in the same format
+    return new_hour * 100 + new_minute
+
+
 with Path("entire-API-Data/data.json").open(encoding="utf-8") as fp:
     data = json.load(fp)
 
@@ -19,11 +36,6 @@ with Path("entire-API-Data/te_data.json").open(encoding="utf-8") as fp:
 
 post_alg_data = []
 klid = 0
-
-date_format = "%Y%m%d"
-start_dt = datetime.strptime(startDate, date_format).date()
-end_dt = datetime.strptime(endDate, date_format).date()
-days = (end_dt - start_dt).days + 2
 
 used_timeslots = []
 
@@ -37,18 +49,17 @@ for klasse in data:
         "room_kl": None,
         "room_kv": None,
         "notified_te": None,
-        "priority": 2
+        "priority": 2,
+        "date": None,
+        "time": None
     }
 
-    for i in range(1, days + 1):
-        klassen_data[f"nr{i}"] = None
-        klassen_data[f"d{i}"] = None
-
-    lessons_by_date = []
-
     for lesson in klasse:
+        photo_time = 10
+        slot_found = False
         kl = lesson.get("kl", {})
         ro = lesson.get("ro", {})
+        te = lesson.get("te", {})
         kv_name = kl.get("teacher1")
         if klassen_data['name'] is None:
             klassen_data['name'] = kl.get("name")
@@ -56,186 +67,43 @@ for klasse in data:
             klassen_data['class_id'] = klid
         if klassen_data['kv'] is None:
             klassen_data['kv'] = kl.get("teacher1")
-        if klassen_data['room_kl'] is None:
-            if isinstance(ro, dict):
-                klassen_data['room_kl'] = ro.get("name")
-            elif isinstance(ro, list) and ro and isinstance(ro[0], dict):
-                klassen_data['room_kl'] = ro[0].get("name")
 
-        lessons_by_date.append(lesson)
+        if klassen_data['name'].startswith('5'):
+            photo_time = 15
 
-    class_name = klassen_data['name'] or ""
-    if class_name.startswith("5"):
-        photo_duration = 15
-    else:
-        photo_duration = 10
+        photo_date = lesson['date']
+        start_time = lesson['startTime']
+        end_time = add_minutes_to_time(start_time, photo_time)  # Fixed calculation
 
-    found_slot = False
-    photo_date = None
-    photo_start_time = None
-    photo_end_time = None
-
-    lessons_grouped = {}
-    for lesson in lessons_by_date:
-        lessons_grouped.setdefault(lesson["date"], []).append(lesson)
-
-    for date, lessons in sorted(lessons_grouped.items()):
-        lessons_sorted = sorted(lessons, key=lambda x: x["startTime"])
-
-        for lesson in lessons_sorted:
-            teacher1_id = klassen_data['kv']
-            teachers = lesson.get("te", [])
-            if isinstance(teachers, dict):
-                teachers = [teachers]
-
-            for teacher in teachers:
-                if teacher.get("name") == teacher1_id:
-                    if lesson['endTime'] <= 1415:
-                        tentative_start = lesson['startTime']
-                        tentative_end = lesson['endTime']
-                        if (date, tentative_start, tentative_end) not in used_timeslots:
-                            klassen_data['priority'] = 1
-                            photo_date = date
-                            photo_start_time = tentative_start
-                            photo_end_time = tentative_end
-                            used_timeslots.append((date, photo_start_time, photo_end_time))
-                            found_slot = True
-                            break
-            if found_slot:
+        if klassen_data['date'] is None and klassen_data['time'] is None:
+            if [photo_date, start_time, end_time] in used_timeslots:
+                start_time = add_minutes_to_time(lesson['endTime'], -photo_time)
+                end_time = lesson['endTime']
+            if [photo_date, start_time, end_time] in used_timeslots:
                 break
 
-        first_lesson = lessons_sorted[0]
-        last_lesson = lessons_sorted[-1]
+            if te['name'] == klassen_data['kv']:
+                klassen_data['priority'] = 1
+                try:
+                    klassen_data['room_kv'] = ro['name']
+                except:
+                    print("womp womp")
+            else:
+                klassen_data['notified_te'] = te['name']
+            klassen_data['date'] = f"{photo_date}"
+            klassen_data['time'] = f"{format_time(start_time)}-{format_time(end_time)}"
+            try:
+                klassen_data['room_kl'] = ro['name']
+            except:
+                print("womp womp")
+            used_timeslots.append([photo_date, start_time, end_time])
 
-        tentative_start = 800
-        tentative_end = tentative_start + photo_duration
-        if first_lesson['startTime'] >= tentative_end and tentative_end <= 1415:
-            if (date, tentative_start, tentative_end) not in used_timeslots:
-                klassen_data['priority'] = 2
-                photo_date = date
-                photo_start_time = tentative_start
-                photo_end_time = tentative_end
-                used_timeslots.append((date, photo_start_time, photo_end_time))
-                found_slot = True
-                break
-
-        if last_lesson['endTime'] + photo_duration <= 1415:
-            tentative_start = last_lesson['endTime']
-            tentative_end = tentative_start + photo_duration
-            if (date, tentative_start, tentative_end) not in used_timeslots:
-                klassen_data['priority'] = 2
-                photo_date = date
-                photo_start_time = tentative_start
-                photo_end_time = tentative_end
-                used_timeslots.append((date, photo_start_time, photo_end_time))
-                found_slot = True
-                break
-
-        for i in range(len(lessons_sorted) - 1):
-            end_current = lessons_sorted[i]['endTime']
-            start_next = lessons_sorted[i + 1]['startTime']
-            if (start_next - end_current) >= photo_duration and (end_current + photo_duration) <= 1415:
-                tentative_start = end_current
-                tentative_end = tentative_start + photo_duration
-                if (date, tentative_start, tentative_end) not in used_timeslots:
-                    klassen_data['priority'] = 2
-                    photo_date = date
-                    photo_start_time = tentative_start
-                    photo_end_time = tentative_end
-                    used_timeslots.append((date, photo_start_time, photo_end_time))
-                    notified_teacher = lessons_sorted[i].get("te", {})
-                    if isinstance(notified_teacher, list) and notified_teacher:
-                        notified_teacher = notified_teacher[0]
-                    if isinstance(notified_teacher, dict):
-                        klassen_data['notified_te'] = notified_teacher.get("name")
-                    found_slot = True
-                    break
-        if found_slot:
-            break
-
-        first_lesson = lessons_sorted[0]
-        last_lesson = lessons_sorted[-1]
-
-        tentative_start = 800
-        tentative_end = tentative_start + photo_duration
-        if first_lesson['startTime'] >= tentative_end and tentative_end <= 1415:
-            if (date, tentative_start, tentative_end) not in used_timeslots:
-                klassen_data['priority'] = 2
-                photo_date = date
-                photo_start_time = tentative_start
-                photo_end_time = tentative_end
-                used_timeslots.append((date, photo_start_time, photo_end_time))
-                found_slot = True
-
-        if not found_slot and last_lesson['endTime'] + photo_duration <= 1415:
-            tentative_start = last_lesson['endTime']
-            tentative_end = tentative_start + photo_duration
-            if (date, tentative_start, tentative_end) not in used_timeslots:
-                klassen_data['priority'] = 2
-                photo_date = date
-                photo_start_time = tentative_start
-                photo_end_time = tentative_end
-                used_timeslots.append((date, photo_start_time, photo_end_time))
-                found_slot = True
-
-        if not found_slot:
-            for i in range(len(lessons_sorted) - 1):
-                end_current = lessons_sorted[i]['endTime']
-                start_next = lessons_sorted[i + 1]['startTime']
-                if (start_next - end_current) >= photo_duration and (end_current + photo_duration) <= 1415:
-                    tentative_start = end_current
-                    tentative_end = tentative_start + photo_duration
-                    if (date, tentative_start, tentative_end) not in used_timeslots:
-                        klassen_data['priority'] = 2
-                        photo_date = date
-                        photo_start_time = tentative_start
-                        photo_end_time = tentative_end
-                        used_timeslots.append((date, photo_start_time, photo_end_time))
-                        notified_teacher = lessons_sorted[i].get("te", {})
-                        if isinstance(notified_teacher, list) and notified_teacher:
-                            notified_teacher = notified_teacher[0]
-                        if isinstance(notified_teacher, dict):
-                            klassen_data['notified_te'] = notified_teacher.get("name")
-                        found_slot = True
-                        break
-        if found_slot:
-            break
-
-    if found_slot:
-        klassen_data['d1'] = str(photo_date)
-        klassen_data['nr1'] = f"{format_time(photo_start_time)} - {format_time(photo_end_time)}"
-        if klassen_data['priority'] == 1:
-            klassen_data['room_kv'] = klassen_data['room_kl']
-        else:
-            kv_name = klassen_data['kv']
-            kv_room = None
-            if photo_date and photo_start_time and photo_end_time:
-                for teacher_schedule in te_data:
-                    for te_lesson in teacher_schedule:
-                        if (
-                                te_lesson.get("date") == photo_date and
-                                te_lesson.get("startTime") <= photo_start_time and
-                                te_lesson.get("endTime") >= photo_end_time
-                        ):
-                            teacher = te_lesson.get("te")
-                            teacher_name = teacher.get("name") if teacher else None
-                            if teacher_name == kv_name:
-                                room = te_lesson.get("ro")
-                                if isinstance(room, dict):
-                                    kv_room = room.get("name")
-                                elif isinstance(room, list) and room:
-                                    kv_room = room[0].get("name")
-                                break
-                    if kv_room:
-                        break
-            klassen_data['room_kv'] = kv_room
-
-    post_alg_data.append(klassen_data)
+    if klassen_data['name'] is not None:
+        post_alg_data.append(klassen_data)
 
 json_str = json.dumps(post_alg_data, ensure_ascii=False, indent=2)
 json_str = json_str.replace("'", '"')
 with open("entire-API-Data/output_data.json", "w", encoding="utf-8") as f:
     f.write(json_str)
-
 
 print("file saved correctly (probably)")

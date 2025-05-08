@@ -59,10 +59,25 @@
                 <p class="text-gray-600">Automatisierte Terminplanung für Klassenfotos</p>
             </div>
             <div class="flex items-center space-x-4">
+
+                 <button id="generateScheduleBtn"
+                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
+                    onclick="window.location.href='index.html';"
+            >
+                <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
+            </button>
+
+
                 <button id="refreshBtn"
                         class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
                     <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
                 </button>
+                <a href="archived_appointments.html"
+                   class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
+                    Archivierte Termine
+                </a>
+
+
                 <div class="relative">
                     <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
                          class="rounded-full h-10 w-10 cursor-pointer">
@@ -72,74 +87,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <!-- Sidebar -->
-        <div class="lg:col-span-1 bg-white rounded-xl shadow-md p-6 h-fit">
-            <h2 class="text-xl font-semibold text-dark mb-4">Einstellungen</h2>
 
-            <div class="mb-6">
-                <h3 class="font-medium text-gray-700 mb-2">Datenquellen</h3>
-                <div class="space-y-3">
-                    <div class="flex items-center">
-                        <input type="button" id="webuntisData" checked
-                               class="mr-2 rounded text-primary focus:ring-primary">
-                        <label for="webuntisData">WebUntis Daten</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="teacherList" checked
-                               class="mr-2 rounded text-primary focus:ring-primary">
-                        <label for="teacherList">Lehrkräfte-Liste</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-medium text-gray-700 mb-2">Zeitplanung</h3>
-                <div class="space-y-3">
-                    <div>
-                        <label for="photoDuration" class="block text-sm text-gray-600 mb-1">Standard Dauer (min)</label>
-                        <input type="number" id="photoDuration" value="10"
-                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                    </div>
-                    <div>
-                        <label for="gradDuration" class="block text-sm text-gray-600 mb-1">Abschlussklassen Dauer
-                            (min)</label>
-                        <input type="number" id="gradDuration" value="15"
-                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-medium text-gray-700 mb-2">Benachrichtigungen</h3>
-                <div class="space-y-3">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="notifyKV" checked
-                               class="mr-2 rounded text-primary focus:ring-primary">
-                        <label for="notifyKV">Klassenvorstände</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="notifyWL" checked
-                               class="mr-2 rounded text-primary focus:ring-primary">
-                        <label for="notifyWL">Werkstättenleiter</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="notifyClass" checked
-                               class="mr-2 rounded text-primary focus:ring-primary">
-                        <label for="notifyClass">Klassen</label>
-                    </div>
-                </div>
-            </div>
-
-            <button id="generateScheduleBtn"
-                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
-                    onclick="window.location.href='terminplan.html';"
-            >
-                <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
-            </button>
-
-        </div>
 
         <!-- Main Content Area -->
         <div class="lg:col-span-3 space-y-8">
@@ -183,7 +131,11 @@
             <!-- Schedule Table -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="px-6 py-4 border-b flex justify-between items-center">
-                    <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
+                   <div class="flex items-center space-x-3">
+  <input type="checkbox" id="masterCheckbox" class="h-4 w-4 text-primary rounded focus:ring-primary">
+  <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
+</div>
+
                     <div class="flex space-x-2">
                         <button id="exportCSVBtn"
                                 class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
@@ -197,8 +149,17 @@
                                 class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
                             <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
                         </button>
+                        <button id="deleteSelected" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                            Archivieren
+                        </button>
                     </div>
                 </div>
+                <div id="toolbar" class="hidden mb-4 bg-red-100 p-4 rounded flex justify-between items-center">
+                    <span class="text-red-700 font-semibold">Ausgewählte Termine löschen</span>
+
+                </div>
+
+
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -349,28 +310,17 @@
     </div>
 </div>
 
-<!--
-The following script should be included in the HTML file to automatically get:
-
--> class names
--> date
--> time
--> location
--> responsible teacher
--> whether it's a graduating class or not
--> email addresses for KV, WL, and class
-
-The data.py generates 4 json files with the above information.
-
--> Folder = entire-API-Data
--> File names = classes.json, rooms.json, teachers.json, timetable.json
--->
-
 <script>
     // Function to load JSON data
     async function loadJsonData() {
         try {
-            const response = await fetch('../entire-API-Data/output_data.json');
+            //  const response = await fetch('/var/www/json/output_data.json');
+            const response = await fetch('json/output_data.json');
+            // const response = await fetch('../json/output_data.json');
+
+            //    const jsonPath = '../json/output_data.json';
+            // console.log('Lade Daten von:', jsonPath); // Pfad in Konsole ausgeben
+
             if (!response.ok) throw new Error('Network response was not ok');
             return await response.json();
         } catch (error) {
@@ -416,7 +366,7 @@ The data.py generates 4 json files with the above information.
                     isGraduating: isGraduating,
                     kvEmail: kvEmail,
                     wlEmail: item.wl && item.wl !== "Can not access required information with API" ?
-                             `wl${item.name.toLowerCase()}@htl-steyr.ac.at` : null,
+                        `wl${item.name.toLowerCase()}@htl-steyr.ac.at` : null,
                     classEmail: classEmail,
                     priority: item.priority || 2
                 };
@@ -447,7 +397,7 @@ The data.py generates 4 json files with the above information.
 
     // Function to download generated content
     function downloadContent(content, filename, type) {
-        const blob = new Blob([content], { type });
+        const blob = new Blob([content], {type});
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -599,6 +549,33 @@ Ihr Fotografieteam
 
     // Initialize the app when DOM is ready
     document.addEventListener('DOMContentLoaded', initializeApp);
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const masterCheckbox = document.getElementById('masterCheckbox');
+    const toolbar = document.getElementById('toolbar');
+
+    masterCheckbox.addEventListener('change', () => {
+        const allCheckboxes = document.querySelectorAll('.delete-checkbox');
+        allCheckboxes.forEach(cb => cb.checked = masterCheckbox.checked);
+        toolbar.classList.toggle('hidden', !masterCheckbox.checked);
+    });
+
+    document.addEventListener('change', (e) => {
+        if (e.target.classList.contains('delete-checkbox')) {
+            const checked = document.querySelectorAll('.delete-checkbox:checked').length;
+            toolbar.classList.toggle('hidden', checked === 0);
+
+            // Wenn einzelne Checkbox abgewählt wird, masterCheckbox ebenfalls abwählen
+            if (!e.target.checked) {
+                masterCheckbox.checked = false;
+            } else {
+                const all = document.querySelectorAll('.delete-checkbox').length;
+                if (checked === all) masterCheckbox.checked = true;
+            }
+        }
+    });
+});
+
 </script>
 
 <script>
@@ -639,11 +616,14 @@ Ihr Fotografieteam
             row.className = 'schedule-item hover:bg-gray-50';
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap">
+
                     <div class="flex items-center">
+                      <input type="checkbox" class="delete-checkbox" data-class-id="${item.class}" />
                         <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                             <i class="fas fa-school text-blue-600"></i>
                         </div>
                         <div class="ml-4">
+
                             <div class="text-sm font-medium text-gray-900">${item.class}</div>
                             <div class="text-sm text-gray-500">${item.isGraduating ? 'Abschlussklasse' : 'Klasse'} ${getPriorityBadge(item.priority)}</div>
                         </div>
@@ -666,9 +646,13 @@ Ihr Fotografieteam
                     <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
                         <i class="fas fa-envelope"></i>
                     </button>
+
+
+                    <!-- 3 punkte element--!>
                     <button class="text-gray-600 hover:text-gray-900">
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
+
                 </td>
             `;
             scheduleTableBody.appendChild(row);
@@ -763,6 +747,43 @@ Ihr Fotografieteam
             notification.remove();
         }, 3000);
     }
+
+    const toolbar = document.getElementById('toolbar');
+    const deleteBtn = document.getElementById('deleteSelected');
+
+    document.addEventListener('change', () => {
+        const selected = document.querySelectorAll('.delete-checkbox:checked');
+        toolbar.classList.toggle('hidden', selected.length === 0);
+    });
+
+    deleteBtn.addEventListener('click', async () => {
+        const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
+            .map(cb => cb.dataset.classId);
+
+        const jsonData = await loadJsonData();
+        const remaining = jsonData.filter(item => !selected.includes(item.name));
+        const archived = jsonData.filter(item => selected.includes(item.name));
+
+        // Speichern der neuen Datei
+        fetch('json/output_data.json', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(remaining)
+        });
+
+        // Archiv speichern
+        fetch('json/archive.json', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(archived)
+        });
+
+        // Tabelle neu laden
+        initializeApp();
+        toolbar.classList.add('hidden');
+    });
+
+
 </script>
 </body>
 <footer>

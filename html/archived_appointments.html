@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Archivierte Termine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+
+  <div class="max-w-6xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-gray-800">Archivierte Termine</h1>
+      <a href="index.html" class="text-blue-600 hover:underline">← Zurück zur Startseite</a>
+    </div>
+
+    <div id="tableContainer" class="bg-white rounded-xl shadow-md overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Klasse</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Datum</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Uhrzeit</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ort</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Verantwortlich</th>
+          </tr>
+        </thead>
+        <tbody id="archiveBody" class="bg-white divide-y divide-gray-200">
+          <!-- Wird per JavaScript befüllt -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function formatDate(dateStr) {
+      if (!dateStr) return "Kein Termin";
+      return `${dateStr.substr(6, 2)}.${dateStr.substr(4, 2)}.${dateStr.substr(0, 4)}`;
+    }
+
+    async function loadArchive() {
+      try {
+        const res = await fetch('json/archive.json');
+        if (!res.ok) throw new Error('Archiv konnte nicht geladen werden.');
+        const data = await res.json();
+
+        const body = document.getElementById('archiveBody');
+        body.innerHTML = '';
+
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="px-6 py-4">${item.name || 'Unbekannt'}</td>
+            <td class="px-6 py-4">${formatDate(item.d1 || item.d2 || item.d3)}</td>
+            <td class="px-6 py-4">${item.nr1 || item.nr2 || item.nr3 || '–'}</td>
+            <td class="px-6 py-4">${item.room_kl || 'Nicht festgelegt'}</td>
+            <td class="px-6 py-4">${item.kv || 'Nicht festgelegt'}</td>
+          `;
+          body.appendChild(row);
+        });
+
+        if (data.length === 0) {
+          body.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500">Keine archivierten Termine vorhanden.</td></tr>`;
+        }
+      } catch (err) {
+        document.getElementById('archiveBody').innerHTML =
+          `<tr><td colspan="5" class="text-center py-6 text-red-500">Fehler beim Laden: ${err.message}</td></tr>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadArchive);
+  </script>
+</body>
+</html>

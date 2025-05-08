@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="algortihm almost done, only room_kv missing and bugs need to be fixed">
-      <change afterPath="$PROJECT_DIR$/.idea/kf.iml" afterDir="false" />
+    <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="algortihm finished, room_kv if priority != 1 is not working yet.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entire-API-Data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entire-API-Data/output_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/output_data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +110,9 @@
       <workItem from="1745527566651" duration="452000" />
       <workItem from="1745820711831" duration="5316000" />
       <workItem from="1746425139856" duration="2692000" />
-      <workItem from="1746428018175" duration="144000" />
+      <workItem from="1746428018175" duration="1512000" />
+      <workItem from="1746618541813" duration="10000" />
+      <workItem from="1746684246244" duration="2617000" />
     </task>
     <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
@@ -179,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745826030168</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="algortihm finished, room_kv if priority != 1 is not working yet.">
+      <option name="closed" value="true" />
+      <created>1746428701362</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1746428701362</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,11 +201,12 @@
     <MESSAGE value="changes in API and algorithm started" />
     <MESSAGE value="algortihm continued" />
     <MESSAGE value="algortihm almost done, only room_kv missing and bugs need to be fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="algortihm almost done, only room_kv missing and bugs need to be fixed" />
+    <MESSAGE value="algortihm finished, room_kv if priority != 1 is not working yet." />
+    <option name="LAST_COMMIT_MESSAGE" value="algortihm finished, room_kv if priority != 1 is not working yet." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1746427662719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1746427480430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1746686850976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1746684867845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

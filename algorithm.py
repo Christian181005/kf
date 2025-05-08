@@ -1,7 +1,5 @@
 import json
 from pathlib import Path
-from data import startDate, endDate
-from datetime import datetime
 
 
 def format_time(time_int):
@@ -60,7 +58,10 @@ for klasse in data:
         kl = lesson.get("kl", {})
         ro = lesson.get("ro", {})
         te = lesson.get("te", {})
-        kv_name = kl.get("teacher1")
+
+        te_list = [te] if isinstance(te, dict) else te
+        ro_list = [ro] if isinstance(ro, dict) else ro
+
         if klassen_data['name'] is None:
             klassen_data['name'] = kl.get("name")
         if klassen_data['class_id'] is None:
@@ -73,30 +74,57 @@ for klasse in data:
 
         photo_date = lesson['date']
         start_time = lesson['startTime']
-        end_time = add_minutes_to_time(start_time, photo_time)  # Fixed calculation
+        end_time = add_minutes_to_time(start_time, photo_time)
 
-        if klassen_data['date'] is None and klassen_data['time'] is None:
-            if [photo_date, start_time, end_time] in used_timeslots:
+        if klassen_data['date'] is None and klassen_data['time'] is None and lesson['endTime'] <= 1405:
+            if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
                 start_time = add_minutes_to_time(lesson['endTime'], -photo_time)
                 end_time = lesson['endTime']
-            if [photo_date, start_time, end_time] in used_timeslots:
+            if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
                 break
 
-            if te['name'] == klassen_data['kv']:
-                klassen_data['priority'] = 1
-                try:
-                    klassen_data['room_kv'] = ro['name']
-                except:
-                    print("womp womp")
-            else:
-                klassen_data['notified_te'] = te['name']
+            found_kv = False
+            for teacher in te_list:
+                if teacher.get('name') == klassen_data['kv']:
+                    klassen_data['priority'] = 1
+                    for room in ro_list:
+                        klassen_data['room_kv'] = room.get('name')
+                        break
+                    found_kv = True
+                    break
+
+            if not found_kv and te_list:
+                klassen_data['notified_te'] = te_list[0].get('name')
+
             klassen_data['date'] = f"{photo_date}"
             klassen_data['time'] = f"{format_time(start_time)}-{format_time(end_time)}"
-            try:
-                klassen_data['room_kl'] = ro['name']
-            except:
-                print("womp womp")
-            used_timeslots.append([photo_date, start_time, end_time])
+
+            if ro_list:
+                klassen_data['room_kl'] = ro_list[0].get('name')
+
+            used_timeslots.append([photo_date, start_time, end_time, kl['name']])
+
+        if klassen_data['priority'] == 2:
+            for teacher in te_list:
+                if kl.get('teacher1') == teacher.get('name'):
+                    print(f"KV unterrichtet die {klassen_data['name']}")
+                    if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
+                        start_time = add_minutes_to_time(lesson['endTime'], -photo_time)
+                        end_time = lesson['endTime']
+                    if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
+                        break
+
+                    new_slots = [entry for entry in used_timeslots if entry[3] != kl['name']]
+                    new_slots.append([photo_date, start_time, end_time, kl['name']])
+                    used_timeslots = new_slots
+                    klassen_data['date'] = f"{photo_date}"
+                    klassen_data['time'] = f"{format_time(start_time)}-{format_time(end_time)}"
+                    klassen_data['priority'] = 1
+                    if ro_list:
+                        klassen_data['room_kl'] = ro_list[0].get('name')
+                        klassen_data['room_kv'] = ro_list[0].get('name')
+
+                    klassen_data['notified_te'] = None
 
     if klassen_data['name'] is not None:
         post_alg_data.append(klassen_data)

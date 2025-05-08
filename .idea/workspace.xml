@@ -7,10 +7,7 @@
     <list default="true" id="74bb256b-3636-4d94-9234-54668ee1a2e5" name="Changes" comment="algorithm redone, works better but there still are some bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entire-API-Data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entire-API-Data/output_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/output_data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entire-API-Data/te_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/entire-API-Data/te_data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +112,7 @@
       <workItem from="1746425139856" duration="2692000" />
       <workItem from="1746428018175" duration="1512000" />
       <workItem from="1746618541813" duration="10000" />
-      <workItem from="1746684246244" duration="7842000" />
+      <workItem from="1746684246244" duration="12080000" />
     </task>
     <task id="LOCAL-00001" summary="git commit">
       <option name="closed" value="true" />
@@ -197,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746686946210</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="algorithm redone, works better but there still are some bugs">
+      <option name="closed" value="true" />
+      <created>1746692165127</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746692165127</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +224,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1746691992093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kf$algorithm.coverage" NAME="algorithm Coverage Results" MODIFIED="1746696386851" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/kf$data.coverage" NAME="data Coverage Results" MODIFIED="1746687034704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

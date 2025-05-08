@@ -71,7 +71,7 @@
   {
     "id": 9,
     "name": "A008",
-    "longName": "Labor für Metallographie Schleifraum",
+    "longName": "Labor f\u00fcr Metallographie Schleifraum",
     "active": true,
     "building": ""
   },
@@ -137,56 +137,56 @@
   {
     "id": 15,
     "name": "A104",
-    "longName": "Labor für Nachrichtentechnik und Regelungstechnik",
+    "longName": "Labor f\u00fcr Nachrichtentechnik und Regelungstechnik",
     "active": true,
     "building": ""
   },
   {
     "id": 16,
     "name": "A106",
-    "longName": "Labor für Digitaltechnik",
+    "longName": "Labor f\u00fcr Digitaltechnik",
     "active": true,
     "building": ""
   },
   {
     "id": 17,
     "name": "A107",
-    "longName": "Labor für Grundlagen und Messtechnik",
+    "longName": "Labor f\u00fcr Grundlagen und Messtechnik",
     "active": true,
     "building": ""
   },
   {
     "id": 18,
     "name": "A109",
-    "longName": "Labor für Grundlagen und Netzwerktechnik",
+    "longName": "Labor f\u00fcr Grundlagen und Netzwerktechnik",
     "active": true,
     "building": ""
   },
   {
     "id": 19,
     "name": "B034",
-    "longName": "Werkstätte für Computergestützte Fertigung, Leiterplattenfertigung",
+    "longName": "Werkst\u00e4tte f\u00fcr Computergest\u00fctzte Fertigung, Leiterplattenfertigung",
     "active": true,
     "building": ""
   },
   {
     "id": 128,
     "name": "B035",
-    "longName": "Werkstätte für Leiterplattenfertigung",
+    "longName": "Werkst\u00e4tte f\u00fcr Leiterplattenfertigung",
     "active": true,
     "building": ""
   },
   {
     "id": 20,
     "name": "B038",
-    "longName": "Werkstätte für Elektronik 1",
+    "longName": "Werkst\u00e4tte f\u00fcr Elektronik 1",
     "active": true,
     "building": ""
   },
   {
     "id": 21,
     "name": "B039",
-    "longName": "Werkstätte für Kommunikationstechnik",
+    "longName": "Werkst\u00e4tte f\u00fcr Kommunikationstechnik",
     "active": true,
     "building": ""
   },
@@ -202,56 +202,56 @@
   {
     "id": 23,
     "name": "B041",
-    "longName": "Werkstätte für Elektromechanik",
+    "longName": "Werkst\u00e4tte f\u00fcr Elektromechanik",
     "active": true,
     "building": ""
   },
   {
     "id": 24,
     "name": "B042",
-    "longName": "Werkstätte für Gerätebau",
+    "longName": "Werkst\u00e4tte f\u00fcr Ger\u00e4tebau",
     "active": true,
     "building": ""
   },
   {
     "id": 25,
     "name": "B043",
-    "longName": "Werkstätte für Computertechnik, Leiterplattenentwicklung",
+    "longName": "Werkst\u00e4tte f\u00fcr Computertechnik, Leiterplattenentwicklung",
     "active": true,
     "building": ""
   },
   {
     "id": 26,
     "name": "B044",
-    "longName": "Werkstätte für Elektroinstallation",
+    "longName": "Werkst\u00e4tte f\u00fcr Elektroinstallation",
     "active": true,
     "building": ""
   },
   {
     "id": 27,
     "name": "B045",
-    "longName": "Werkstätte für Elektromechanik",
+    "longName": "Werkst\u00e4tte f\u00fcr Elektromechanik",
     "active": true,
     "building": ""
   },
   {
     "id": 28,
     "name": "B046",
-    "longName": "Werkstätte für Industrielle Elektronik",
+    "longName": "Werkst\u00e4tte f\u00fcr Industrielle Elektronik",
     "active": true,
     "building": ""
   },
   {
     "id": 29,
     "name": "B055",
-    "longName": "Werkstätte für Arbeitsvorbereitung",
+    "longName": "Werkst\u00e4tte f\u00fcr Arbeitsvorbereitung",
     "active": true,
     "building": ""
   },
   {
     "id": 30,
     "name": "B057",
-    "longName": "Werkstätte für Werkzeug- und Vorrichtungsbau",
+    "longName": "Werkst\u00e4tte f\u00fcr Werkzeug- und Vorrichtungsbau",
     "active": true,
     "building": ""
   },
@@ -272,20 +272,20 @@
   {
     "id": 33,
     "name": "B060",
-    "longName": "Werkstätte für Messtechnik",
+    "longName": "Werkst\u00e4tte f\u00fcr Messtechnik",
     "active": true,
     "building": ""
   },
   {
     "id": 34,
     "name": "B060-Nord",
-    "longName": "PC/CNC Werkstätte",
+    "longName": "PC/CNC Werkst\u00e4tte",
     "active": true,
     "building": ""
   },
   {
     "id": 35,
-    "name": "B060-Süd",
+    "name": "B060-S\u00fcd",
     "longName": "CNC Programmierung",
     "active": true,
     "building": ""
@@ -293,14 +293,14 @@
   {
     "id": 36,
     "name": "B062",
-    "longName": "Labor für Verbrennungsmaschinen",
+    "longName": "Labor f\u00fcr Verbrennungsmaschinen",
     "active": true,
     "building": ""
   },
   {
     "id": 37,
     "name": "B063",
-    "longName": "Rollenleistungsprüfstand",
+    "longName": "Rollenleistungspr\u00fcfstand",
     "active": true,
     "building": ""
   },
@@ -335,14 +335,14 @@
   {
     "id": 113,
     "name": "B069-Ost",
-    "longName": "Mechanische Werkstätte",
+    "longName": "Mechanische Werkst\u00e4tte",
     "active": true,
     "building": ""
   },
   {
     "id": 42,
     "name": "B069-West",
-    "longName": "Werkstätte für Kunststofftechnik",
+    "longName": "Werkst\u00e4tte f\u00fcr Kunststofftechnik",
     "active": true,
     "building": ""
   },
@@ -370,7 +370,7 @@
   {
     "id": 46,
     "name": "B083",
-    "longName": "Oberflächentechnik",
+    "longName": "Oberfl\u00e4chentechnik",
     "active": true,
     "building": ""
   },
@@ -385,7 +385,7 @@
   {
     "id": 48,
     "name": "B085",
-    "longName": "Schweißerei",
+    "longName": "Schwei\u00dferei",
     "active": true,
     "building": ""
   },
@@ -896,7 +896,7 @@
   {
     "id": 107,
     "name": "V002",
-    "longName": "Mechanische Werkstätte",
+    "longName": "Mechanische Werkst\u00e4tte",
     "active": true,
     "did": 37,
     "building": ""
@@ -920,7 +920,7 @@
   {
     "id": 110,
     "name": "V106",
-    "longName": "Gürtlerei",
+    "longName": "G\u00fcrtlerei",
     "active": true,
     "did": 37,
     "building": ""

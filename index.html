@@ -6,6 +6,7 @@
     <title>Klassenfotos Planungstool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
+    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -63,7 +64,8 @@
                     <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
                 </button>
                 <div class="relative">
-                    <img src="https://via.placeholder.com/40" alt="User" class="rounded-full h-10 w-10 cursor-pointer">
+                    <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
+                         class="rounded-full h-10 w-10 cursor-pointer">
                     <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
             </div>
@@ -80,7 +82,7 @@
                 <h3 class="font-medium text-gray-700 mb-2">Datenquellen</h3>
                 <div class="space-y-3">
                     <div class="flex items-center">
-                        <input type="checkbox" id="webuntisData" checked
+                        <input type="button" id="webuntisData" checked
                                class="mr-2 rounded text-primary focus:ring-primary">
                         <label for="webuntisData">WebUntis Daten</label>
                     </div>
@@ -131,9 +133,12 @@
             </div>
 
             <button id="generateScheduleBtn"
-                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
+                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
+                    onclick="window.location.href='terminplan.html';"
+            >
                 <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
             </button>
+
         </div>
 
         <!-- Main Content Area -->
@@ -301,19 +306,7 @@
                                 </div>
                                 <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
                                           placeholder="E-Mail Text hier eingeben...">
-Sehr geehrte Schülerinnen und Schüler der 5AHITM,
-
-hiermit möchten wir Sie über den Termin für die Klassenfotos informieren:
-
-Datum: 15. Oktober 2024
-Uhrzeit: 09:30 - 09:45 Uhr
-Ort: Fotostudio (Raum A101)
-
-Bitte erscheinen Sie pünktlich und in angemessener Kleidung.
-
-Mit freundlichen Grüßen,
-Ihr Fotografieteam
-                                    </textarea>
+                                </textarea>
                             </div>
                         </div>
 
@@ -373,75 +366,242 @@ The data.py generates 4 json files with the above information.
 -> File names = classes.json, rooms.json, teachers.json, timetable.json
 -->
 
-<py-script>
+<script>
+    // Function to load JSON data
+    async function loadJsonData() {
+        try {
+            const response = await fetch('entire-API-Data/output_data.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error loading JSON data:', error);
+            return null;
+        }
+    }
 
-print("Du Sack")
+    // Function to convert date format
+    function formatDate(dateStr) {
+        if (!dateStr) return "Kein Termin";
+        return `${dateStr.substr(6, 2)}.${dateStr.substr(4, 2)}.${dateStr.substr(0, 4)}`;
+    }
 
+    // Function to prepare table data with scheduling logic
+    function prepareTableData(data) {
+        // Filter out invalid entries and apply scheduling rules
+        return data
+            .filter(item => item.name && item.class_id) // Filter out items without names or IDs
+            .map(item => {
+                const isGraduating = item.name.startsWith('5');
+                const duration = isGraduating ? 15 : 10;
+                const kvEmail = item.kv ? `kv${item.name.toLowerCase()}@htl-steyr.ac.at` : null;
+                const classEmail = `klasse${item.name.toLowerCase()}@htl-steyr.ac.at`;
 
+                // Determine time slot based on priority
+                let timeSlot = "Kein Termin";
+                if (item.nr1 && item.d1) {
+                    timeSlot = item.nr1;
+                } else if (item.nr2 && item.d2) {
+                    timeSlot = item.nr2;
+                } else if (item.nr3 && item.d3) {
+                    timeSlot = item.nr3;
+                }
 
+                return {
+                    class: item.name,
+                    date: formatDate(item.d1 || item.d2 || item.d3),
+                    time: timeSlot,
+                    duration: duration,
+                    location: item.room_kl || "Nicht festgelegt",
+                    responsible: item.kv || "Nicht festgelegt",
+                    isGraduating: isGraduating,
+                    kvEmail: kvEmail,
+                    wlEmail: item.wl && item.wl !== "Can not access required information with API" ?
+                             `wl${item.name.toLowerCase()}@htl-steyr.ac.at` : null,
+                    classEmail: classEmail,
+                    priority: item.priority || 2
+                };
+            })
+            .sort((a, b) => {
+                // Sort by priority first, then by class name
+                if (a.priority !== b.priority) return a.priority - b.priority;
+                return a.class.localeCompare(b.class);
+            });
+    }
 
-</py-script>
+    // Function to generate CSV from schedule data
+    function generateCSV(data) {
+        const headers = ["Klasse", "Datum", "Uhrzeit", "Dauer (min)", "Ort", "Verantwortlich", "Abschlussklasse", "Priorität"];
+        const rows = data.map(item => [
+            `"${item.class}"`,
+            `"${item.date}"`,
+            `"${item.time}"`,
+            item.duration,
+            `"${item.location}"`,
+            `"${item.responsible}"`,
+            item.isGraduating ? "Ja" : "Nein",
+            item.priority
+        ]);
+
+        return [headers.join(","), ...rows].join("\n");
+    }
+
+    // Function to download generated content
+    function downloadContent(content, filename, type) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // Function to generate email content for a class
+    function generateEmailContent(item) {
+        return `
+Sehr geehrte Schülerinnen und Schüler der ${item.class},
+
+hiermit möchten wir Sie über den Termin für die Klassenfotos informieren:
+
+Datum: ${item.date}
+Uhrzeit: ${item.time}
+Ort: ${item.location}
+Dauer: ${item.duration} Minuten
+
+Bitte erscheinen Sie pünktlich und in angemessener Kleidung.
+
+${item.isGraduating ? "Da es sich um eine Abschlussklasse handelt, werden zusätzlich alternative Fotos gemacht. Bitte planen Sie entsprechend mehr Zeit ein." : ""}
+
+Mit freundlichen Grüßen,
+Ihr Fotografieteam
+        `.trim();
+    }
+
+    // Function to generate order document email content
+    function generateOrderDocumentEmail(item) {
+        return `
+Sehr geehrte Schülerinnen und Schüler der ${item.class},
+
+anbei finden Sie das Bestellformular für Ihre Klassenfotos.
+
+Bitte beachten Sie die Bestellfrist und geben Sie das ausgefüllte Formular rechtzeitig bei Ihrem Klassenvorstand ab.
+
+Mit freundlichen Grüßen,
+Ihr Fotografieteam
+        `.trim();
+    }
+
+    // Function to populate email modal with class data
+    function populateEmailModal(item) {
+        // Get modal elements
+        const recipientsContainer = document.querySelector('#emailModal .flex-wrap');
+        const subjectInput = document.querySelector('#emailModal input[type="text"]');
+        const messageTextarea = document.querySelector('#emailModal textarea');
+
+        // Clear existing recipients
+        recipientsContainer.innerHTML = '';
+
+        // Add recipients based on settings
+        const notifyKV = document.getElementById('notifyKV').checked;
+        const notifyWL = document.getElementById('notifyWL').checked;
+        const notifyClass = document.getElementById('notifyClass').checked;
+
+        if (notifyClass && item.classEmail) {
+            addRecipient(recipientsContainer, item.classEmail);
+        }
+        if (notifyKV && item.kvEmail) {
+            addRecipient(recipientsContainer, item.kvEmail);
+        }
+        if (notifyWL && item.wlEmail) {
+            addRecipient(recipientsContainer, item.wlEmail);
+        }
+
+        // Set subject and message
+        subjectInput.value = `Termin für Klassenfotos - ${item.class}`;
+        messageTextarea.value = generateEmailContent(item);
+    }
+
+    // Helper function to add recipient to modal
+    function addRecipient(container, email) {
+        const recipient = document.createElement('span');
+        recipient.className = 'bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center';
+        recipient.innerHTML = `
+            ${email}
+            <button class="ml-2 text-blue-600 hover:text-blue-800 remove-recipient">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        container.appendChild(recipient);
+    }
+
+    // Function to initialize email modal event listeners
+    function initEmailModal() {
+        // Close modal when clicking outside
+        emailModal.addEventListener('click', (e) => {
+            if (e.target === emailModal) {
+                emailModal.classList.add('hidden');
+            }
+        });
+
+        // Remove recipient buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.remove-recipient')) {
+                e.target.closest('span').remove();
+            }
+        });
+    }
+
+    // Main function to load and render data
+    async function initializeApp() {
+        // Load data
+        const jsonData = await loadJsonData();
+        if (!jsonData) {
+            renderErrorState();
+            return;
+        }
+
+        // Prepare and render data
+        const tableData = prepareTableData(jsonData);
+        renderScheduleTable(tableData);
+
+        // Initialize email modal
+        initEmailModal();
+
+        // Update stats
+        updateStatistics(tableData);
+    }
+
+    // Function to render error state
+    function renderErrorState() {
+        scheduleTableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="px-6 py-4 text-center text-red-500">
+                    Daten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
+                </td>
+            </tr>
+        `;
+    }
+
+    // Function to update statistics
+    function updateStatistics(data) {
+        const graduatingCount = data.filter(item => item.isGraduating).length;
+        const scheduledCount = data.filter(item => item.date !== "Kein Termin").length;
+        const teachersCount = data.reduce((count, item) => {
+            return count + (item.kvEmail ? 1 : 0) + (item.wlEmail ? 1 : 0);
+        }, 0);
+
+        scheduledClasses.textContent = scheduledCount;
+        teachersToNotify.textContent = teachersCount;
+        graduatingClasses.textContent = graduatingCount;
+    }
+
+    // Initialize the app when DOM is ready
+    document.addEventListener('DOMContentLoaded', initializeApp);
+</script>
 
 <script>
-    // Sample data - in a real app this would come from the API
-    const sampleData = [
-        {
-            class: "5AHITN",
-            date: "15.10.2024",
-            time: "09:30 - 09:45",
-            location: "Fotostudio (A101)",
-            responsible: "Herr Reisinger (REWO)",
-            isGraduating: true,
-            kvEmail: "kv5ahitm@htl-steyr.ac.at",
-            wlEmail: "wl5ahitm@htl-steyr.ac.at",
-            classEmail: "klasse5ahitm@htl-steyr.ac.at"
-        },
-        {
-            class: "3BHEL",
-            date: "16.10.2024",
-            time: "08:15 - 08:25",
-            location: "Fotostudio (A101)",
-            responsible: "Frau Orgill (ORGI)",
-            isGraduating: false,
-            kvEmail: "kv3bhet@htl-steyr.ac.at",
-            wlEmail: "wl3bhet@htl-steyr.ac.at",
-            classEmail: "klasse3bhet@htl-steyr.ac.at"
-        },
-        {
-            class: "2AHITN",
-            date: "16.10.2024",
-            time: "10:30 - 10:40",
-            location: "Fotostudio (A101)",
-            responsible: "Herr Pusch (PUSC)",
-            isGraduating: false,
-            kvEmail: "kv2ahitn@htl-steyr.ac.at",
-            wlEmail: "wl2ahitn@htl-steyr.ac.at",
-            classEmail: "klasse2ahitn@htl-steyr.ac.at"
-        },
-        {
-            class: "4DHET",
-            date: "17.10.2024",
-            time: "11:20 - 11:35",
-            location: "Fotostudio (A101)",
-            responsible: "Fr. Bauer (KV)",
-            isGraduating: true,
-            kvEmail: "kv4dhet@htl-steyr.ac.at",
-            wlEmail: "wl4dhet@htl-steyr.ac.at",
-            classEmail: "klasse4dhet@htl-steyr.ac.at"
-        },
-        {
-            class: "1EHIT",
-            date: "18.10.2024",
-            time: "07:45 - 07:55",
-            location: "Fotostudio (A101)",
-            responsible: "Hr. Huber",
-            isGraduating: false,
-            kvEmail: "kv1ehit@htl-steyr.ac.at",
-            wlEmail: "wl1ehit@htl-steyr.ac.at",
-            classEmail: "klasse1ehit@htl-steyr.ac.at"
-        }
-    ];
-
     // DOM elements
     const scheduleTableBody = document.getElementById('scheduleTableBody');
     const loadingRow = document.getElementById('loadingRow');
@@ -456,182 +616,117 @@ print("Du Sack")
     const teachersToNotify = document.getElementById('teachersToNotify');
     const graduatingClasses = document.getElementById('graduatingClasses');
 
-    // Functions
+    // Function to get priority badge
+    function getPriorityBadge(priority) {
+        if (priority === 1) {
+            return '<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Priorität 1</span>';
+        } else {
+            return '<span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Priorität 2</span>';
+        }
+    }
+
+    // Function to render schedule table
     function renderScheduleTable(data) {
         // Remove loading row
-        loadingRow.remove();
+        if (loadingRow) loadingRow.remove();
 
         // Clear existing rows
         scheduleTableBody.innerHTML = '';
 
-        // Count stats
-        let graduatingCount = 0;
-
         // Add new rows
         data.forEach(item => {
-            if (item.isGraduating) graduatingCount++;
-
             const row = document.createElement('tr');
             row.className = 'schedule-item hover:bg-gray-50';
             row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                <i class="fas fa-school text-blue-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <div class="text-sm font-medium text-gray-900">${item.class}</div>
-                                <div class="text-sm text-gray-500">${item.isGraduating ? 'Abschlussklasse' : 'Klasse'}</div>
-                            </div>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-school text-blue-600"></i>
                         </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${item.date}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${item.time}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${item.location}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${item.responsible}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
-                            <i class="fas fa-envelope"></i>
-                        </button>
-                        <button class="text-gray-600 hover:text-gray-900">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </button>
-                    </td>
-                `;
+                        <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">${item.class}</div>
+                            <div class="text-sm text-gray-500">${item.isGraduating ? 'Abschlussklasse' : 'Klasse'} ${getPriorityBadge(item.priority)}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">${item.date}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">${item.time}</div>
+                    <div class="text-xs text-gray-500">${item.duration} min</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">${item.location}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">${item.responsible}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </td>
+            `;
             scheduleTableBody.appendChild(row);
         });
 
         // Update stats
-        scheduledClasses.textContent = data.length;
-        teachersToNotify.textContent = data.length * 3; // KV + WL + Class
-        graduatingClasses.textContent = graduatingCount;
-    }
-
-    function showEmailModal(classInfo) {
-        // In a real app, we would populate the modal with actual class data
-        emailModal.classList.remove('hidden');
+        updateStatistics(data);
     }
 
     // Event Listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        // Simulate API call with timeout
-        setTimeout(() => {
-            renderScheduleTable(sampleData);
-        }, 1000);
-    });
-
-    generateScheduleBtn.addEventListener('click', () => {
+    refreshBtn.addEventListener('click', async () => {
         // Show loading state
         scheduleTableBody.innerHTML = '';
         const loadingRow = document.createElement('tr');
         loadingRow.id = 'loadingRow';
         loadingRow.innerHTML = `
-                <td colspan="6" class="px-6 py-8 text-center">
-                    <div class="flex flex-col items-center justify-center">
-                        <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                        <p class="text-gray-600">Generiere Terminplan...</p>
-                    </div>
-                </td>
-            `;
+            <td colspan="6" class="px-6 py-8 text-center">
+                <div class="flex flex-col items-center justify-center">
+                    <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
+                    <p class="text-gray-600">Aktualisiere Daten...</p>
+                </div>
+            </td>
+        `;
         scheduleTableBody.appendChild(loadingRow);
 
-        // Simulate API call with timeout
-        setTimeout(() => {
-            renderScheduleTable(sampleData);
+        // Reload data
+        const jsonData = await loadJsonData();
+        if (jsonData) {
+            const tableData = prepareTableData(jsonData);
+            renderScheduleTable(tableData);
 
             // Show success notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-            notification.innerHTML = `
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Terminplan erfolgreich generiert!</span>
-                `;
-            document.body.appendChild(notification);
-
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }, 1500);
+            showNotification('Daten erfolgreich aktualisiert!', 'green-500', 'fa-check-circle');
+        } else {
+            renderErrorState();
+        }
     });
 
-    refreshBtn.addEventListener('click', () => {
-        // Show loading state
-        scheduleTableBody.innerHTML = '';
-        const loadingRow = document.createElement('tr');
-        loadingRow.id = 'loadingRow';
-        loadingRow.innerHTML = `
-                <td colspan="6" class="px-6 py-8 text-center">
-                    <div class="flex flex-col items-center justify-center">
-                        <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                        <p class="text-gray-600">Aktualisiere Daten...</p>
-                    </div>
-                </td>
-            `;
-        scheduleTableBody.appendChild(loadingRow);
-
-        // Simulate API call with timeout
-        setTimeout(() => {
-            renderScheduleTable(sampleData);
-
-            // Show success notification
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-            notification.innerHTML = `
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>Daten erfolgreich aktualisiert!</span>
-                `;
-            document.body.appendChild(notification);
-
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }, 1000);
-    });
-
-    exportCSVBtn.addEventListener('click', () => {
-        // Show notification
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-        notification.innerHTML = `
-                <i class="fas fa-file-csv mr-2"></i>
-                <span>CSV wird heruntergeladen...</span>
-            `;
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
+    exportCSVBtn.addEventListener('click', async () => {
+        // Load current data
+        const jsonData = await loadJsonData();
+        if (jsonData) {
+            const tableData = prepareTableData(jsonData);
+            const csvContent = generateCSV(tableData);
+            downloadContent(csvContent, 'klassenfotos_terminplan.csv', 'text/csv');
+            showNotification('CSV wird heruntergeladen...', 'blue-500', 'fa-file-csv');
+        } else {
+            showNotification('Fehler beim Generieren der CSV', 'red-500', 'fa-exclamation-circle');
+        }
     });
 
     exportPDFBtn.addEventListener('click', () => {
-        // Show notification
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
-        notification.innerHTML = `
-                <i class="fas fa-file-pdf mr-2"></i>
-                <span>PDF wird generiert...</span>
-            `;
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
+        // In a real implementation, this would generate a PDF
+        showNotification('PDF wird generiert...', 'red-500', 'fa-file-pdf');
     });
 
     sendEmailsBtn.addEventListener('click', () => {
-        showEmailModal();
+        emailModal.classList.remove('hidden');
     });
 
     closeEmailModal.addEventListener('click', () => {
@@ -648,9 +743,29 @@ print("Du Sack")
                 wlEmail: btn.dataset.wl,
                 classEmail: btn.dataset.classemail
             };
-            showEmailModal(classInfo);
+            populateEmailModal(classInfo);
+            emailModal.classList.remove('hidden');
         }
     });
+
+    // Function to show notification
+    function showNotification(message, color, icon) {
+        const notification = document.createElement('div');
+        notification.className = `fixed bottom-4 right-4 bg-${color} text-white px-4 py-2 rounded-lg shadow-lg flex items-center`;
+        notification.innerHTML = `
+            <i class="fas ${icon} mr-2"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
 </script>
 </body>
+<footer>
+    Creators: Manuel Weinmayr, Christian Domes, Manuel Pichler
+</footer>
 </html>

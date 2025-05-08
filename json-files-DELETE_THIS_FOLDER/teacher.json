@@ -252,7 +252,7 @@
   {
     "id": 443,
     "name": "EGLG",
-    "foreName": "Günter",
+    "foreName": "G\u00fcnter",
     "longName": "EGLSEER",
     "title": "FOL DP",
     "active": true,
@@ -358,7 +358,7 @@
     "id": 449,
     "name": "FOES",
     "foreName": "Stefan",
-    "longName": "FÖDERL-HÖBENREICH",
+    "longName": "F\u00d6DERL-H\u00d6BENREICH",
     "title": "FOL BEd",
     "active": true,
     "dids": [
@@ -701,7 +701,7 @@
   {
     "id": 465,
     "name": "HOFE",
-    "foreName": "Bärbel",
+    "foreName": "B\u00e4rbel",
     "longName": "HOFER-POSTUVANSCHITZ",
     "title": "FOL OSR DP BEd",
     "active": true,
@@ -771,7 +771,7 @@
     "id": 469,
     "name": "KALH",
     "foreName": "Hannes",
-    "longName": "KALTENBÖCK",
+    "longName": "KALTENB\u00d6CK",
     "title": "FOL OSR DP BEd",
     "active": true,
     "dids": [
@@ -902,7 +902,7 @@
     "id": 783,
     "name": "tkuehn",
     "foreName": "Thomas",
-    "longName": "KÜHN",
+    "longName": "K\u00dcHN",
     "title": "Schularzt Dr.",
     "active": true,
     "dids": [
@@ -921,7 +921,7 @@
     "id": 475,
     "name": "KUEC",
     "foreName": "Christoph",
-    "longName": "KÜLLINGER",
+    "longName": "K\u00dcLLINGER",
     "title": "FOL BEd",
     "active": true,
     "dids": [
@@ -1046,7 +1046,7 @@
     "name": "dmader",
     "foreName": "Doris",
     "longName": "MADER",
-    "title": "Schulärztin Dr.",
+    "title": "Schul\u00e4rztin Dr.",
     "active": true,
     "dids": [
       {
@@ -1130,7 +1130,7 @@
     "id": 700,
     "name": "MUHW",
     "foreName": "Walter",
-    "longName": "MÜHLBACHER",
+    "longName": "M\u00dcHLBACHER",
     "title": "Prof. DI",
     "active": true,
     "dids": [
@@ -1337,7 +1337,7 @@
     "id": 498,
     "name": "POLZ",
     "foreName": "Gertrud",
-    "longName": "PÖLZL",
+    "longName": "P\u00d6LZL",
     "title": "FOL OSR DP BEd",
     "active": true,
     "dids": [
@@ -1379,7 +1379,7 @@
     "id": 500,
     "name": "PROE",
     "foreName": "Margit",
-    "longName": "PRÖMER",
+    "longName": "PR\u00d6MER",
     "title": "Prof. OStR Mag. Dr.",
     "active": true,
     "dids": [
@@ -1676,7 +1676,7 @@
     "id": 651,
     "name": "SAMC",
     "foreName": "Christian",
-    "longName": "SAMEGMÜLLER",
+    "longName": "SAMEGM\u00dcLLER",
     "title": "Prof. Mag.",
     "active": true,
     "dids": [
@@ -1784,7 +1784,7 @@
     "id": 522,
     "name": "SCHW",
     "foreName": "Gottfried",
-    "longName": "SCHWARZLMÜLLER",
+    "longName": "SCHWARZLM\u00dcLLER",
     "title": "FOL OSR DP",
     "active": true,
     "dids": [
@@ -1870,7 +1870,7 @@
     "id": 656,
     "name": "STOW",
     "foreName": "Wolfgang",
-    "longName": "STÖCHER",
+    "longName": "ST\u00d6CHER",
     "title": "Prof. DI",
     "active": true,
     "dids": [
@@ -1965,7 +1965,7 @@
   {
     "id": 531,
     "name": "ULLH",
-    "foreName": "Hansjörg",
+    "foreName": "Hansj\u00f6rg",
     "longName": "ULLMANN",
     "title": "FOL BEd",
     "active": true,
@@ -1995,7 +1995,7 @@
     "id": 533,
     "name": "VIEH",
     "foreName": "Herwig",
-    "longName": "VIEHBÖCK",
+    "longName": "VIEHB\u00d6CK",
     "title": "FOL OSR DP Ing.",
     "active": true,
     "dids": [

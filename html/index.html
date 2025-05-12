@@ -8,7 +8,6 @@
     <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
     <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -60,12 +59,12 @@
             </div>
             <div class="flex items-center space-x-4">
 
-                 <button id="generateScheduleBtn"
-                    class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
-                    onclick="window.location.href='index.html';"
-            >
-                <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
-            </button>
+                <button id="generateScheduleBtn"
+                        class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
+                        onclick="window.location.href='index.html';"
+                >
+                    <i class="fas fa-calendar-alt mr-2"></i> Terminplan generieren
+                </button>
 
 
                 <button id="refreshBtn"
@@ -88,227 +87,226 @@
     </header>
 
 
-
-        <!-- Main Content Area -->
-        <div class="lg:col-span-3 space-y-8">
-            <!-- Status Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white rounded-xl shadow-md p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600">Geplante Klassen</p>
-                            <h3 class="text-2xl font-bold text-dark" id="scheduledClasses">0</h3>
-                        </div>
-                        <div class="bg-blue-100 p-3 rounded-full">
-                            <i class="fas fa-school text-blue-600 text-xl"></i>
-                        </div>
+    <!-- Main Content Area -->
+    <div class="lg:col-span-3 space-y-8">
+        <!-- Status Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600">Geplante Klassen</p>
+                        <h3 class="text-2xl font-bold text-dark" id="scheduledClasses">0</h3>
                     </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-md p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600">Zu benachrichtigen</p>
-                            <h3 class="text-2xl font-bold text-dark" id="teachersToNotify">0</h3>
-                        </div>
-                        <div class="bg-green-100 p-3 rounded-full">
-                            <i class="fas fa-envelope text-green-600 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-md p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600">Abschlussklassen</p>
-                            <h3 class="text-2xl font-bold text-dark" id="graduatingClasses">0</h3>
-                        </div>
-                        <div class="bg-purple-100 p-3 rounded-full">
-                            <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
-                        </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <i class="fas fa-school text-blue-600 text-xl"></i>
                     </div>
                 </div>
             </div>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600">Zu benachrichtigen</p>
+                        <h3 class="text-2xl font-bold text-dark" id="teachersToNotify">0</h3>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-envelope text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600">Abschlussklassen</p>
+                        <h3 class="text-2xl font-bold text-dark" id="graduatingClasses">0</h3>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <!-- Schedule Table -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <!-- Schedule Table -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 border-b flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="masterCheckbox" class="h-4 w-4 text-primary rounded focus:ring-primary">
+                    <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
+                    <p>
+                        <span class="text-gray-500 text-sm">Markierte Termine: </span>
+                    </p>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button id="exportCSVBtn"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                        <i class="fas fa-file-csv mr-1"></i> CSV
+                    </button>
+                    <button id="exportPDFBtn"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                        <i class="fas fa-file-pdf mr-1"></i> PDF
+                    </button>
+                    <button id="sendEmailsBtn"
+                            class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
+                        <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
+                    </button>
+                    <button id="deleteSelected" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                        Archivieren
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Klasse
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Datum
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Uhrzeit
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Ort
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Verantwortlich
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Aktionen
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
+                    <!-- Loading state -->
+                    <tr id="loadingRow">
+                        <td colspan="6" class="px-6 py-8 text-center">
+                            <div class="flex flex-col items-center justify-center">
+                                <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
+                                <p class="text-gray-600">Lade Daten...</p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Email Preview Modal (hidden by default) -->
+        <div id="emailModal"
+             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
                 <div class="px-6 py-4 border-b flex justify-between items-center">
-                   <div class="flex items-center space-x-3">
-  <input type="checkbox" id="masterCheckbox" class="h-4 w-4 text-primary rounded focus:ring-primary">
-  <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
-</div>
-
-                    <div class="flex space-x-2">
-                        <button id="exportCSVBtn"
-                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
-                            <i class="fas fa-file-csv mr-1"></i> CSV
-                        </button>
-                        <button id="exportPDFBtn"
-                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
-                            <i class="fas fa-file-pdf mr-1"></i> PDF
-                        </button>
-                        <button id="sendEmailsBtn"
-                                class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
-                            <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
-                        </button>
-                        <button id="deleteSelected" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                            Archivieren
-                        </button>
-                    </div>
+                    <h2 class="text-xl font-semibold text-dark">E-Mail Vorbereitung</h2>
+                    <button id="closeEmailModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div id="toolbar" class="hidden mb-4 bg-red-100 p-4 rounded flex justify-between items-center">
-                    <span class="text-red-700 font-semibold">Ausgewählte Termine löschen</span>
-
-                </div>
-
-
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Klasse
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Datum
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Uhrzeit
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Ort
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Verantwortlich
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Aktionen
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Loading state -->
-                        <tr id="loadingRow">
-                            <td colspan="6" class="px-6 py-8 text-center">
-                                <div class="flex flex-col items-center justify-center">
-                                    <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                                    <p class="text-gray-600">Lade Daten...</p>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Email Preview Modal (hidden by default) -->
-            <div id="emailModal"
-                 class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-                    <div class="px-6 py-4 border-b flex justify-between items-center">
-                        <h2 class="text-xl font-semibold text-dark">E-Mail Vorbereitung</h2>
-                        <button id="closeEmailModal" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="p-6 overflow-y-auto max-h-[70vh]">
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2">Empfänger</label>
-                            <div class="flex flex-wrap gap-2 mb-4">
+                <div class="p-6 overflow-y-auto max-h-[70vh]">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Empfänger</label>
+                        <div class="flex flex-wrap gap-2 mb-4">
                                     <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
                                         klasse5ahitm@htl-steyr.ac.at
                                         <button class="ml-2 text-blue-600 hover:text-blue-800">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </span>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
                                         kv5ahitm@htl-steyr.ac.at
                                         <button class="ml-2 text-blue-600 hover:text-blue-800">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </span>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
                                         wl5ahitm@htl-steyr.ac.at
                                         <button class="ml-2 text-blue-600 hover:text-blue-800">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </span>
-                            </div>
-                            <input type="text" placeholder="Weitere Empfänger hinzufügen"
-                                   class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
                         </div>
+                        <input type="text" placeholder="Weitere Empfänger hinzufügen"
+                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                    </div>
 
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2">Betreff</label>
-                            <input type="text" value="Termin für Klassenfotos - 5AHITM"
-                                   class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                        </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Betreff</label>
+                        <input type="text" value="Termin für Klassenfotos - 5AHITM"
+                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                    </div>
 
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2">Nachricht</label>
-                            <div class="border rounded-lg overflow-hidden">
-                                <div class="bg-gray-50 px-4 py-2 border-b">
-                                    <div class="flex space-x-2">
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-bold"></i>
-                                        </button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-italic"></i>
-                                        </button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i
-                                                class="fas fa-underline"></i></button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ul"></i>
-                                        </button>
-                                        <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ol"></i>
-                                        </button>
-                                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Nachricht</label>
+                        <div class="border rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 px-4 py-2 border-b">
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-bold"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-italic"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900"><i
+                                            class="fas fa-underline"></i></button>
+                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ul"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ol"></i>
+                                    </button>
                                 </div>
-                                <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
-                                          placeholder="E-Mail Text hier eingeben...">
+                            </div>
+                            <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
+                                      placeholder="E-Mail Text hier eingeben...">
                                 </textarea>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2">Anhänge</label>
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>
-                                        <span>Terminliste_5AHITN.pdf</span>
-                                    </div>
-                                    <button class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Anhänge</label>
+                        <div class="border rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                    <span>Terminliste_5AHITN.pdf</span>
                                 </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-qrcode text-blue-500 mr-2"></i>
-                                        <span>Bestellformular_QR.pdf</span>
-                                    </div>
-                                    <button class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
-                            <button class="mt-2 text-primary hover:text-secondary flex items-center">
-                                <i class="fas fa-plus mr-1"></i> Anhang hinzufügen
-                            </button>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-qrcode text-blue-500 mr-2"></i>
+                                    <span>Bestellformular_QR.pdf</span>
+                                </div>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="px-6 py-4 border-t flex justify-end space-x-3">
-                        <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
-                        </button>
-                        <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
+                        <button class="mt-2 text-primary hover:text-secondary flex items-center">
+                            <i class="fas fa-plus mr-1"></i> Anhang hinzufügen
                         </button>
                     </div>
+                </div>
+                <div class="px-6 py-4 border-t flex justify-end space-x-3">
+                    <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
+                    </button>
+                    <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+
 
 <script>
     // Function to load JSON data
@@ -551,30 +549,30 @@ Ihr Fotografieteam
     document.addEventListener('DOMContentLoaded', initializeApp);
 
     document.addEventListener('DOMContentLoaded', () => {
-    const masterCheckbox = document.getElementById('masterCheckbox');
-    const toolbar = document.getElementById('toolbar');
+        const masterCheckbox = document.getElementById('masterCheckbox');
+        const toolbar = document.getElementById('toolbar');
 
-    masterCheckbox.addEventListener('change', () => {
-        const allCheckboxes = document.querySelectorAll('.delete-checkbox');
-        allCheckboxes.forEach(cb => cb.checked = masterCheckbox.checked);
-        toolbar.classList.toggle('hidden', !masterCheckbox.checked);
-    });
+        masterCheckbox.addEventListener('change', () => {
+            const allCheckboxes = document.querySelectorAll('.delete-checkbox');
+            allCheckboxes.forEach(cb => cb.checked = masterCheckbox.checked);
+            toolbar.classList.toggle('hidden', !masterCheckbox.checked);
+        });
 
-    document.addEventListener('change', (e) => {
-        if (e.target.classList.contains('delete-checkbox')) {
-            const checked = document.querySelectorAll('.delete-checkbox:checked').length;
-            toolbar.classList.toggle('hidden', checked === 0);
+        document.addEventListener('change', (e) => {
+            if (e.target.classList.contains('delete-checkbox')) {
+                const checked = document.querySelectorAll('.delete-checkbox:checked').length;
+                toolbar.classList.toggle('hidden', checked === 0);
 
-            // Wenn einzelne Checkbox abgewählt wird, masterCheckbox ebenfalls abwählen
-            if (!e.target.checked) {
-                masterCheckbox.checked = false;
-            } else {
-                const all = document.querySelectorAll('.delete-checkbox').length;
-                if (checked === all) masterCheckbox.checked = true;
+                // Wenn einzelne Checkbox abgewählt wird, masterCheckbox ebenfalls abwählen
+                if (!e.target.checked) {
+                    masterCheckbox.checked = false;
+                } else {
+                    const all = document.querySelectorAll('.delete-checkbox').length;
+                    if (checked === all) masterCheckbox.checked = true;
+                }
             }
-        }
+        });
     });
-});
 
 </script>
 
@@ -643,16 +641,18 @@ Ihr Fotografieteam
                     <div class="text-sm text-gray-900">${item.responsible}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button class="text-blue-600 hover:text-blue-800 mr-3 edit-btn" data-class='${JSON.stringify(item)}'>
+                      <i class="fas fa-edit"></i>
+</button>
+
                     <button class="text-primary hover:text-secondary mr-3 email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
                         <i class="fas fa-envelope"></i>
                     </button>
-
-
-                    <!-- 3 punkte element--!>
+<!--
                     <button class="text-gray-600 hover:text-gray-900">
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
-
+-->
                 </td>
             `;
             scheduleTableBody.appendChild(row);
@@ -757,63 +757,261 @@ Ihr Fotografieteam
     });
 
     // In index.html
-deleteBtn.addEventListener('click', async () => {
-    const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
-        .map(cb => cb.dataset.classId);
+    deleteBtn.addEventListener('click', async () => {
+        const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
+            .map(cb => cb.dataset.classId);
 
-    if (selected.length === 0) {
-        showNotification('Bitte wählen Sie Termine zum Archivieren aus', 'red-500', 'fa-exclamation-circle');
-        return;
+        if (selected.length === 0) {
+            showNotification('Bitte wählen Sie Termine zum Archivieren aus', 'red-500', 'fa-exclamation-circle');
+            return;
+        }
+
+        try {
+            const [currentRes, archiveRes] = await Promise.all([
+                fetch('json/output_data.json'),
+                fetch('json/archive.json')
+            ]);
+
+            if (!currentRes.ok || !archiveRes.ok) throw new Error('Daten konnten nicht geladen werden');
+
+            const currentData = await currentRes.json();
+            const archiveData = await archiveRes.json();
+
+            const toArchive = currentData.filter(item => selected.includes(item.name));
+            const remaining = currentData.filter(item => !selected.includes(item.name));
+            const updatedArchive = [...archiveData, ...toArchive];
+
+            // Biete Dateien als Download an
+            downloadContent(JSON.stringify(remaining, null, 2), 'output_data.json', 'application/json');
+            downloadContent(JSON.stringify(updatedArchive, null, 2), 'archive.json', 'application/json');
+
+            showNotification(`${toArchive.length} Termine archiviert. Dateien wurden heruntergeladen.`, 'green-500', 'fa-check-circle');
+
+            // Aktualisiere Ansicht im Browser
+            const tableData = prepareTableData(remaining);
+            renderScheduleTable(tableData);
+            toolbar.classList.add('hidden');
+
+        } catch (err) {
+            console.error('Fehler beim Archivieren:', err);
+            showNotification('Fehler beim Archivieren: ' + err.message, 'red-500', 'fa-exclamation-circle');
+        }
+    });
+
+
+    // Elemente
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+    const editDate = document.getElementById('editDate');
+    const editTime = document.getElementById('editTime');
+    const editLocation = document.getElementById('editLocation');
+    const editResponsible = document.getElementById('editResponsible');
+    const editClass = document.getElementById('editClass');
+    const cancelEdit = document.getElementById('cancelEdit');
+
+    // Event: Öffne Bearbeitenmodal
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.edit-btn');
+        console.log('Edit button clicked?', btn);
+        if (btn) {
+            const data = JSON.parse(btn.dataset.class);
+            editClass.value = data.class;
+            editDate.value = reverseDate(data.date);
+            editTime.value = data.time || '';
+            editLocation.value = data.location || '';
+            editResponsible.value = data.responsible || '';
+            editModal.classList.remove('hidden');
+        }
+    });
+
+    // Event: Abbrechen
+    cancelEdit.addEventListener('click', () => {
+        editModal.classList.add('hidden');
+    });
+
+    // Event: Speichern
+    editForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const cls = editClass.value;
+
+        try {
+            const res = await fetch('json/output_data.json');
+            const json = await res.json();
+            const index = json.findIndex(item => item.name === cls);
+            if (index === -1) throw new Error('Klasse nicht gefunden');
+
+            json[index].d1 = editDate.value;
+            json[index].nr1 = editTime.value;
+            json[index].room_kl = editLocation.value;
+            json[index].kv = editResponsible.value;
+
+            // Neue Datei als Download anbieten
+            downloadContent(JSON.stringify(json, null, 2), 'output_data.json', 'application/json');
+
+            showNotification('Änderungen gespeichert – neue Datei heruntergeladen.', 'green-500', 'fa-save');
+            editModal.classList.add('hidden');
+
+            // Ansicht aktualisieren
+            const tableData = prepareTableData(json);
+            renderScheduleTable(tableData);
+
+        } catch (err) {
+            console.error('Bearbeiten-Fehler:', err);
+            showNotification('Fehler beim Speichern', 'red-500', 'fa-exclamation-circle');
+        }
+    });
+
+    function reverseDate(d) {
+        const parts = d.split('.');
+        return parts.length === 3 ? parts[2] + parts[1] + parts[0] : '';
     }
+    // Function to handle the "Edit" button click
+document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const item = JSON.parse(this.getAttribute('data-class')); // Extract and parse the class data
 
-    try {
-        // Load current data
-        const [currentRes, archiveRes] = await Promise.all([
-            fetch('json/output_data.json'),
-            fetch('json/archive.json')
-        ]);
+        // Populate the modal with the item's data
+        document.getElementById('editClass').value = item.class;
+        document.getElementById('editDate').value = item.date;
+        document.getElementById('editTime').value = item.time;
+        document.getElementById('editLocation').value = item.location;
+        document.getElementById('editResponsible').value = item.responsible;
 
-        if (!currentRes.ok || !archiveRes.ok) throw new Error('Daten konnten nicht geladen werden');
+        // Open the modal
+        document.getElementById('editModal').classList.remove('hidden');
 
-        const currentData = await currentRes.json();
-        const archiveData = await archiveRes.json();
-
-        // Filter items to archive
-        const toArchive = currentData.filter(item => item.name && selected.includes(item.name));
-        const remaining = currentData.filter(item => !selected.includes(item.name));
-
-        // Combine with existing archive
-        const updatedArchive = [...archiveData, ...toArchive].filter(item => item.name);
-
-        // In a real app, you would send this to a server endpoint
-        console.log('Would save:', {
-            remaining,
-            updatedArchive
+        // Save button click logic
+        document.getElementById('saveEditBtn').addEventListener('click', function () {
+            saveEdit(item.classId); // Pass the unique classId to save
         });
 
-        // For demo purposes, we'll use localStorage
-        localStorage.setItem('archiveData', JSON.stringify(updatedArchive));
-        localStorage.setItem('currentData', JSON.stringify(remaining));
-
-        // Show success message
-        showNotification(`${toArchive.length} Termine archiviert`, 'green-500', 'fa-check-circle');
-
-        // Reload the table
-        const tableData = prepareTableData(remaining);
-        renderScheduleTable(tableData);
-        toolbar.classList.add('hidden');
-
-        // Update archive display
-        window.open('archived_appointments.html', '_blank');
-
-    } catch (err) {
-        console.error('Archiving error:', err);
-        showNotification('Fehler beim Archivieren: ' + err.message, 'red-500', 'fa-exclamation-circle');
-    }
+        // Close button logic
+        document.getElementById('cancelEditBtn').addEventListener('click', function () {
+            document.getElementById('editModal').classList.add('hidden');
+        });
+    });
 });
+
+// Function to save the edited data
+function saveEdit(classId) {
+    const item = data.find(item => item.classId === classId); // Find the class by classId
+
+    if (!item) return;
+
+    // Update the class data with the new values from the modal
+    item.class = document.getElementById('editClass').value;
+    item.date = document.getElementById('editDate').value;
+    item.time = document.getElementById('editTime').value;
+    item.location = document.getElementById('editLocation').value;
+    item.responsible = document.getElementById('editResponsible').value;
+
+    // Close the modal
+    document.getElementById('editModal').classList.add('hidden');
+
+    // Re-render the table with the updated data
+    renderScheduleTable(data);
+}
+
+
+
+    // Function to open the edit modal with class data
+function openEditModal(classId) {
+    const item = data.find(item => item.classId === classId); // Find the class to edit
+
+    if (!item) return;
+
+    // Populate modal with current data
+    document.getElementById('editClass').value = item.class;
+    document.getElementById('editDate').value = item.date;
+    document.getElementById('editTime').value = item.time;
+    document.getElementById('editLocation').value = item.location;
+    document.getElementById('editResponsible').value = item.responsible;
+
+    // Show the modal
+    document.getElementById('editModal').classList.remove('hidden');
+
+    // Close modal when clicking "Cancel"
+    document.getElementById('cancelEditBtn').addEventListener('click', () => {
+        document.getElementById('editModal').classList.add('hidden');
+    });
+
+    // Save edited data when clicking "Save"
+    document.getElementById('saveEditBtn').addEventListener('click', () => {
+        saveEdit(classId);
+    });
+}
+
+// Function to save the edited data
+function saveEdit(classId) {
+    const item = data.find(item => item.classId === classId);
+
+    if (!item) return;
+
+    // Get updated values from modal inputs
+    item.class = document.getElementById('editClass').value;
+    item.date = document.getElementById('editDate').value;
+    item.time = document.getElementById('editTime').value;
+    item.location = document.getElementById('editLocation').value;
+    item.responsible = document.getElementById('editResponsible').value;
+
+    // Close the modal
+    document.getElementById('editModal').classList.add('hidden');
+
+    // Re-render the schedule table with updated data
+    renderScheduleTable(data);
+}
 
 
 </script>
+
+<!-- Edit Modal (hidden by default) -->
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+        <div class="px-6 py-4 border-b flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-dark">Bearbeiten: Klasse</h2>
+            <button id="closeEditModal" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto max-h-[70vh]">
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Klasse</label>
+                <input type="text" id="editClass" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Datum</label>
+                <input type="date" id="editDate" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Uhrzeit</label>
+                <input type="time" id="editTime" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Ort</label>
+                <input type="text" id="editLocation" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Verantwortlich</label>
+                <input type="text" id="editResponsible" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+        </div>
+
+        <div class="px-6 py-4 border-t flex justify-end space-x-3">
+            <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50" id="cancelEditBtn">
+                Abbrechen
+            </button>
+            <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg" id="saveEditBtn">
+                Speichern
+            </button>
+        </div>
+    </div>
+</div>
+
 </body>
 <footer>
     Creators: Manuel Weinmayr, Christian Domes, Manuel Pichler

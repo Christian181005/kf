@@ -1,71 +1,78 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Archivierte Termine</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <title>Archivierte Termine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50 min-h-screen p-6">
+<body class="bg-gray-100 min-h-screen">
 
-  <div class="max-w-6xl mx-auto">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold text-gray-800">Archivierte Termine</h1>
-      <a href="index.html" class="text-blue-600 hover:underline">← Zurück zur Startseite</a>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">📦 Archivierte Termine</h1>
+
+    <div id="tableWrapper" class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="min-w-full table-auto">
+            <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Klasse</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Datum</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Uhrzeit</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Ort</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Verantwortlich</th>
+                </tr>
+            </thead>
+            <tbody id="archiveTableBody" class="divide-y divide-gray-100">
+                <tr>
+                    <td colspan="5" class="text-center px-6 py-4 text-gray-500">Lade archivierte Daten...</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 
-    <div id="tableContainer" class="bg-white rounded-xl shadow-md overflow-hidden">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Klasse</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Datum</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Uhrzeit</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ort</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Verantwortlich</th>
-          </tr>
-        </thead>
-        <tbody id="archiveBody" class="bg-white divide-y divide-gray-200">
-          <!-- Wird per JavaScript befüllt -->
-        </tbody>
-      </table>
-    </div>
-  </div>
+<script>
+    async function loadArchive() {
+        try {
+            const res = await fetch('json/archive.json');
+            const text = await res.text();
+            const data = text.trim() ? JSON.parse(text) : [];
 
-  <script>
-   // In archived_appointments.html
-async function loadArchive() {
-  try {
-    const res = await fetch('json/archive.json');
-    if (!res.ok) throw new Error('Archiv konnte nicht geladen werden.');
-    const data = await res.json();
+            const tbody = document.getElementById('archiveTableBody');
+            tbody.innerHTML = '';
 
-    const body = document.getElementById('archiveBody');
-    body.innerHTML = '';
+            if (!data.length) {
+                tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Keine archivierten Termine gefunden.</td></tr>`;
+                return;
+            }
 
-    // Filter out null/empty entries
-    const validItems = data.filter(item => item.name && item.class_id);
-
-    validItems.forEach(item => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="px-6 py-4">${item.name || 'Unbekannt'}</td>
-        <td class="px-6 py-4">${formatDate(item.d1 || item.d2 || item.d3)}</td>
-        <td class="px-6 py-4">${item.nr1 || item.nr2 || item.nr3 || '–'}</td>
-        <td class="px-6 py-4">${item.room_kl || 'Nicht festgelegt'}</td>
-        <td class="px-6 py-4">${item.kv || 'Nicht festgelegt'}</td>
-      `;
-      body.appendChild(row);
-    });
-
-    if (validItems.length === 0) {
-      body.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500">Keine archivierten Termine vorhanden.</td></tr>`;
+            data.forEach(item => {
+                const date = formatDate(item.d1 || item.d2 || item.d3);
+                const time = item.nr1 || item.nr2 || item.nr3 || "—";
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${date}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${time}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.room_kl || "—"}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.kv || "—"}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        } catch (err) {
+            console.error('Fehler beim Laden des Archivs:', err);
+            document.getElementById('archiveTableBody').innerHTML =
+                `<tr><td colspan="5" class="text-center px-6 py-4 text-red-500">Fehler beim Laden der archivierten Daten.</td></tr>`;
+        }
     }
-  } catch (err) {
-    document.getElementById('archiveBody').innerHTML =
-      `<tr><td colspan="5" class="text-center py-6 text-red-500">Fehler beim Laden: ${err.message}</td></tr>`;
-  }
-}
-  </script>
+
+    function formatDate(dateStr) {
+        if (!dateStr || dateStr.length !== 8) return "—";
+        return `${dateStr.substr(6,2)}.${dateStr.substr(4,2)}.${dateStr.substr(0,4)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadArchive);
+</script>
+
 </body>
 </html>

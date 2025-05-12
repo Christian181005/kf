@@ -33,42 +33,39 @@
   </div>
 
   <script>
-    function formatDate(dateStr) {
-      if (!dateStr) return "Kein Termin";
-      return `${dateStr.substr(6, 2)}.${dateStr.substr(4, 2)}.${dateStr.substr(0, 4)}`;
+   // In archived_appointments.html
+async function loadArchive() {
+  try {
+    const res = await fetch('json/archive.json');
+    if (!res.ok) throw new Error('Archiv konnte nicht geladen werden.');
+    const data = await res.json();
+
+    const body = document.getElementById('archiveBody');
+    body.innerHTML = '';
+
+    // Filter out null/empty entries
+    const validItems = data.filter(item => item.name && item.class_id);
+
+    validItems.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-6 py-4">${item.name || 'Unbekannt'}</td>
+        <td class="px-6 py-4">${formatDate(item.d1 || item.d2 || item.d3)}</td>
+        <td class="px-6 py-4">${item.nr1 || item.nr2 || item.nr3 || '–'}</td>
+        <td class="px-6 py-4">${item.room_kl || 'Nicht festgelegt'}</td>
+        <td class="px-6 py-4">${item.kv || 'Nicht festgelegt'}</td>
+      `;
+      body.appendChild(row);
+    });
+
+    if (validItems.length === 0) {
+      body.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500">Keine archivierten Termine vorhanden.</td></tr>`;
     }
-
-    async function loadArchive() {
-      try {
-        const res = await fetch('json/archive.json');
-        if (!res.ok) throw new Error('Archiv konnte nicht geladen werden.');
-        const data = await res.json();
-
-        const body = document.getElementById('archiveBody');
-        body.innerHTML = '';
-
-        data.forEach(item => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td class="px-6 py-4">${item.name || 'Unbekannt'}</td>
-            <td class="px-6 py-4">${formatDate(item.d1 || item.d2 || item.d3)}</td>
-            <td class="px-6 py-4">${item.nr1 || item.nr2 || item.nr3 || '–'}</td>
-            <td class="px-6 py-4">${item.room_kl || 'Nicht festgelegt'}</td>
-            <td class="px-6 py-4">${item.kv || 'Nicht festgelegt'}</td>
-          `;
-          body.appendChild(row);
-        });
-
-        if (data.length === 0) {
-          body.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500">Keine archivierten Termine vorhanden.</td></tr>`;
-        }
-      } catch (err) {
-        document.getElementById('archiveBody').innerHTML =
-          `<tr><td colspan="5" class="text-center py-6 text-red-500">Fehler beim Laden: ${err.message}</td></tr>`;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadArchive);
+  } catch (err) {
+    document.getElementById('archiveBody').innerHTML =
+      `<tr><td colspan="5" class="text-center py-6 text-red-500">Fehler beim Laden: ${err.message}</td></tr>`;
+  }
+}
   </script>
 </body>
 </html>

@@ -756,32 +756,61 @@ Ihr Fotografieteam
         toolbar.classList.toggle('hidden', selected.length === 0);
     });
 
-    deleteBtn.addEventListener('click', async () => {
-        const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
-            .map(cb => cb.dataset.classId);
+    // In index.html
+deleteBtn.addEventListener('click', async () => {
+    const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
+        .map(cb => cb.dataset.classId);
 
-        const jsonData = await loadJsonData();
-        const remaining = jsonData.filter(item => !selected.includes(item.name));
-        const archived = jsonData.filter(item => selected.includes(item.name));
+    if (selected.length === 0) {
+        showNotification('Bitte wählen Sie Termine zum Archivieren aus', 'red-500', 'fa-exclamation-circle');
+        return;
+    }
 
-        // Speichern der neuen Datei
-        fetch('json/output_data.json', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(remaining)
+    try {
+        // Load current data
+        const [currentRes, archiveRes] = await Promise.all([
+            fetch('json/output_data.json'),
+            fetch('json/archive.json')
+        ]);
+
+        if (!currentRes.ok || !archiveRes.ok) throw new Error('Daten konnten nicht geladen werden');
+
+        const currentData = await currentRes.json();
+        const archiveData = await archiveRes.json();
+
+        // Filter items to archive
+        const toArchive = currentData.filter(item => item.name && selected.includes(item.name));
+        const remaining = currentData.filter(item => !selected.includes(item.name));
+
+        // Combine with existing archive
+        const updatedArchive = [...archiveData, ...toArchive].filter(item => item.name);
+
+        // In a real app, you would send this to a server endpoint
+        console.log('Would save:', {
+            remaining,
+            updatedArchive
         });
 
-        // Archiv speichern
-        fetch('json/archive.json', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(archived)
-        });
+        // For demo purposes, we'll use localStorage
+        localStorage.setItem('archiveData', JSON.stringify(updatedArchive));
+        localStorage.setItem('currentData', JSON.stringify(remaining));
 
-        // Tabelle neu laden
-        initializeApp();
+        // Show success message
+        showNotification(`${toArchive.length} Termine archiviert`, 'green-500', 'fa-check-circle');
+
+        // Reload the table
+        const tableData = prepareTableData(remaining);
+        renderScheduleTable(tableData);
         toolbar.classList.add('hidden');
-    });
+
+        // Update archive display
+        window.open('archived_appointments.html', '_blank');
+
+    } catch (err) {
+        console.error('Archiving error:', err);
+        showNotification('Fehler beim Archivieren: ' + err.message, 'red-500', 'fa-exclamation-circle');
+    }
+});
 
 
 </script>

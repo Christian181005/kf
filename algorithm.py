@@ -172,9 +172,12 @@ for klasse in data:
                             lesson["endTime"] >= photo_end_time):
 
                         teacher = lesson.get("te")
-                        teacher_name = teacher.get("name") if teacher else None
-
-                        print(f"  Lesson teacher: {teacher_name}, KV: {kv_name}")
+                        try :
+                            teacher_name = teacher.get("name") if teacher else None
+                            print(f"  Lesson teacher: {teacher_name}, KV: {kv_name}")
+                        except AttributeError:
+                            print(f"  Error: {lesson} - {kv_name}")
+                            continue
 
                         if teacher and teacher_name == kv_name:
                             room = lesson.get("ro", {})
@@ -196,6 +199,10 @@ for klasse in data:
     post_alg_data.append(klassen_data)
 
 json_str = json.dumps(post_alg_data, ensure_ascii=False, indent=2)
+
+print("Writing to file...")
+print(json_str)
+
 json_str = json_str.replace("'", '"')
 with open("entire-API-Data/output_data.json", "w", encoding="utf-8") as f:
     f.write(json_str)

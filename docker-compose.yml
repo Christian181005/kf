@@ -6,3 +6,4 @@ services:
       - "80:80"
     volumes:
       - ./html:/var/www/html
+      - ./json:/var/www/json

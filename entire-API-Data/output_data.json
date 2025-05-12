@@ -2,589 +2,599 @@
   {
     "name": "1AFMBZ",
     "class_id": 1,
-    "kv": "BENE",
+    "kv": "RUMG",
     "wl": "Can not access required information with API",
-    "room_kl": "B110",
-    "room_kv": "B110",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "room_kl": [
+      "B137"
+    ],
+    "room_kv": "B067",
+    "notified_te": [
+      "LINA"
+    ],
+    "priority": 2,
+    "date": 20241016,
+    "start": 1140,
+    "end": 1150
   },
   {
     "name": "2AFMBZ",
     "class_id": 2,
     "kv": "LEBR",
     "wl": "Can not access required information with API",
-    "room_kl": "B144",
+    "room_kl": [
+      "B144"
+    ],
     "room_kv": "B144",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "15:15-15:25"
+    "date": 20241016,
+    "start": 1515,
+    "end": 1525
   },
   {
     "name": "3AFMBZ",
     "class_id": 3,
     "kv": "GRAJ",
     "wl": "Can not access required information with API",
-    "room_kl": "B145",
+    "room_kl": [
+      "B145"
+    ],
     "room_kv": "B145",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "13:25-13:35"
+    "date": 20241017,
+    "start": 1325,
+    "end": 1335
   },
   {
     "name": "4AFMBZ",
     "class_id": 4,
     "kv": "DERM",
     "wl": "Can not access required information with API",
-    "room_kl": "B065",
+    "room_kl": [
+      "B065"
+    ],
     "room_kv": "B065",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
+    "date": 20241016,
+    "start": 1325,
+    "end": 1335
   },
   {
     "name": "1AHME",
     "class_id": 5,
     "kv": "HOTA",
     "wl": "Can not access required information with API",
-    "room_kl": "C215",
+    "room_kl": [
+      "C215"
+    ],
     "room_kv": "C215",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "08:00-08:10"
+    "date": 20241017,
+    "start": 800,
+    "end": 810
   },
   {
     "name": "1BHME",
     "class_id": 6,
     "kv": "AIGS",
     "wl": "Can not access required information with API",
-    "room_kl": "C216",
+    "room_kl": [
+      "C216"
+    ],
     "room_kv": "C216",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "09:55-10:05"
+    "date": 20241017,
+    "start": 955,
+    "end": 1005
   },
   {
     "name": "2AHME",
     "class_id": 7,
     "kv": "KLAS",
     "wl": "Can not access required information with API",
-    "room_kl": "C215",
+    "room_kl": [
+      "C215"
+    ],
     "room_kv": "C215",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
+    "date": 20241016,
+    "start": 1405,
+    "end": 1415
   },
   {
     "name": "2BHME",
     "class_id": 8,
     "kv": "RAFR",
     "wl": "Can not access required information with API",
-    "room_kl": "C203",
-    "room_kv": null,
-    "notified_te": "ZELC",
+    "room_kl": [
+      "C203"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "ZELC"
+    ],
     "priority": 2,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "date": 20241016,
+    "start": 800,
+    "end": 810
   },
   {
     "name": "3AHME",
     "class_id": 9,
     "kv": "OBEL",
     "wl": "Can not access required information with API",
-    "room_kl": "C213",
+    "room_kl": [
+      "C213"
+    ],
     "room_kv": "C213",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "date": 20241016,
+    "start": 840,
+    "end": 850
   },
   {
     "name": "3BHME",
     "class_id": 10,
     "kv": "GAUS",
     "wl": "Can not access required information with API",
-    "room_kl": "C310",
+    "room_kl": [
+      "C310"
+    ],
     "room_kv": "C310",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "13:25-13:35"
+    "date": 20241017,
+    "start": 1405,
+    "end": 1415
   },
   {
     "name": "4AHME",
     "class_id": 11,
     "kv": "KIMB",
     "wl": "Can not access required information with API",
-    "room_kl": "C207",
+    "room_kl": [
+      "C207"
+    ],
     "room_kv": "C207",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "date": 20241016,
+    "start": 850,
+    "end": 900
   },
   {
     "name": "4BHME",
     "class_id": 12,
     "kv": "STCH",
     "wl": "Can not access required information with API",
-    "room_kl": "C211",
+    "room_kl": [
+      "C211"
+    ],
     "room_kv": "C211",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
+    "date": 20241016,
+    "start": 1415,
+    "end": 1425
   },
   {
     "name": "5AHME",
     "class_id": 13,
     "kv": "ZELC",
     "wl": "Can not access required information with API",
-    "room_kl": "C030",
-    "room_kv": null,
-    "notified_te": "GRUJ",
+    "room_kl": [
+      "C030"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "GRUJ"
+    ],
     "priority": 2,
-    "date": "20241016",
-    "time": "10:45-11:00"
+    "date": 20241016,
+    "start": 1045,
+    "end": 1100
   },
   {
     "name": "5BHME",
     "class_id": 14,
     "kv": "PROE",
     "wl": "Can not access required information with API",
-    "room_kl": "C201",
+    "room_kl": [
+      "C201"
+    ],
     "room_kv": "C201",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "08:00-08:15"
+    "date": 20241016,
+    "start": 800,
+    "end": 815
   },
   {
-    "name": "1YHKUP",
+    "name": "1YHKU",
     "class_id": 15,
     "kv": "BAUU",
     "wl": "Can not access required information with API",
-    "room_kl": "V103",
-    "room_kv": null,
-    "notified_te": "PRAC",
+    "room_kl": [
+      "E104"
+    ],
+    "room_kv": "C202",
+    "notified_te": [
+      "HOLJ"
+    ],
     "priority": 2,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "date": 20241017,
+    "start": 1415,
+    "end": 1425
   },
   {
-    "name": "1YHKUP",
+    "name": "2YHKU",
     "class_id": 16,
-    "kv": "BAUU",
+    "kv": "AMOT",
     "wl": "Can not access required information with API",
-    "room_kl": "V104",
-    "room_kv": null,
-    "notified_te": "HOFE",
-    "priority": 2,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "room_kl": [
+      "C130"
+    ],
+    "room_kv": "C130",
+    "notified_te": [],
+    "priority": 1,
+    "date": 20241017,
+    "start": 1035,
+    "end": 1045
   },
   {
-    "name": "1YHKUP",
+    "name": "3YHKU",
     "class_id": 17,
-    "kv": "BAUU",
+    "kv": "BENT",
     "wl": "Can not access required information with API",
-    "room_kl": "B081",
-    "room_kv": null,
-    "notified_te": "KUEC",
-    "priority": 2,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "room_kl": [
+      "C202"
+    ],
+    "room_kv": "C202",
+    "notified_te": [],
+    "priority": 1,
+    "date": 20241016,
+    "start": 1455,
+    "end": 1505
   },
   {
-    "name": "2YHKUG",
+    "name": "4YHKU",
     "class_id": 18,
-    "kv": "AMOT",
+    "kv": "HANC",
     "wl": "Can not access required information with API",
-    "room_kl": "C130",
-    "room_kv": "C130",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241017",
-    "time": "09:55-10:05"
+    "room_kl": [
+      "E004"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "OBEL"
+    ],
+    "priority": 2,
+    "date": 20241017,
+    "start": 840,
+    "end": 850
   },
   {
-    "name": "2YHKUJ",
+    "name": "5YHKU",
     "class_id": 19,
-    "kv": "AMOT",
-    "wl": "Can not access required information with API",
-    "room_kl": "C130",
-    "room_kv": "C130",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241017",
-    "time": "10:35-10:45"
-  },
-  {
-    "name": "2YHKUP",
-    "class_id": 20,
-    "kv": "AMOT",
-    "wl": "Can not access required information with API",
-    "room_kl": "C130",
-    "room_kv": "C130",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241017",
-    "time": "09:55-10:05"
-  },
-  {
-    "name": "3YHKUP",
-    "class_id": 21,
-    "kv": "BENT",
-    "wl": "Can not access required information with API",
-    "room_kl": "C202",
-    "room_kv": "C202",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
-  },
-  {
-    "name": "3YHKUP",
-    "class_id": 22,
-    "kv": "BENT",
-    "wl": "Can not access required information with API",
-    "room_kl": "C202",
-    "room_kv": "C202",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "14:05-14:15"
-  },
-  {
-    "name": "3YHKUP",
-    "class_id": 23,
-    "kv": "BENT",
-    "wl": "Can not access required information with API",
-    "room_kl": "C202",
-    "room_kv": "C202",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
-  },
-  {
-    "name": "4YHKUP",
-    "class_id": 24,
-    "kv": "HANC",
-    "wl": "Can not access required information with API",
-    "room_kl": "E004",
-    "room_kv": "E004",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
-  },
-  {
-    "name": "4YHKUP",
-    "class_id": 25,
-    "kv": "HANC",
-    "wl": "Can not access required information with API",
-    "room_kl": "E004",
-    "room_kv": "E004",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "14:05-14:15"
-  },
-  {
-    "name": "4YHKUP",
-    "class_id": 26,
-    "kv": "HANC",
-    "wl": "Can not access required information with API",
-    "room_kl": "E004",
-    "room_kv": "E004",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
-  },
-  {
-    "name": "5YHKUP",
-    "class_id": 27,
     "kv": "PRAC",
     "wl": "Can not access required information with API",
-    "room_kl": "C131",
-    "room_kv": null,
-    "notified_te": "WILD",
+    "room_kl": [
+      "C131"
+    ],
+    "room_kv": "E003",
+    "notified_te": [
+      "WILD"
+    ],
     "priority": 2,
-    "date": "20241017",
-    "time": "08:00-08:15"
-  },
-  {
-    "name": "5YHKUP",
-    "class_id": 28,
-    "kv": "PRAC",
-    "wl": "Can not access required information with API",
-    "room_kl": "C131",
-    "room_kv": null,
-    "notified_te": "WILD",
-    "priority": 2,
-    "date": "20241017",
-    "time": "08:35-08:50"
-  },
-  {
-    "name": "5YHKUP",
-    "class_id": 29,
-    "kv": "PRAC",
-    "wl": "Can not access required information with API",
-    "room_kl": null,
-    "room_kv": null,
-    "notified_te": null,
-    "priority": 2,
-    "date": null,
-    "time": null
+    "date": 20241017,
+    "start": 800,
+    "end": 815
   },
   {
     "name": "1AHITN",
-    "class_id": 30,
+    "class_id": 20,
     "kv": "RABS",
     "wl": "Can not access required information with API",
-    "room_kl": "C015",
-    "room_kv": null,
-    "notified_te": "LOVB",
+    "room_kl": [
+      "C015"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "LOVB"
+    ],
     "priority": 2,
-    "date": "20241017",
-    "time": "09:55-10:05"
+    "date": 20241017,
+    "start": 1045,
+    "end": 1055
   },
   {
     "name": "2AHITN",
-    "class_id": 31,
+    "class_id": 21,
     "kv": "RATP",
     "wl": "Can not access required information with API",
-    "room_kl": "C013",
+    "room_kl": [
+      "C013"
+    ],
     "room_kv": "C013",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "11:40-11:50"
+    "date": 20241016,
+    "start": 1220,
+    "end": 1230
   },
   {
     "name": "3AHMBZ",
-    "class_id": 32,
+    "class_id": 22,
     "kv": "WEIN",
     "wl": "Can not access required information with API",
-    "room_kl": "A103",
-    "room_kv": "A103",
-    "notified_te": null,
+    "room_kl": [
+      "C306"
+    ],
+    "room_kv": "C306",
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "09:55-10:05"
+    "date": 20241017,
+    "start": 850,
+    "end": 900
   },
   {
     "name": "4AHITN",
-    "class_id": 33,
+    "class_id": 23,
     "kv": "PRAG",
     "wl": "Can not access required information with API",
-    "room_kl": "A102",
+    "room_kl": [
+      "A102"
+    ],
     "room_kv": "A102",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "date": 20241016,
+    "start": 930,
+    "end": 940
   },
   {
     "name": "5AHITN",
-    "class_id": 34,
+    "class_id": 24,
     "kv": "HORF",
     "wl": "Can not access required information with API",
-    "room_kl": "TS2",
+    "room_kl": [
+      "TS2"
+    ],
     "room_kv": "TS2",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "11:40-11:55"
+    "date": 20241017,
+    "start": 1140,
+    "end": 1155
   },
   {
     "name": "1AHEL",
-    "class_id": 35,
+    "class_id": 25,
     "kv": "PANG",
     "wl": "Can not access required information with API",
-    "room_kl": "C115",
+    "room_kl": [
+      "C115"
+    ],
     "room_kv": "C115",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "11:40-11:50"
+    "date": 20241017,
+    "start": 1140,
+    "end": 1150
   },
   {
     "name": "2AHEL",
-    "class_id": 36,
+    "class_id": 26,
     "kv": "RAMM",
     "wl": "Can not access required information with API",
-    "room_kl": "A002",
-    "room_kv": null,
-    "notified_te": "WEIN",
+    "room_kl": [
+      "A002"
+    ],
+    "room_kv": "TS1",
+    "notified_te": [
+      "HOTA"
+    ],
     "priority": 2,
-    "date": "20241016",
-    "time": "08:00-08:10"
+    "date": 20241016,
+    "start": 955,
+    "end": 1005
   },
   {
     "name": "3AHEL",
-    "class_id": 37,
+    "class_id": 27,
     "kv": "EICA",
     "wl": "Can not access required information with API",
-    "room_kl": "C116",
+    "room_kl": [
+      "C116"
+    ],
     "room_kv": "C116",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "13:25-13:35"
+    "date": 20241017,
+    "start": 1220,
+    "end": 1230
   },
   {
     "name": "4AHEL",
-    "class_id": 38,
+    "class_id": 28,
     "kv": "LOVB",
     "wl": "Can not access required information with API",
-    "room_kl": "C117",
-    "room_kv": "C117",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241017",
-    "time": "11:40-11:50"
+    "room_kl": [
+      "A104"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "PUSC"
+    ],
+    "priority": 2,
+    "date": 20241016,
+    "start": 1555,
+    "end": 1605
   },
   {
     "name": "5AHEL",
-    "class_id": 39,
+    "class_id": 29,
     "kv": "WITT",
     "wl": "Can not access required information with API",
-    "room_kl": "C014",
+    "room_kl": [
+      "C014"
+    ],
     "room_kv": "C014",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "08:00-08:15"
+    "date": 20241016,
+    "start": 835,
+    "end": 850
   },
   {
     "name": "1AHMBZ",
-    "class_id": 40,
+    "class_id": 30,
     "kv": "BACR",
     "wl": "Can not access required information with API",
-    "room_kl": "C304",
-    "room_kv": null,
-    "notified_te": "ZELC",
+    "room_kl": [
+      "C304"
+    ],
+    "room_kv": "B137",
+    "notified_te": [
+      "EICA"
+    ],
     "priority": 2,
-    "date": "20241017",
-    "time": "11:40-11:50"
+    "date": 20241017,
+    "start": 1125,
+    "end": 1135
   },
   {
     "name": "1BHMBZ",
-    "class_id": 41,
+    "class_id": 31,
     "kv": "STRJ",
     "wl": "Can not access required information with API",
-    "room_kl": "C311",
+    "room_kl": [
+      "C311"
+    ],
     "room_kv": "C311",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "09:55-10:05"
+    "date": 20241016,
+    "start": 1035,
+    "end": 1045
   },
   {
     "name": "2AHMBZ",
-    "class_id": 42,
+    "class_id": 32,
     "kv": "WILD",
     "wl": "Can not access required information with API",
-    "room_kl": "C307",
+    "room_kl": [
+      "C307"
+    ],
     "room_kv": "C307",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241017",
-    "time": "13:25-13:35"
+    "date": 20241017,
+    "start": 1455,
+    "end": 1505
   },
   {
     "name": "2BHMBZ",
-    "class_id": 43,
+    "class_id": 33,
     "kv": "UHLT",
     "wl": "Can not access required information with API",
-    "room_kl": "C302",
-    "room_kv": "C302",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "11:40-11:50"
-  },
-  {
-    "name": "3AHMBZ",
-    "class_id": 44,
-    "kv": "WEIN",
-    "wl": "Can not access required information with API",
-    "room_kl": "C305",
-    "room_kv": "C305",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241016",
-    "time": "09:55-10:05"
+    "room_kl": [
+      "B110"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "SONM"
+    ],
+    "priority": 2,
+    "date": 20241016,
+    "start": 1045,
+    "end": 1055
   },
   {
     "name": "3BHMBZ",
-    "class_id": 45,
+    "class_id": 34,
     "kv": "FREP",
     "wl": "Can not access required information with API",
-    "room_kl": "C314",
-    "room_kv": null,
-    "notified_te": "GRUJ",
+    "room_kl": [
+      "C314"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "GRUJ"
+    ],
     "priority": 2,
-    "date": "20241017",
-    "time": "08:00-08:10"
+    "date": 20241017,
+    "start": 930,
+    "end": 940
   },
   {
     "name": "4AHMBZ",
-    "class_id": 46,
+    "class_id": 35,
     "kv": "SONM",
     "wl": "Can not access required information with API",
-    "room_kl": "C306",
-    "room_kv": "C306",
-    "notified_te": null,
-    "priority": 1,
-    "date": "20241017",
-    "time": "13:25-13:35"
+    "room_kl": [
+      "C306"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [
+      "KAPL"
+    ],
+    "priority": 2,
+    "date": 20241017,
+    "start": 1230,
+    "end": 1240
   },
   {
     "name": "5AHMBZ",
-    "class_id": 47,
+    "class_id": 36,
     "kv": "SARN",
     "wl": "Can not access required information with API",
-    "room_kl": "C131",
-    "room_kv": null,
-    "notified_te": "LOVB",
+    "room_kl": [
+      "C131"
+    ],
+    "room_kv": "B145",
+    "notified_te": [
+      "LOVB"
+    ],
     "priority": 2,
-    "date": "20241016",
-    "time": "08:00-08:15"
+    "date": 20241016,
+    "start": 850,
+    "end": 905
   },
   {
     "name": "5BHMBZ",
-    "class_id": 48,
+    "class_id": 37,
     "kv": "NIET",
     "wl": "Can not access required information with API",
-    "room_kl": "B147",
+    "room_kl": [
+      "B147"
+    ],
     "room_kv": "B147",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "09:55-10:10"
+    "date": 20241016,
+    "start": 955,
+    "end": 1010
   },
   {
     "name": "4BHMBZ",
-    "class_id": 50,
+    "class_id": 39,
     "kv": "OBEA",
     "wl": "Can not access required information with API",
-    "room_kl": "A005",
+    "room_kl": [
+      "A005"
+    ],
     "room_kv": "A005",
-    "notified_te": null,
+    "notified_te": [],
     "priority": 1,
-    "date": "20241016",
-    "time": "16:05-16:15"
+    "date": 20241016,
+    "start": 1605,
+    "end": 1615
   }
 ]

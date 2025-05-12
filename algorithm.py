@@ -1,29 +1,53 @@
 import json
+import re
 from pathlib import Path
 
 
 def format_time(time_int):
-    """Format integer time like 955 -> 09:55"""
     hour = time_int // 100
     minute = time_int % 100
     return f"{hour:02d}:{minute:02d}"
 
 
 def add_minutes_to_time(time_int, minutes_to_add):
-    """Add minutes to a time integer and handle hour overflow properly.
-
-    Example: 955 (9:55) + 15 minutes = 1010 (10:10)
-    """
     hour = time_int // 100
     minute = time_int % 100
-
-    # Add minutes and handle overflow
     total_minutes = minute + minutes_to_add
     new_hour = hour + (total_minutes // 60)
     new_minute = total_minutes % 60
-
-    # Return new time in the same format
     return new_hour * 100 + new_minute
+
+
+def normalize_class_name(name):
+    if name:
+        match = re.match(r'(\d+YHKU)[A-Z]', name)
+        if match:
+            return match.group(1)
+    return name
+
+
+def find_teacher_room(teacher_name, date, start_time, end_time, te_data):
+    if not teacher_name:
+        return "Unknown"
+
+    for teacher in te_data:
+        if not isinstance(teacher, list):
+            continue
+
+        for lesson in teacher:
+            if not isinstance(lesson, dict):
+                continue
+
+            te = lesson.get("te", {})
+            if isinstance(te, dict) and te.get("name") == teacher_name:
+                if (lesson.get("date") == date and
+                        lesson.get("startTime") <= start_time and
+                        end_time <= lesson.get("endTime")):
+                    ro = lesson.get("ro", {})
+                    if isinstance(ro, dict) and ro.get("name"):
+                        return ro.get("name")
+
+    return "Unknown"
 
 
 with Path("entire-API-Data/data.json").open(encoding="utf-8") as fp:
@@ -32,99 +56,162 @@ with Path("entire-API-Data/data.json").open(encoding="utf-8") as fp:
 with Path("entire-API-Data/te_data.json").open(encoding="utf-8") as fp:
     te_data = json.load(fp)
 
-post_alg_data = []
-klid = 0
-
-used_timeslots = []
+combined_classes = {}
 
 for klasse in data:
-    klid += 1
-    klassen_data = {
-        "name": None,
-        "class_id": None,
-        "kv": None,
-        "wl": "Can not access required information with API",
-        "room_kl": None,
-        "room_kv": None,
-        "notified_te": None,
-        "priority": 2,
-        "date": None,
-        "time": None
-    }
+    class_name = None
+    class_kv = None
 
     for lesson in klasse:
-        photo_time = 10
-        slot_found = False
+        kl = lesson.get("kl", {})
+        if class_name is None:
+            class_name = kl.get("name")
+        if class_kv is None:
+            class_kv = kl.get("teacher1")
+        if class_name and class_kv:
+            break
+
+    normalized_name = normalize_class_name(class_name)
+
+    if normalized_name not in combined_classes:
+        combined_classes[normalized_name] = {
+            "name": normalized_name,
+            "lessons": [],
+            "kv": class_kv
+        }
+
+    combined_classes[normalized_name]["lessons"].extend(klasse)
+
+post_alg_data = []
+used_timeslots = []
+new_klid = 0
+
+for normalized_name, class_data in combined_classes.items():
+    new_klid += 1
+
+    if not normalized_name:
+        continue
+
+    klassen_data = {
+        "name": normalized_name,
+        "class_id": new_klid,
+        "kv": class_data["kv"],
+        "wl": "Can not access required information with API",
+        "room_kl": [],
+        "room_kv": None,
+        "notified_te": [],
+        "priority": 2,
+        "date": None,
+        "start": None,
+        "end": None
+    }
+
+    photo_time = 15 if (normalized_name and normalized_name.startswith('5')) else 10
+
+    time_assigned = False
+    all_possible_slots = []
+
+    for lesson in class_data["lessons"]:
         kl = lesson.get("kl", {})
         ro = lesson.get("ro", {})
         te = lesson.get("te", {})
 
-        te_list = [te] if isinstance(te, dict) else te
-        ro_list = [ro] if isinstance(ro, dict) else ro
+        te_list = [te] if isinstance(te, dict) else te if isinstance(te, list) else []
+        ro_list = [ro] if isinstance(ro, dict) else ro if isinstance(ro, list) else []
 
-        if klassen_data['name'] is None:
-            klassen_data['name'] = kl.get("name")
-        if klassen_data['class_id'] is None:
-            klassen_data['class_id'] = klid
-        if klassen_data['kv'] is None:
-            klassen_data['kv'] = kl.get("teacher1")
-
-        if klassen_data['name'].startswith('5'):
-            photo_time = 15
+        if not te_list or not all(isinstance(t, dict) for t in te_list):
+            continue
 
         photo_date = lesson['date']
+
         start_time = lesson['startTime']
         end_time = add_minutes_to_time(start_time, photo_time)
 
-        if klassen_data['date'] is None and klassen_data['time'] is None and lesson['endTime'] <= 1405:
-            if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
-                start_time = add_minutes_to_time(lesson['endTime'], -photo_time)
-                end_time = lesson['endTime']
-            if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
+        kv_present = any(teacher.get('name') == klassen_data['kv'] for teacher in te_list if isinstance(teacher, dict))
+
+        room_names = [r.get('name') for r in ro_list if isinstance(r, dict) and r.get('name')]
+        if not room_names:
+            room_names = ["Unknown"]
+
+        teacher_names = [t.get('name') for t in te_list if isinstance(t, dict) and t.get('name')]
+        if not teacher_names:
+            teacher_names = []
+
+        slot_data = {
+            'date': photo_date,
+            'start': start_time,
+            'end': end_time,
+            'priority': 1 if kv_present else 2,
+            'rooms': room_names,
+            'teachers': teacher_names,
+            'timeslot': [photo_date, start_time, end_time]
+        }
+        all_possible_slots.append(slot_data)
+
+        end_slot_start = add_minutes_to_time(lesson['endTime'], -photo_time)
+        end_slot_end = lesson['endTime']
+
+        end_slot_data = {
+            'date': photo_date,
+            'start': end_slot_start,
+            'end': end_slot_end,
+            'priority': 1 if kv_present else 2,
+            'rooms': room_names,
+            'teachers': teacher_names,
+            'timeslot': [photo_date, end_slot_start, end_slot_end]
+        }
+        all_possible_slots.append(end_slot_data)
+
+    sorted_slots = sorted(all_possible_slots, key=lambda x: x['priority'])
+
+    for slot in sorted_slots:
+        if slot['timeslot'] not in used_timeslots:
+            klassen_data['date'] = slot['date']
+            klassen_data['start'] = slot['start']
+            klassen_data['end'] = slot['end']
+            klassen_data['priority'] = slot['priority']
+            klassen_data['room_kl'] = slot['rooms']
+
+            if slot['priority'] == 1:
+                klassen_data['room_kv'] = next((room for room in slot['rooms'] if room != "Unknown"), "Unknown")
+
+                klassen_data['notified_te'] = [t for t in slot['teachers'] if t != klassen_data['kv']]
+            else:
+                kv_room = find_teacher_room(klassen_data['kv'], slot['date'], slot['start'], slot['end'], te_data)
+                klassen_data['room_kv'] = kv_room
+                klassen_data['notified_te'] = slot['teachers']
+
+            used_timeslots.append(slot['timeslot'])
+            time_assigned = True
+            break
+
+    if not time_assigned and all_possible_slots:
+        max_attempts = 50
+        attempt = 0
+        base_slot = all_possible_slots[0]
+
+        while attempt < max_attempts and not time_assigned:
+            attempt += 1
+            offset = attempt * 5
+
+            new_start = add_minutes_to_time(base_slot['start'], offset)
+            new_end = add_minutes_to_time(new_start, photo_time)
+            new_timeslot = [base_slot['date'], new_start, new_end]
+
+            if new_timeslot not in used_timeslots:
+                klassen_data['date'] = base_slot['date']
+                klassen_data['start'] = new_start
+                klassen_data['end'] = new_end
+                klassen_data['priority'] = 3
+                klassen_data['room_kl'] = base_slot['rooms']
+
+                kv_room = find_teacher_room(klassen_data['kv'], base_slot['date'], new_start, new_end, te_data)
+                klassen_data['room_kv'] = kv_room
+                klassen_data['notified_te'] = base_slot['teachers']
+
+                used_timeslots.append(new_timeslot)
+                time_assigned = True
                 break
-
-            found_kv = False
-            for teacher in te_list:
-                if teacher.get('name') == klassen_data['kv']:
-                    klassen_data['priority'] = 1
-                    for room in ro_list:
-                        klassen_data['room_kv'] = room.get('name')
-                        break
-                    found_kv = True
-                    break
-
-            if not found_kv and te_list:
-                klassen_data['notified_te'] = te_list[0].get('name')
-
-            klassen_data['date'] = f"{photo_date}"
-            klassen_data['time'] = f"{format_time(start_time)}-{format_time(end_time)}"
-
-            if ro_list:
-                klassen_data['room_kl'] = ro_list[0].get('name')
-
-            used_timeslots.append([photo_date, start_time, end_time, kl['name']])
-
-        if klassen_data['priority'] == 2:
-            for teacher in te_list:
-                if kl.get('teacher1') == teacher.get('name'):
-                    print(f"KV unterrichtet die {klassen_data['name']}")
-                    if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
-                        start_time = add_minutes_to_time(lesson['endTime'], -photo_time)
-                        end_time = lesson['endTime']
-                    if [photo_date, start_time, end_time, kl['name']] in used_timeslots:
-                        break
-
-                    new_slots = [entry for entry in used_timeslots if entry[3] != kl['name']]
-                    new_slots.append([photo_date, start_time, end_time, kl['name']])
-                    used_timeslots = new_slots
-                    klassen_data['date'] = f"{photo_date}"
-                    klassen_data['time'] = f"{format_time(start_time)}-{format_time(end_time)}"
-                    klassen_data['priority'] = 1
-                    if ro_list:
-                        klassen_data['room_kl'] = ro_list[0].get('name')
-                        klassen_data['room_kv'] = ro_list[0].get('name')
-
-                    klassen_data['notified_te'] = None
 
     if klassen_data['name'] is not None:
         post_alg_data.append(klassen_data)
@@ -134,4 +221,4 @@ json_str = json_str.replace("'", '"')
 with open("entire-API-Data/output_data.json", "w", encoding="utf-8") as f:
     f.write(json_str)
 
-print("file saved correctly (probably)")
+print(f"File saved correctly. Scheduled {len(post_alg_data)} combined classes.")

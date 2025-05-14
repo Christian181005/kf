@@ -403,66 +403,70 @@
             editModal.classList.remove('hidden');
         }
 
-        // Speichere Änderungen
         saveEditBtn.addEventListener('click', async () => {
-            if (!currentEditingItem) return;
+    if (!currentEditingItem) return;
 
-            try {
-                // Lade aktuelle Daten
-                const response = await fetch('json/output_data.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
+    try {
+        // Lade aktuelle Daten
+        const response = await fetch('json/output_data.json');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
 
-                // Finde den zu bearbeitenden Eintrag
-                const itemIndex = data.findIndex(item => item.name === currentEditingItem.class);
-                if (itemIndex === -1) throw new Error('Eintrag nicht gefunden');
+        // Finde den zu bearbeitenden Eintrag
+        const itemIndex = data.findIndex(item => item.name === currentEditingItem.class);
+        if (itemIndex === -1) throw new Error('Eintrag nicht gefunden');
 
-                // Aktualisiere die Daten
-                const dateValue = document.getElementById('editDate').value;
-                const timeValue = document.getElementById('editTime').value;
-                const locationValue = document.getElementById('editLocation').value;
-                const responsibleValue = document.getElementById('editResponsible').value;
+        // Aktualisiere die Daten
+        const dateValue = document.getElementById('editDate').value;
+        const timeValue = document.getElementById('editTime').value;
+        const locationValue = document.getElementById('editLocation').value;
+        const responsibleValue = document.getElementById('editResponsible').value;
 
-                // Konvertiere Datum zurück in das Format YYYYMMDD
-                if (dateValue) {
-                    const [year, month, day] = dateValue.split('-');
-                    data[itemIndex].d1 = '${year}${month}${day}';
-                }
+        // Konvertiere Datum zurück in das Format YYYYMMDD
+        if (dateValue) {
+            const [year, month, day] = dateValue.split('-');
+            data[itemIndex].d1 = `${year}${month}${day}`;
+        }
 
-                // Aktualisiere Uhrzeit
-                if (timeValue) {
-                    data[itemIndex].nr1 = timeValue;
-                }
+        // Aktualisiere Uhrzeit
+        if (timeValue) {
+            data[itemIndex].nr1 = timeValue;
+        }
 
-                // Aktualisiere Ort und Verantwortlichen
-                data[itemIndex].room_kl = locationValue;
-                data[itemIndex].kv = responsibleValue;
+        // Aktualisiere Ort und Verantwortlichen
+        data[itemIndex].room_kl = locationValue;
+        data[itemIndex].kv = responsibleValue;
 
-                // Erstelle einen Download der aktualisierten Daten
-                const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'output_data_updated.json';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+        // Sende die aktualisierten Daten an den Server
+        const saveResponse = await fetch('/api/save_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
 
-                // Zeige Erfolgsmeldung
-                showNotification('Änderungen gespeichert. JSON-Datei wurde heruntergeladen.', 'green-500', 'fa-check-circle');
+        const result = await saveResponse.json();
 
-                // Schließe das Modal
-                editModal.classList.add('hidden');
+        if (!result.success) {
+            throw new Error(result.message);
+        }
 
-                // Aktualisiere die Tabelle
-                const tableData = prepareTableData(data);
-                renderScheduleTable(tableData);
+        // Zeige Erfolgsmeldung
+        showNotification('Änderungen erfolgreich gespeichert!', 'green-500', 'fa-check-circle');
 
-            } catch (error) {
-                console.error('Fehler beim Speichern:', error);
-                showNotification('Fehler beim Speichern: ' + error.message, 'red-500', 'fa-exclamation-circle');
-            }
+        // Schließe das Modal
+        editModal.classList.add('hidden');
+
+        // Aktualisiere die Tabelle
+        const tableData = prepareTableData(data);
+        renderScheduleTable(tableData);
+
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+        showNotification('Fehler beim Speichern: ' + error.message, 'red-500', 'fa-exclamation-circle');
+    }
+
         });
     });
 </script>

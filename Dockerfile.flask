@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY server.py ./
+COPY html/json ./html/json
+
+RUN pip install flask flask-cors
+
+EXPOSE 5000
+
+CMD ["python", "server.py"]

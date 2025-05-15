@@ -218,7 +218,7 @@ for normalized_name, class_data in combined_classes.items():
 
 json_str = json.dumps(post_alg_data, ensure_ascii=False, indent=2)
 json_str = json_str.replace("'", '"')
-with open("entire-API-Data/output_data.json", "w", encoding="utf-8") as f:
+with open("html/json/output_data.json", "w", encoding="utf-8") as f:
     f.write(json_str)
 
 print(f"File saved correctly. Scheduled {len(post_alg_data)} combined classes.")

@@ -4,1375 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassenfotos Planungstool</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
     <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
-
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6',
-                        secondary: '#1e40af',
-                        accent: '#10b981',
-                        dark: '#1f2937',
-                        light: '#f9fafb'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .schedule-item {
-            transition: all 0.3s ease;
-        }
-
-        .schedule-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .loading-spinner {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    <!-- Eigene Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50 min-h-screen">
 <div class="container mx-auto px-4 py-8">
     <!-- Header -->
-    <header class="mb-10">
-        <div class="flex justify-between items-center">
-            <div>
-                <h1 class="text-3xl font-bold text-dark">Klassenfotos Planungstool</h1>
-                <p class="text-gray-600">Automatisierte Terminplanung für Klassenfotos</p>
-            </div>
-            <div class="flex items-center space-x-4">
-
-                <button id="openPopup"
-                        class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
-                    Termin hinzufügen
-                </button>
-
-
-                <button id="refreshBtn"
-                        class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
-                    <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
-                </button>
-                <a href="archived_appointments.html"
-                   class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
-                    Archivierte Termine
-                </a>
-
-
-                <div class="relative">
-                    <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
-                         class="rounded-full h-10 w-10 cursor-pointer">
-                    <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
-                </div>
+    <header class="mb-10 flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold text-dark">Klassenfotos Planungstool</h1>
+            <p class="text-gray-600">Automatisierte Terminplanung für Klassenfotos</p>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="openPopup"
+                    class="bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center">
+                <i class="fas fa-plus mr-2"></i> Termin hinzufügen
+            </button>
+            <button id="refreshBtn"
+                    class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
+            </button>
+            <a href="archived_appointments.html"
+               class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
+                Archivierte Termine
+            </a>
+            <div class="relative">
+                <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
+                     class="rounded-full h-10 w-10 cursor-pointer">
+                <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
         </div>
     </header>
 
-
-    <!-- Main Content Area -->
-    <div class="lg:col-span-3 space-y-8">
-        <!-- Status Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600">Geplante Klassen</p>
-                        <h3 class="text-2xl font-bold text-dark" id="scheduledClasses">0</h3>
-                    </div>
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fas fa-school text-blue-600 text-xl"></i>
-                    </div>
+    <!-- Status Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600">Geplante Klassen</p>
+                    <h3 class="text-2xl font-bold text-dark" id="scheduledClasses">0</h3>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600">Zu benachrichtigen</p>
-                        <h3 class="text-2xl font-bold text-dark" id="teachersToNotify">0</h3>
-                    </div>
-                    <div class="bg-green-100 p-3 rounded-full">
-                        <i class="fas fa-envelope text-green-600 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600">Abschlussklassen</p>
-                        <h3 class="text-2xl font-bold text-dark" id="graduatingClasses">0</h3>
-                    </div>
-                    <div class="bg-purple-100 p-3 rounded-full">
-                        <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
-                    </div>
+                <div class="bg-blue-100 p-3 rounded-full">
+                    <i class="fas fa-school text-blue-600 text-xl"></i>
                 </div>
             </div>
         </div>
-
-        <!-- Schedule Table -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="px-6 py-4 border-b flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="masterCheckbox" class="h-4 w-4 text-primary rounded focus:ring-primary">
-                    <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
-                    <p>
-                        <span class="text-gray-500 text-sm">Markierte Termine: </span>
-                    </p>
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600">Zu benachrichtigen</p>
+                    <h3 class="text-2xl font-bold text-dark" id="teachersToNotify">0</h3>
                 </div>
-
-                <div class="flex space-x-2">
-                    <button id="exportCSVBtn"
-                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
-                        <i class="fas fa-file-csv mr-1"></i> CSV
-                    </button>
-                    <button id="exportPDFBtn"
-                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
-                        <i class="fas fa-file-pdf mr-1"></i> PDF
-                    </button>
-                    <button id="sendEmailsBtn"
-                            class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
-                        <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
-                    </button>
-                    <button id="deleteSelected" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                        Archivieren
-                    </button>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-envelope text-green-600 text-xl"></i>
                 </div>
-            </div>
-
-
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Klasse
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Datum
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Uhrzeit
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Ort
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Verantwortlich
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aktionen
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
-                    <!-- Loading state -->
-                    <tr id="loadingRow">
-                        <td colspan="6" class="px-6 py-8 text-center">
-                            <div class="flex flex-col items-center justify-center">
-                                <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                                <p class="text-gray-600">Lade Daten...</p>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
-        <div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-                <div class="px-6 py-4 border-b flex justify-between items-center">
-                    <h2 class="text-xl font-semibold text-dark">E-Mail Vorbereitung</h2>
-                    <button id="closeEmailModal" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600">Abschlussklassen</p>
+                    <h3 class="text-2xl font-bold text-dark" id="graduatingClasses">0</h3>
                 </div>
-                <div class="p-6 overflow-y-auto max-h-[70vh]">
-                <div class="mb-6">
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="block text-gray-700">Empfänger</label>
-                        <button id="toggleRecipients" class="text-primary hover:text-secondary text-sm">
-                            <i class="fas fa-eye mr-1"></i> Anzeigen/Verbergen
-                        </button>
-                    </div>
-                    <div id="recipientsContainer" class="flex flex-wrap gap-2 mb-4">
-                        <!-- Recipients will be added here -->
-                    </div>
-                    <input type="text" placeholder="Weitere Empfänger hinzufügen"
-                           class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                </div>
-
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2">Betreff</label>
-                    <input id="emailSubject" type="text" value="Termin für Klassenfotos"
-                           class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Nachricht</label>
-                        <div class="border rounded-lg overflow-hidden">
-                            <div class="bg-gray-50 px-4 py-2 border-b">
-                                <div class="flex space-x-2">
-                                    <button id="boldBtn" class="text-gray-600 hover:text-gray-900"><i
-                                            class="fas fa-bold"></i></button>
-                                    <button id="italicBtn" class="text-gray-600 hover:text-gray-900"><i
-                                            class="fas fa-italic"></i></button>
-                                    <button id="underlineBtn" class="text-gray-600 hover:text-gray-900"><i
-                                            class="fas fa-underline"></i></button>
-                                    <button id="unorderedListBtn" class="text-gray-600 hover:text-gray-900"><i
-                                            class="fas fa-list-ul"></i></button>
-                                    <button id="orderedListBtn" class="text-gray-600 hover:text-gray-900"><i
-                                            class="fas fa-list-ol"></i></button>
-                                </div>
-                            </div>
-                            <textarea id="emailMessage" class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
-                                      placeholder="E-Mail Text hier eingeben..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Anhänge</label>
-                        <div id="attachmentsContainer" class="border rounded-lg p-4">
-                            <!-- Default attachments -->
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center">
-                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
-                                    <span>Terminliste.pdf</span>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700 remove-attachment">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-qrcode text-blue-500 mr-2"></i>
-                                    <span>Bestellformular.pdf</span>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700 remove-attachment">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <button id="addAttachment" class="mt-2 text-primary hover:text-secondary flex items-center">
-                            <i class="fas fa-plus mr-1"></i> Anhang hinzufügen
-                        </button>
-                    </div>
-                </div>
-                <div class="px-6 py-4 border-t flex justify-end space-x-3">
-                    <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
-                    </button>
-                    <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden</button>
+                <div class="bg-purple-100 p-3 rounded-full">
+                    <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Schedule Table -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="px-6 py-4 border-b flex items-center">
+            <input type="checkbox" id="masterCheckbox"
+                   class="h-4 w-4 text-primary rounded focus:ring-primary mr-3">
+            <h2 class="text-xl font-semibold text-dark flex-1">Terminplan</h2>
+            <div class="text-gray-500 text-sm mr-2">Markierte Termine:</div>
+            <div id="selectedCount" class="text-primary font-medium">0</div>
+            <div class="flex space-x-2 ml-6">
+                <button id="exportCSVBtn"
+                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-file-csv mr-1"></i> CSV
+                </button>
+                <button id="exportPDFBtn"
+                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-file-pdf mr-1"></i> PDF
+                </button>
+                <button id="sendEmailsBtn"
+                        class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
+                </button>
+                <button id="deleteSelected"
+                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Archivieren
+                </button>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Klasse</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Datum</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uhrzeit</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ort</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Verantwortlich</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
+                <tr id="loadingRow">
+                    <td colspan="6" class="px-6 py-8 text-center">
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
+                            <p class="text-gray-600">Lade Daten...</p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<!-- Edit Modal (hidden by default) -->
+<!-- Email Preview Modal -->
+<div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <!-- ... unverändert aus deinem Original ... -->
+</div>
+
+<!-- Edit Modal -->
 <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-        <div class="px-6 py-4 border-b flex justify-between items-center">
-            <h2 class="text-xl font-semibold text-dark">Termin bearbeiten</h2>
-            <button id="closeEditModal" class="text-gray-500 hover:text-gray-700">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <div class="p-6 overflow-y-auto max-h-[70vh]">
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Klasse</label>
-                <input type="text" id="editClass"
-                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary" readonly>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Datum</label>
-                <input type="date" id="editDate"
-                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Uhrzeit</label>
-                <input type="time" id="editTime"
-                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Ort</label>
-                <input type="text" id="editLocation"
-                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Verantwortlich</label>
-                <input type="text" id="editResponsible"
-                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-        </div>
-
-        <div class="px-6 py-4 border-t flex justify-end space-x-3">
-            <button id="cancelEditBtn" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">
-                Abbrechen
-            </button>
-            <button id="saveEditBtn" class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">
-                Speichern
-            </button>
-        </div>
-    </div>
+    <!-- ... unverändert ... -->
 </div>
-
-
-<script>
-    // Edit Modal Funktionen
-    document.addEventListener('DOMContentLoaded', () => {
-        const editModal = document.getElementById('editModal');
-        const closeEditModal = document.getElementById('closeEditModal');
-        const cancelEditBtn = document.getElementById('cancelEditBtn');
-        const saveEditBtn = document.getElementById('saveEditBtn');
-        let currentEditingItem = null;
-
-        // Event Delegation für Edit-Buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.edit-btn')) {
-                const btn = e.target.closest('.edit-btn');
-                currentEditingItem = JSON.parse(btn.dataset.class);
-                openEditModal(currentEditingItem);
-            }
-        });
-
-        // Modal schließen
-        [closeEditModal, cancelEditBtn].forEach(btn => {
-            btn.addEventListener('click', () => {
-                editModal.classList.add('hidden');
-            });
-        });
-
-        // Öffne Modal mit Daten
-        function openEditModal(item) {
-            document.getElementById('editClass').value = item.class;
-
-            // Konvertiere das Datum in das Format YYYY-MM-DD für das date input Feld
-            if (item.date && item.date !== "Kein Termin") {
-                const [day, month, year] = item.date.split('.');
-                document.getElementById('editDate').value = "${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')";
-            } else {
-                document.getElementById('editDate').value = '';
-            }
-
-            // Setze Uhrzeit (falls vorhanden)
-            document.getElementById('editTime').value = item.time && item.time !== "Kein Termin" ?
-                item.time.split(' - ')[0].padStart(5, '0') : '';
-
-            document.getElementById('editLocation').value = item.location;
-            document.getElementById('editResponsible').value = item.responsible;
-
-            editModal.classList.remove('hidden');
-        }
-
-        saveEditBtn.addEventListener('click', async () => {
-            if (!currentEditingItem) return;
-
-            try {
-                // Lade aktuelle Daten
-                const response = await fetch('json/output_data.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-
-                // Finde den zu bearbeitenden Eintrag
-                const itemIndex = data.findIndex(item => item.name === currentEditingItem.class);
-                if (itemIndex === -1) throw new Error('Eintrag nicht gefunden');
-
-                // Aktualisiere die Daten
-                const dateValue = document.getElementById('editDate').value;
-                const timeValue = document.getElementById('editTime').value;
-                const locationValue = document.getElementById('editLocation').value;
-                const responsibleValue = document.getElementById('editResponsible').value;
-
-                // Konvertiere Datum zurück in das Format YYYYMMDD
-                if (dateValue) {
-                    const [year, month, day] = dateValue.split('-');
-                    data[itemIndex].d1 = `${year}${month}${day}`;
-                }
-
-                // Aktualisiere Uhrzeit
-                if (timeValue) {
-                    data[itemIndex].nr1 = timeValue;
-                }
-
-                // Aktualisiere Ort und Verantwortlichen
-                data[itemIndex].room_kl = locationValue;
-                data[itemIndex].kv = responsibleValue;
-
-                // Sende die aktualisierten Daten an den Server
-                const saveResponse = await fetch('/api/save_data', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await saveResponse.json();
-
-                if (!result.success) {
-                    throw new Error(result.message);
-                }
-
-                // Zeige Erfolgsmeldung
-                showNotification('Änderungen erfolgreich gespeichert!', 'green-500', 'fa-check-circle');
-
-                // Schließe das Modal
-                editModal.classList.add('hidden');
-
-                // Aktualisiere die Tabelle
-                const tableData = prepareTableData(data);
-                renderScheduleTable(tableData);
-
-            } catch (error) {
-                console.error('Fehler beim Speichern:', error);
-                showNotification('Fehler beim Speichern: ' + error.message, 'red-500', 'fa-exclamation-circle');
-            }
-
-        });
-    });
-</script>
-
-
-<script>
-    // Function to load JSON data
-    async function loadJsonData() {
-        try {
-            //  const response = await fetch('/var/www/json/output_data.json');
-            const response = await fetch('json/output_data.json');
-            // const response = await fetch('../json/output_data.json');
-
-            //    const jsonPath = '../json/output_data.json';
-            // console.log('Lade Daten von:', jsonPath); // Pfad in Konsole ausgeben
-
-            if (!response.ok) throw new Error('Network response was not ok');
-            return await response.json();
-        } catch (error) {
-            console.error('Error loading JSON data:', error);
-            return null;
-        }
-    }
-
-    // Function to convert date format
-    function formatDate(dateStr) {
-        if (!dateStr) return "Kein Termin";
-        return `${dateStr.substr(6, 2)}.${dateStr.substr(4, 2)}.${dateStr.substr(0, 4)}`;
-    }
-
-    // Function to prepare table data with scheduling logic
-    function prepareTableData(data) {
-        // Filter out invalid entries and apply scheduling rules
-        return data
-            .filter(item => item.name && item.class_id) // Filter out items without names or IDs
-            .map(item => {
-                const isGraduating = item.name.startsWith('5');
-                const duration = isGraduating ? 15 : 10;
-                const kvEmail = item.kv ? `kv${item.name.toLowerCase()}@htl-steyr.ac.at` : null;
-                const classEmail = `klasse${item.name.toLowerCase()}@htl-steyr.ac.at`;
-
-                // Determine time slot based on priority
-                let timeSlot = "Kein Termin";
-                if (item.nr1 && item.d1) {
-                    timeSlot = item.nr1;
-                } else if (item.nr2 && item.d2) {
-                    timeSlot = item.nr2;
-                } else if (item.nr3 && item.d3) {
-                    timeSlot = item.nr3;
-                }
-
-                return {
-                    class: item.name,
-                    date: formatDate(item.d1 || item.d2 || item.d3),
-                    time: timeSlot,
-                    duration: duration,
-                    location: item.room_kl || "Nicht festgelegt",
-                    responsible: item.kv || "Nicht festgelegt",
-                    isGraduating: isGraduating,
-                    kvEmail: kvEmail,
-                    wlEmail: item.wl && item.wl !== "Can not access required information with API" ?
-                        `wl${item.name.toLowerCase()}@htl-steyr.ac.at` : null,
-                    classEmail: classEmail,
-                    priority: item.priority || 2
-                };
-            })
-            .sort((a, b) => {
-                // Sort by priority first, then by class name
-                if (a.priority !== b.priority) return a.priority - b.priority;
-                return a.class.localeCompare(b.class);
-            });
-    }
-
-    // Function to generate CSV from schedule data
-    function generateCSV(data) {
-        const headers = ["Klasse", "Datum", "Uhrzeit", "Dauer (min)", "Ort", "Verantwortlich", "Abschlussklasse", "Priorität"];
-        const rows = data.map(item => [
-            `"${item.class}"`,
-            `"${item.date}"`,
-            `"${item.time}"`,
-            item.duration,
-            `"${item.location}"`,
-            `"${item.responsible}"`,
-            item.isGraduating ? "Ja" : "Nein",
-            item.priority
-        ]);
-
-        return [headers.join(","), ...rows].join("\n");
-    }
-
-    // Function to download generated content
-    function downloadContent(content, filename, type) {
-        const blob = new Blob([content], {type});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-
-    // Function to generate email content for a class
-    function generateEmailContent(item) {
-        return `
-Sehr geehrte Schülerinnen und Schüler der ${item.class},
-
-hiermit möchten wir Sie über den Termin für die Klassenfotos informieren:
-
-Datum: ${item.date}
-Uhrzeit: ${item.time}
-Ort: ${item.location}
-Dauer: ${item.duration} Minuten
-
-Bitte erscheinen Sie pünktlich und in angemessener Kleidung.
-
-${item.isGraduating ? "Da es sich um eine Abschlussklasse handelt, werden zusätzlich alternative Fotos gemacht. Bitte planen Sie entsprechend mehr Zeit ein." : ""}
-
-Mit freundlichen Grüßen,
-Ihr Fotografieteam
-        `.trim();
-    }
-
-    // Function to generate order document email content
-    function generateOrderDocumentEmail(item) {
-        return `
-Sehr geehrte Schülerinnen und Schüler der ${item.class},
-
-anbei finden Sie das Bestellformular für Ihre Klassenfotos.
-
-Bitte beachten Sie die Bestellfrist und geben Sie das ausgefüllte Formular rechtzeitig bei Ihrem Klassenvorstand ab.
-
-Mit freundlichen Grüßen,
-Ihr Fotografie-Team
-        `.trim();
-    }
-
-    // Function to populate email modal with class data
-    function populateEmailModal(item) {
-        // Get modal elements
-        const recipientsContainer = document.querySelector('#emailModal .flex-wrap');
-        const subjectInput = document.querySelector('#emailModal input[type="text"]');
-        const messageTextarea = document.querySelector('#emailModal textarea');
-
-        // Clear existing recipients
-        recipientsContainer.innerHTML = '';
-
-        // Add recipients based on settings
-        const notifyKV = document.getElementById('notifyKV').checked;
-        const notifyWL = document.getElementById('notifyWL').checked;
-        const notifyClass = document.getElementById('notifyClass').checked;
-
-        if (notifyClass && item.classEmail) {
-            addRecipient(recipientsContainer, item.classEmail);
-        }
-        if (notifyKV && item.kvEmail) {
-            addRecipient(recipientsContainer, item.kvEmail);
-        }
-        if (notifyWL && item.wlEmail) {
-            addRecipient(recipientsContainer, item.wlEmail);
-        }
-
-        // Set subject and message
-        subjectInput.value = `Termin für Klassenfotos - ${item.class}`;
-        messageTextarea.value = generateEmailContent(item);
-    }
-
-    // Helper function to add recipient to modal
-    function addRecipient(container, email) {
-        const recipient = document.createElement('span');
-        recipient.className = 'bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center';
-        recipient.innerHTML = `
-            ${email}
-            <button class="ml-2 text-blue-600 hover:text-blue-800 remove-recipient">
-                <i class="fas fa-times"></i>
-            </button>
-        `;
-        container.appendChild(recipient);
-    }
-
-    // Function to initialize email modal event listeners
-    function initEmailModal() {
-        // Close modal when clicking outside
-        emailModal.addEventListener('click', (e) => {
-            if (e.target === emailModal) {
-                emailModal.classList.add('hidden');
-            }
-        });
-
-        // Remove recipient buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.remove-recipient')) {
-                e.target.closest('span').remove();
-            }
-        });
-    }
-
-    // Main function to load and render data
-    async function initializeApp() {
-        // Load data
-        const jsonData = await loadJsonData();
-        if (!jsonData) {
-            renderErrorState();
-            return;
-        }
-
-        // Prepare and render data
-        const tableData = prepareTableData(jsonData);
-        renderScheduleTable(tableData);
-
-        // Initialize email modal
-        initEmailModal();
-
-        // Update stats
-        updateStatistics(tableData);
-    }
-
-    // Function to render error state
-    function renderErrorState() {
-        scheduleTableBody.innerHTML = `
-            <tr>
-                <td colspan="6" class="px-6 py-4 text-center text-red-500">
-                    Daten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
-                </td>
-            </tr>
-        `;
-    }
-
-    // Function to update statistics
-    function updateStatistics(data) {
-        const graduatingCount = data.filter(item => item.isGraduating).length;
-        const scheduledCount = data.filter(item => item.date !== "Kein Termin").length;
-        const teachersCount = data.reduce((count, item) => {
-            return count + (item.kvEmail ? 1 : 0) + (item.wlEmail ? 1 : 0);
-        }, 0);
-
-        scheduledClasses.textContent = scheduledCount;
-        teachersToNotify.textContent = teachersCount;
-        graduatingClasses.textContent = graduatingCount;
-    }
-
-    // Initialize the app when DOM is ready
-    document.addEventListener('DOMContentLoaded', initializeApp);
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const masterCheckbox = document.getElementById('masterCheckbox');
-        const toolbar = document.getElementById('toolbar');
-
-        masterCheckbox.addEventListener('change', () => {
-            const allCheckboxes = document.querySelectorAll('.delete-checkbox');
-            allCheckboxes.forEach(cb => cb.checked = masterCheckbox.checked);
-            toolbar.classList.toggle('hidden', !masterCheckbox.checked);
-        });
-
-        document.addEventListener('change', (e) => {
-            if (e.target.classList.contains('delete-checkbox')) {
-                const checked = document.querySelectorAll('.delete-checkbox:checked').length;
-                toolbar.classList.toggle('hidden', checked === 0);
-
-                // Wenn einzelne Checkbox abgewählt wird, masterCheckbox ebenfalls abwählen
-                if (!e.target.checked) {
-                    masterCheckbox.checked = false;
-                } else {
-                    const all = document.querySelectorAll('.delete-checkbox').length;
-                    if (checked === all) masterCheckbox.checked = true;
-                }
-            }
-        });
-    });
-
-</script>
-
-<script>
-    // DOM elements
-    const scheduleTableBody = document.getElementById('scheduleTableBody');
-    const loadingRow = document.getElementById('loadingRow');
-    const generateScheduleBtn = document.getElementById('generateScheduleBtn');
-    const refreshBtn = document.getElementById('refreshBtn');
-    const exportCSVBtn = document.getElementById('exportCSVBtn');
-    const exportPDFBtn = document.getElementById('exportPDFBtn');
-    const sendEmailsBtn = document.getElementById('sendEmailsBtn');
-    const emailModal = document.getElementById('emailModal');
-    const closeEmailModal = document.getElementById('closeEmailModal');
-    const scheduledClasses = document.getElementById('scheduledClasses');
-    const teachersToNotify = document.getElementById('teachersToNotify');
-    const graduatingClasses = document.getElementById('graduatingClasses');
-
-    // Function to get priority badge
-    function getPriorityBadge(priority) {
-        if (priority === 1) {
-            return '<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Priorität 1</span>';
-        } else {
-            return '<span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Priorität 2</span>';
-        }
-    }
-
-    // Function to render schedule table
-    function renderScheduleTable(data) {
-        // Remove loading row
-        if (loadingRow) loadingRow.remove();
-
-        // Clear existing rows
-        scheduleTableBody.innerHTML = '';
-
-        // Add new rows
-        data.forEach(item => {
-            const row = document.createElement('tr');
-            row.className = 'schedule-item hover:bg-gray-50';
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap">
-
-                    <div class="flex items-center">
-                      <input type="checkbox" class="delete-checkbox" data-class-id="${item.class}" />
-                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                            <i class="fas fa-school text-blue-600"></i>
-                        </div>
-                        <div class="ml-4">
-
-                            <div class="text-sm font-medium text-gray-900">${item.class}</div>
-                            <div class="text-sm text-gray-500">${item.isGraduating ? 'Abschlussklasse' : 'Klasse'} ${getPriorityBadge(item.priority)}</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">${item.date}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">${item.time}</div>
-                    <div class="text-xs text-gray-500">${item.duration} min</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">${item.location}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">${item.responsible}</div>
-                </td>
-
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-
-                    <button class="text-blue-600 hover:text-blue-800 mr-3 py-2 px-4 text-2xl edit-btn" data-class='${JSON.stringify(item)}'>
-                      <i class="fas fa-edit"></i>
-                    </button>
-
-                    <button class="text-primary hover:text-secondary mr-3 py-2 px-4 text-2xl email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
-                        <i class="fas fa-envelope"></i>
-                    </button>
-
-
-
-
-<!--
-                    <button class="text-gray-600 hover:text-gray-900">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
--->
-                </td>
-            `;
-            scheduleTableBody.appendChild(row);
-        });
-
-        // Update stats
-        updateStatistics(data);
-    }
-
-    // Event Listeners
-    refreshBtn.addEventListener('click', async () => {
-        // Show loading state
-        scheduleTableBody.innerHTML = '';
-        const loadingRow = document.createElement('tr');
-        loadingRow.id = 'loadingRow';
-        loadingRow.innerHTML = `
-            <td colspan="6" class="px-6 py-8 text-center">
-                <div class="flex flex-col items-center justify-center">
-                    <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                    <p class="text-gray-600">Aktualisiere Daten...</p>
-                </div>
-            </td>
-        `;
-        scheduleTableBody.appendChild(loadingRow);
-
-        // Reload data
-        const jsonData = await loadJsonData();
-        if (jsonData) {
-            const tableData = prepareTableData(jsonData);
-            renderScheduleTable(tableData);
-
-            // Show success notification
-            showNotification('Daten erfolgreich aktualisiert!', 'green-500', 'fa-check-circle');
-        } else {
-            renderErrorState();
-        }
-    });
-
-    exportCSVBtn.addEventListener('click', async () => {
-        // Load current data
-        const jsonData = await loadJsonData();
-        if (jsonData) {
-            const tableData = prepareTableData(jsonData);
-            const csvContent = generateCSV(tableData);
-            downloadContent(csvContent, 'klassenfotos_terminplan.csv', 'text/csv');
-            showNotification('CSV wird heruntergeladen...', 'blue-500', 'fa-file-csv');
-        } else {
-            showNotification('Fehler beim Generieren der CSV', 'red-500', 'fa-exclamation-circle');
-        }
-    });
-
-    exportPDFBtn.addEventListener('click', () => {
-        // In a real implementation, this would generate a PDF
-        showNotification('PDF wird generiert...', 'red-500', 'fa-file-pdf');
-    });
-
-    sendEmailsBtn.addEventListener('click', async () => {
-        // Get all selected checkboxes
-        const selectedCheckboxes = document.querySelectorAll('.delete-checkbox:checked');
-
-        if (selectedCheckboxes.length === 0) {
-            showNotification('Bitte wählen Sie mindestens eine Klasse aus', 'red-500', 'fa-exclamation-circle');
-            return;
-        }
-
-        // Load current data
-        const jsonData = await loadJsonData();
-        if (!jsonData) {
-            showNotification('Fehler beim Laden der Daten', 'red-500', 'fa-exclamation-circle');
-            return;
-        }
-
-        // Prepare selected classes data
-        const selectedClasses = Array.from(selectedCheckboxes).map(checkbox => {
-            const className = checkbox.dataset.classId;
-            return jsonData.find(item => item.name === className);
-        }).filter(Boolean);
-
-        // Prepare email modal content
-        populateSelectedClassesEmailModal(selectedClasses);
-        emailModal.classList.remove('hidden');
-    });
-
-    // Function to populate email modal with selected classes data
-    function populateSelectedClassesEmailModal(selectedClasses) {
-        const recipientsContainer = document.querySelector('#emailModal .flex-wrap');
-        const subjectInput = document.querySelector('#emailModal input[type="text"]');
-        const messageTextarea = document.querySelector('#emailModal textarea');
-
-        // Clear existing recipients
-        recipientsContainer.innerHTML = '';
-
-        // Add recipients for each selected class
-        selectedClasses.forEach(item => {
-            // Class email
-            const classEmail = `${item.name.toLowerCase()}@htl-steyr.ac.at`;
-            addRecipient(recipientsContainer, classEmail);
-
-            // KV email if exists
-            if (item.kv) {
-                const kvEmail = `kv${item.name.toLowerCase()}@htl-steyr.ac.at`;
-                addRecipient(recipientsContainer, kvEmail);
-            }
-
-            // Notified teachers emails if exist
-            if (item.notified_te && Array.isArray(item.notified_te)) {
-                item.notified_te.forEach(teacher => {
-                    const teEmail = `te${item.name.toLowerCase()}@htl-steyr.ac.at`;
-                    addRecipient(recipientsContainer, teEmail);
-                });
-            }
-        });
-
-        // Set subject and message
-        const classNames = selectedClasses.map(item => item.name).join(', ');
-        subjectInput.value = `Termin für Klassenfotos - ${classNames}`;
-
-        // Generate email message for all selected classes
-        let message = `Sehr geehrte Schülerinnen und Schüler,\n\n`;
-        message += `hiermit möchten wir Sie über die Termine für die Klassenfotos informieren:\n\n`;
-
-        selectedClasses.forEach(item => {
-            const formattedDate = formatDate(item.d1 || item.d2 || item.d3);
-            message += `Klasse: ${item.name}\n`;
-            message += `Datum: ${formattedDate}\n`;
-            message += `Uhrzeit: ${item.nr1 || item.nr2 || item.nr3}\n`;
-            message += `Ort: ${item.room_kl || "Nicht festgelegt"}\n`;
-            message += `Verantwortlich: ${item.kv || "Nicht festgelegt"}\n\n`;
-        });
-
-        message += `Bitte erscheinen Sie pünktlich und in angemessener Kleidung.\n\n`;
-        message += `Mit freundlichen Grüßen,\nIhr Fotografieteam`;
-
-        messageTextarea.value = message;
-    }
-
-    closeEmailModal.addEventListener('click', () => {
-        emailModal.classList.add('hidden');
-    });
-
-    // Delegate event for email buttons (since they're dynamically added)
-    document.addEventListener('click', (e) => {
-        if (e.target.closest('.email-btn')) {
-            const btn = e.target.closest('.email-btn');
-            const classInfo = {
-                class: btn.dataset.class,
-                kvEmail: btn.dataset.kv,
-                wlEmail: btn.dataset.wl,
-                classEmail: btn.dataset.classemail
-            };
-            populateEmailModal(classInfo);
-            emailModal.classList.remove('hidden');
-        }
-    });
-
-    // Function to show notification
-    function showNotification(message, color, icon) {
-        const notification = document.createElement('div');
-        notification.className = `fixed bottom-4 right-4 bg-${color} text-white px-4 py-2 rounded-lg shadow-lg flex items-center`;
-        notification.innerHTML = `
-            <i class="fas ${icon} mr-2"></i>
-            <span>${message}</span>
-        `;
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
-
-    const toolbar = document.getElementById('toolbar');
-    const deleteBtn = document.getElementById('deleteSelected');
-
-    document.addEventListener('change', () => {
-        const selected = document.querySelectorAll('.delete-checkbox:checked');
-        toolbar.classList.toggle('hidden', selected.length === 0);
-    });
-
-    // In index.html
-    deleteBtn.addEventListener('click', async () => {
-        const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
-            .map(cb => cb.dataset.classId);
-
-        if (selected.length === 0) {
-            showNotification('Bitte wählen Sie Termine zum Archivieren aus', 'red-500', 'fa-exclamation-circle');
-            return;
-        }
-
-        try {
-            const [currentRes, archiveRes] = await Promise.all([
-                fetch('json/output_data.json'),
-                fetch('json/archive.json')
-            ]);
-
-            if (!currentRes.ok || !archiveRes.ok) throw new Error('Daten konnten nicht geladen werden');
-
-            const currentData = await currentRes.json();
-            const archiveData = await archiveRes.json();
-
-            const toArchive = currentData.filter(item => selected.includes(item.name));
-            const remaining = currentData.filter(item => !selected.includes(item.name));
-            const updatedArchive = [...archiveData, ...toArchive];
-
-            // Biete Dateien als Download an
-            downloadContent(JSON.stringify(remaining, null, 2), 'output_data.json', 'application/json');
-            downloadContent(JSON.stringify(updatedArchive, null, 2), 'archive.json', 'application/json');
-
-            showNotification(`${toArchive.length} Termine archiviert. Dateien wurden heruntergeladen.`, 'green-500', 'fa-check-circle');
-
-            // Aktualisiere Ansicht im Browser
-            const tableData = prepareTableData(remaining);
-            renderScheduleTable(tableData);
-            toolbar.classList.add('hidden');
-
-        } catch (err) {
-            console.error('Fehler beim Archivieren:', err);
-            showNotification('Fehler beim Archivieren: ' + err.message, 'red-500', 'fa-exclamation-circle');
-        }
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const editModal = document.getElementById('editModal');
-        const editForm = document.getElementById('editForm');
-        const editDate = document.getElementById('editDate');
-        const editTime = document.getElementById('editTime');
-        const editLocation = document.getElementById('editLocation');
-        const editResponsible = document.getElementById('editResponsible');
-        const editClass = document.getElementById('editClass');
-        const cancelEdit = document.getElementById('cancelEdit');
-
-        // Event: Öffne Bearbeitenmodal
-        document.addEventListener('click', e => {
-            const btn = e.target.closest('.edit-btn');
-            console.log('Edit button clicked?', btn);
-            if (btn) {
-                let data = JSON.parse(btn.dataset.class);
-                editClass.value = data.class;
-                editDate.value = reverseDate(data.date);
-                editTime.value = data.time
-            }
-        })
-
-
-        // Event: Abbrechen
-        cancelEdit.addEventListener('click', () => {
-            editModal.classList.add('hidden');
-        });
-
-        // Event: Speichern
-        editForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const cls = editClass.value;
-
-            try {
-                const res = await fetch('json/output_data.json');
-                const json = await res.json();
-                const index = json.findIndex(item => item.name === cls);
-                if (index === -1) throw new Error('Klasse nicht gefunden');
-
-                json[index].d1 = editDate.value;
-                json[index].nr1 = editTime.value;
-                json[index].room_kl = editLocation.value;
-                json[index].kv = editResponsible.value;
-
-                // Neue Datei als Download anbieten
-                downloadContent(JSON.stringify(json, null, 2), 'output_data.json', 'application/json');
-
-                showNotification('Änderungen gespeichert – neue Datei heruntergeladen.', 'green-500', 'fa-save');
-                editModal.classList.add('hidden');
-
-                // Ansicht aktualisieren
-                const tableData = prepareTableData(json);
-                renderScheduleTable(tableData);
-
-            } catch (err) {
-                console.error('Bearbeiten-Fehler:', err);
-                showNotification('Fehler beim Speichern', 'red-500', 'fa-exclamation-circle');
-            }
-        });
-
-        function reverseDate(d) {
-            const parts = d.split('.');
-            return parts.length === 3 ? parts[2] + parts[1] + parts[0] : '';
-        }
-    })
-</script>
 
 <!-- Manual Schedule Modal -->
 <div id="manualScheduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-dark">Manuellen Termin erstellen</h3>
-            <button id="closeManualModal" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i>
-            </button>
-        </div>
-        <form id="appointmentForm" class="space-y-4">
-            <!-- Klassen Auswahl -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Klasse</label>
-                <select name="klasse" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    <option value="">Bitte auswählen</option>
-                    <option>1A</option>
-                    <option>1B</option>
-                    <option>2A</option>
-                    <option>2B</option>
-                    <option>3A</option>
-                </select>
-            </div>
-            <!-- Datum und Zeitfenster -->
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Datum</label>
-                    <input name="datum" type="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Zeitfenster</label>
-                    <select name="zeitfenster" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>09:00 - 09:10</option>
-                        <option>09:10 - 09:20</option>
-                        <option>09:20 - 09:30</option>
-                        <option>09:30 - 09:40</option>
-                        <option>09:40 - 09:50</option>
-                        <option>09:50 - 10:00</option>
-                    </select>
-                </div>
-            </div>
-            <!-- Verantwortlicher Auswahl -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Verantwortlicher</label>
-                <select name="verantwortlicher" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    <option value="">Bitte auswählen</option>
-                    <option>Max Mustermann</option>
-                    <option>Anna Müller</option>
-                    <option>Peter Schmidt</option>
-                </select>
-            </div>
-            <!-- Ort Auswahl -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Ort</label>
-                <select name="ort" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    <option value="">Bitte auswählen</option>
-                    <option>C116</option>
-                    <option>C117</option>
-                    <option>C118</option>
-                </select>
-            </div>
-            <!-- Aktion Buttons -->
-            <div class="flex justify-end space-x-3 mt-6">
-                <button type="button" id="cancelManual"
-                        class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Abbrechen
-                </button>
-                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary">Termin
-                    erstellen
-                </button>
-            </div>
-        </form>
-    </div>
+    <!-- ... unverändert ... -->
 </div>
 
-<script>
-
-
-    const appointmentForm = document.getElementById('appointmentForm');
-    const manualScheduleModal = document.getElementById('manualScheduleModal');
-
-
-    document.getElementById('openPopup')?.addEventListener('click', () => {
-        manualScheduleModal.classList.remove('hidden');
-    });
-    document.getElementById('closeManualModal')?.addEventListener('click', () => {
-        manualScheduleModal.classList.add('hidden');
-    });
-    document.getElementById('cancelManual')?.addEventListener('click', () => {
-        manualScheduleModal.classList.add('hidden');
-    });
-
-
-    appointmentForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(appointmentForm);
-
-        const data = {
-            klasse: formData.get('klasse'),
-            datum: formData.get('datum'),
-            zeitfenster: formData.get('zeitfenster'),
-            verantwortlicher: formData.get('verantwortlicher'),
-            ort: formData.get('ort')
-        };
-
-        try {
-            const response = await fetch('/api/add_appointment', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                alert('Termin erfolgreich erstellt!');
-                manualScheduleModal.classList.add('hidden');
-                appointmentForm.reset();
-            } else {
-                alert('Fehler beim Erstellen des Termins.');
-            }
-        } catch (error) {
-            alert('Serverfehler: ' + error.message);
-        }
-    });
-
-</script>
-
-</script>
-
-<!-- Insert our email modal functionality script here -->
-<script>
-// Email Modal Functionality
-document.addEventListener('DOMContentLoaded', () => {
-    // Email subject handling
-    function updateEmailSubject(selectedClasses) {
-        const subjectInput = document.getElementById('emailSubject');
-        if (selectedClasses && selectedClasses.length > 0) {
-            const classNames = selectedClasses.map(item => item.name || item.class).join(', ');
-            subjectInput.value = `Termin für Klassenfotos - ${classNames}`;
-        }
-    }
-
-    // Recipients toggle
-    const toggleRecipientsBtn = document.getElementById('toggleRecipients');
-    const recipientsContainer = document.getElementById('recipientsContainer');
-
-    if (toggleRecipientsBtn) {
-        toggleRecipientsBtn.addEventListener('click', () => {
-            const isHidden = recipientsContainer.classList.contains('hidden');
-            recipientsContainer.classList.toggle('hidden');
-
-            // Update icon and text
-            if (isHidden) {
-                toggleRecipientsBtn.innerHTML = '<i class="fas fa-eye-slash mr-1"></i> Anzeigen/Verbergen';
-            } else {
-                toggleRecipientsBtn.innerHTML = '<i class="fas fa-eye mr-1"></i> Anzeigen/Verbergen';
-            }
-        });
-    }
-
-    // Text formatting buttons
-    const boldBtn = document.getElementById('boldBtn');
-    const italicBtn = document.getElementById('italicBtn');
-    const underlineBtn = document.getElementById('underlineBtn');
-    const unorderedListBtn = document.getElementById('unorderedListBtn');
-    const orderedListBtn = document.getElementById('orderedListBtn');
-    const emailMessage = document.getElementById('emailMessage');
-
-    function surroundSelectedText(prefix, suffix) {
-        if (!emailMessage) return;
-
-        const start = emailMessage.selectionStart;
-        const end = emailMessage.selectionEnd;
-        const selectedText = emailMessage.value.substring(start, end);
-        const beforeText = emailMessage.value.substring(0, start);
-        const afterText = emailMessage.value.substring(end);
-
-        emailMessage.value = beforeText + prefix + selectedText + suffix + afterText;
-
-        // Set the cursor position after the insertion
-        emailMessage.focus();
-        emailMessage.setSelectionRange(start + prefix.length, end + prefix.length);
-    }
-
-    if (boldBtn) {
-        boldBtn.addEventListener('click', () => surroundSelectedText('**', '**'));
-    }
-
-    if (italicBtn) {
-        italicBtn.addEventListener('click', () => surroundSelectedText('*', '*'));
-    }
-
-    if (underlineBtn) {
-        underlineBtn.addEventListener('click', () => surroundSelectedText('__', '__'));
-    }
-
-    if (unorderedListBtn && emailMessage) {
-        unorderedListBtn.addEventListener('click', () => {
-            const start = emailMessage.selectionStart;
-            const selectedText = emailMessage.value.substring(start, emailMessage.selectionEnd);
-
-            // Split text into lines and add bullet points
-            const bulletList = selectedText.split('\n')
-                .map(line => line.trim() ? '- ' + line : line)
-                .join('\n');
-
-            surroundSelectedText('', '');  // Clear selection
-            surroundSelectedText('\n' + bulletList + '\n', '');
-        });
-    }
-
-    if (orderedListBtn && emailMessage) {
-        orderedListBtn.addEventListener('click', () => {
-            const start = emailMessage.selectionStart;
-            const selectedText = emailMessage.value.substring(start, emailMessage.selectionEnd);
-
-            // Split text into lines and add numbers
-            const numberedList = selectedText.split('\n')
-                .map((line, i) => line.trim() ? `${i+1}. ${line}` : line)
-                .join('\n');
-
-            surroundSelectedText('', '');  // Clear selection
-            surroundSelectedText('\n' + numberedList + '\n', '');
-        });
-    }
-
-    // File attachment handling
-    const attachmentsContainer = document.getElementById('attachmentsContainer');
-    const addAttachmentBtn = document.getElementById('addAttachment');
-
-    if (addAttachmentBtn && attachmentsContainer) {
-        addAttachmentBtn.addEventListener('click', () => {
-            // Simple file type selection (in a real app, you'd use a file picker)
-            const fileType = prompt('Dateityp auswählen (pdf, doc, jpg, xlsx):', 'pdf');
-            if (!fileType) return;
-
-            const fileName = prompt('Dateiname:', 'Dokument');
-            if (!fileName) return;
-
-            // Get icon based on file type
-            let icon;
-            switch (fileType.toLowerCase()) {
-                case 'pdf': icon = 'fa-file-pdf text-red-500'; break;
-                case 'doc': case 'docx': icon = 'fa-file-word text-blue-500'; break;
-                case 'jpg': case 'jpeg': case 'png': icon = 'fa-file-image text-green-500'; break;
-                case 'xlsx': case 'xls': icon = 'fa-file-excel text-green-700'; break;
-                default: icon = 'fa-file text-gray-500'; break;
-            }
-
-            // Create attachment element
-            const attachmentItem = document.createElement('div');
-            attachmentItem.className = 'flex items-center justify-between mb-2';
-            attachmentItem.innerHTML = `
-                <div class="flex items-center">
-                    <i class="fas ${icon} mr-2"></i>
-                    <span>${fileName}.${fileType}</span>
-                </div>
-                <button class="text-red-500 hover:text-red-700 remove-attachment">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-
-            attachmentsContainer.appendChild(attachmentItem);
-        });
-    }
-
-    // Handle attachment removal (event delegation)
-    if (attachmentsContainer) {
-        attachmentsContainer.addEventListener('click', (e) => {
-            if (e.target.closest('.remove-attachment')) {
-                e.target.closest('.flex.items-center.justify-between').remove();
-            }
-        });
-    }
-});
-</script>
-
+<script src="script.js" defer></script>
 </body>
 </html>

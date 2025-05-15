@@ -1,21 +1,24 @@
+/* Eigene Styles */
 .schedule-item {
-            transition: all 0.3s ease;
-        }
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
-        .schedule-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
+.schedule-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
 
-        .loading-spinner {
-            animation: spin 1s linear infinite;
-        }
+/* Markierte Zeile hervorheben */
+.schedule-item.selected {
+    background-color: #e0f2fe; /* hellblau */
+}
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}

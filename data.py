@@ -8,8 +8,8 @@ klassenURL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getKlasse
 timetable_base_URL = "https://www.htl-steyr.ac.at//intern/webuntis/execute.php/getTimetable"
 
 # notation: year, month, date
-startDate = "20250515"
-endDate = "20250516"
+startDate = "20241016"
+endDate = "20241017"
 
 def get_data():
     try:

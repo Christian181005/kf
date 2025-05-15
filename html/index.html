@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassenfotos Planungstool</title>
     <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS -->
-    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png"> <!-- favicon -->
+    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
+    <!-- favicon -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome -->
     <script>
         tailwind.config = {
             theme: {
@@ -28,9 +30,15 @@
             transition: all 0.3s ease;
         }
 
+
         .schedule-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Markierte Zeile hervorheben */
+        .schedule-item.selected {
+            background-color: #e0f2fe; /* hellblau */
         }
 
         .loading-spinner {
@@ -119,9 +127,8 @@
                 <div class="flex items-center space-x-3">
                     <input type="checkbox" id="masterCheckbox" class="h-4 w-4 text-primary rounded focus:ring-primary">
                     <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
-                    <p>
-                        <span class="text-gray-500 text-sm">Markierte Termine: </span>
-                    </p>
+                    <div class="text-gray-500 text-sm mr-2">Markierte Termine:</div>
+                    <div id="selectedCount" class="text-primary font-medium">0</div>
                 </div>
 
                 <div class="flex space-x-2">
@@ -353,6 +360,14 @@
         const cancelEditBtn = document.getElementById('cancelEditBtn');
         const saveEditBtn = document.getElementById('saveEditBtn');
         let currentEditingItem = null;
+        const masterCheckbox = document.getElementById('masterCheckbox');
+        const selectedCountEl = document.getElementById('selectedCount');
+
+        function updateSelectedCount() {
+            const selected = document.querySelectorAll('.schedule-item.selected').length;
+            selectedCountEl.textContent = selected;
+            masterCheckbox.checked = selected > 0 && selected === document.querySelectorAll('.schedule-item').length;
+        }
 
         // Event Delegation für Edit-Buttons
         document.addEventListener('click', (e) => {
@@ -808,7 +823,7 @@ Ihr Fotografie-Team
             const row = document.createElement('tr');
             row.className = 'schedule-item hover:bg-gray-50';
             row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="px-6 py-4 whitespace-nowrap appointment">
 
                     <div class="flex items-center">
                       <input type="checkbox" class="delete-checkbox" data-class-id="${item.class}" />
@@ -945,7 +960,6 @@ Ihr Fotografie-Team
     });
 
 
-
     document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -990,6 +1004,8 @@ Ihr Fotografie-Team
             try {
                 confirmAutoModal.classList.add('hidden');
 
+
+
                 // Zeige Ladeindikator
                 showNotification('Automatische Terminplanung wird durchgeführt...', 'blue-500', 'fa-spinner fa-spin');
 
@@ -1005,6 +1021,7 @@ Ihr Fotografie-Team
 
                 if (result.success) {
                     showNotification('Terminplan erfolgreich generiert!', 'green-500', 'fa-check-circle');
+
 
                     // Kleine Verzögerung, um sicherzustellen, dass die Datei geschrieben wurde
                     setTimeout(async () => {
@@ -1191,12 +1208,17 @@ Ihr Fotografie-Team
                     <label class="block text-sm font-medium text-gray-700 mb-1">Zeitfenster</label>
                     <select name="zeitfenster" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
                         <option value="">Bitte auswählen</option>
-                        <option>09:00 - 09:10</option>
-                        <option>09:10 - 09:20</option>
-                        <option>09:20 - 09:30</option>
-                        <option>09:30 - 09:40</option>
-                        <option>09:40 - 09:50</option>
-                        <option>09:50 - 10:00</option>
+                        <option>08:00 - 08:50</option>
+                        <option>08:50 - 09:40</option>
+                        <option>09:55 - 10:45</option>
+                        <option>10:45 - 11:35</option>
+                        <option>11:40 - 12:30</option>
+                        <option>12:30 - 13:20</option>
+                        <option>13:25 - 14:15</option>
+                        <option>14:15 - 15:05</option>
+                        <option>15:15 - 16:05</option>
+                        <option>16:05 - 16:55</option>
+                        <option>16:55 - 17:45</option>
                     </select>
                 </div>
             </div>
@@ -1236,67 +1258,69 @@ Ihr Fotografie-Team
 <script>
 
 
+
+
     const appointmentForm = document.getElementById('appointmentForm');
     const manualScheduleModal = document.getElementById('manualScheduleModal');
 
 
-  // Event Listener für das Öffnen des Popups
-document.getElementById('openPopup')?.addEventListener('click', () => {
-    document.getElementById('popupOverlay').classList.remove('hidden');
-});
+    // Event Listener für das Öffnen des Popups
+    document.getElementById('openPopup')?.addEventListener('click', () => {
+        document.getElementById('popupOverlay').classList.remove('hidden');
+    });
 
-// Event Listener für das manuelle Termin-Formular
-document.getElementById('manualSchedule')?.addEventListener('click', () => {
-    document.getElementById('popupOverlay').classList.add('hidden');
-    document.getElementById('manualScheduleModal').classList.remove('hidden');
-});
+    // Event Listener für das manuelle Termin-Formular
+    document.getElementById('manualSchedule')?.addEventListener('click', () => {
+        document.getElementById('popupOverlay').classList.add('hidden');
+        document.getElementById('manualScheduleModal').classList.remove('hidden');
+    });
 
-// Event Listener für das Schließen der Modals
-document.getElementById('closeManualModal')?.addEventListener('click', () => {
-    document.getElementById('manualScheduleModal').classList.add('hidden');
-});
+    // Event Listener für das Schließen der Modals
+    document.getElementById('closeManualModal')?.addEventListener('click', () => {
+        document.getElementById('manualScheduleModal').classList.add('hidden');
+    });
 
-document.getElementById('cancelManual')?.addEventListener('click', () => {
-    document.getElementById('manualScheduleModal').classList.add('hidden');
-});
+    document.getElementById('cancelManual')?.addEventListener('click', () => {
+        document.getElementById('manualScheduleModal').classList.add('hidden');
+    });
 
-// Funktion zur Konvertierung des Datums in das richtige Format (YYYYMMDD)
-function convertDateToNumber(dateString) {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return parseInt(`${year}${month}${day}`, 10);
-}
+    // Funktion zur Konvertierung des Datums in das richtige Format (YYYYMMDD)
+    function convertDateToNumber(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return parseInt(`${year}${month}${day}`, 10);
+    }
 
-// Funktion zur Konvertierung der Zeit in Minuten (z.B. "09:20" → 920)
-function convertTimeToMinutes(timeString) {
-    if (!timeString) return 0;
-    const [hours, minutes] = timeString.split(':');
-    return parseInt(hours) * 100 + parseInt(minutes);
-}
+    // Funktion zur Konvertierung der Zeit in Minuten (z.B. "09:20" → 920)
+    function convertTimeToMinutes(timeString) {
+        if (!timeString) return 0;
+        const [hours, minutes] = timeString.split(':');
+        return parseInt(hours) * 100 + parseInt(minutes);
+    }
 
-// Event Listener für das Formular-Submit
-document.getElementById('appointmentForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    // Event Listener für das Formular-Submit
+    document.getElementById('appointmentForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const zeitfenster = formData.get('zeitfenster');
-    const [startTime, endTime] = zeitfenster.split(' - ');
+        const formData = new FormData(e.target);
+        const zeitfenster = formData.get('zeitfenster');
+        const [startTime, endTime] = zeitfenster.split(' - ');
 
-    const newAppointment = {
-        name: formData.get('klasse'),
-        class_id: Date.now(), // Temporäre ID, sollte durch echte ID ersetzt werden
-        kv: formData.get('verantwortlicher'),
-        wl: "Can not access required information with API",
-        room_kl: [formData.get('ort')],
-        room_kv: "Unknown",
-        notified_te: [],
-        priority: 2,
-        date: convertDateToNumber(formData.get('datum')),
-        start: convertTimeToMinutes(startTime),
-        end: convertTimeToMinutes(endTime)
-    };
+        const newAppointment = {
+            name: formData.get('klasse'),
+            class_id: Date.now(), // Temporäre ID, sollte durch echte ID ersetzt werden
+            kv: formData.get('verantwortlicher'),
+            wl: "Can not access required information with API",
+            room_kl: [formData.get('ort')],
+            room_kv: "Unknown",
+            notified_te: [],
+            priority: 2,
+            date: convertDateToNumber(formData.get('datum')),
+            start: convertTimeToMinutes(startTime),
+            end: convertTimeToMinutes(endTime)
+        };
 
         try {
             const response = await fetch('/api/add_appointment', {
@@ -1318,6 +1342,9 @@ document.getElementById('appointmentForm')?.addEventListener('submit', async (e)
     });
 
 </script>
+
+
+
 
 
 </body>

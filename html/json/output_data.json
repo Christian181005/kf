@@ -8,8 +8,8 @@
     "room_kv": "B137",
     "notified_te": null,
     "priority": 1,
-    "nr1": "08:29",
-    "d1": "20250523",
+    "nr1": "03:12",
+    "d1": "20250518",
     "nr2": null,
     "d2": null,
     "nr3": null,
@@ -878,5 +878,12 @@
     "d2": null,
     "nr3": null,
     "d3": null
+  },
+  {
+    "klasse": "1B",
+    "datum": "2025-05-16",
+    "zeitfenster": "09:40 - 09:50",
+    "verantwortlicher": "Max Mustermann",
+    "ort": "C116"
   }
 ]

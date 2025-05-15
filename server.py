@@ -1,7 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS, cross_origin  # Hinzugefügt für CORS-Unterstützung
+
 import os
 import json
-from flask_cors import CORS, cross_origin  # Hinzugefügt für CORS-Unterstützung
+import subprocess
+import threading
+
+
 
 app = Flask(__name__)
 
@@ -21,6 +26,29 @@ def serve_static(path):
         return "Not Found", 404
 
     return send_from_directory('html', path)
+
+@app.route('/api/generate_schedule', methods=['POST'])
+def generate_schedule():
+    try:
+        # Funktion zum Ausführen der Skripte in einem separaten Thread
+        def run_scripts():
+            try:
+                # data.py ausführen
+                subprocess.run(['python', 'data.py'], check=True)
+                # algorithm.py ausführen, wenn data.py erfolgreich war
+                subprocess.run(['python', 'algorithm.py'], check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Fehler beim Ausführen der Skripte: {e}")
+
+        # Starte die Skripte in einem neuen Thread, um den HTTP-Request nicht zu blockieren
+        thread = threading.Thread(target=run_scripts)
+        thread.start()
+
+
+
+        return jsonify({"success": True, "message": "Automatische Terminplanung wurde gestartet."})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/save_data', methods=['POST'])
 def save_data():

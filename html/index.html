@@ -986,9 +986,42 @@ Ihr Fotografie-Team
         });
         [closeAutoModal, cancelAuto].forEach(btn => btn.addEventListener('click', () => confirmAutoModal.classList.add('hidden')));
         [closeManualModal, cancelManual].forEach(btn => btn.addEventListener('click', () => manualScheduleModal.classList.add('hidden')));
-        confirmAuto.addEventListener('click', () => {
-            alert('Automatische Terminplanung wird durchgeführt...');
-            confirmAutoModal.classList.add('hidden');
+        confirmAuto.addEventListener('click', async () => {
+            try {
+                confirmAutoModal.classList.add('hidden');
+
+                // Zeige Ladeindikator
+                showNotification('Automatische Terminplanung wird durchgeführt...', 'blue-500', 'fa-spinner fa-spin');
+
+                // API aufrufen, um die Skripte zu starten
+                const response = await fetch('/api/generate_schedule', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showNotification('Terminplan erfolgreich generiert!', 'green-500', 'fa-check-circle');
+
+                    // Kleine Verzögerung, um sicherzustellen, dass die Datei geschrieben wurde
+                    setTimeout(async () => {
+                        // Daten neu laden
+                        const jsonData = await loadJsonData();
+                        if (jsonData) {
+                            const tableData = prepareTableData(jsonData);
+                            renderScheduleTable(tableData);
+                        }
+                    }, 2000);
+                } else {
+                    showNotification('Fehler: ' + result.message, 'red-500', 'fa-exclamation-circle');
+                }
+            } catch (error) {
+                console.error('Fehler:', error);
+                //showNotification('Fehler beim Generieren des Terminplans', 'red-500', 'fa-exclamation-circle');
+            }
         });
         appointmentForm.addEventListener('submit', e => {
             e.preventDefault();

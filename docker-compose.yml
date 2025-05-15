@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   web:
     image: php:8.4-apache
@@ -7,3 +9,13 @@ services:
     volumes:
       - ./html:/var/www/html
       - ./json:/var/www/json
+
+  flask-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    container_name: flask_api_itp2
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./html:/app/html

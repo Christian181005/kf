@@ -5,10 +5,20 @@
     cursor: pointer;
 }
 
-.schedule-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+/* ausgewählte Zeilen: sanftes Grün */
+.schedule-item.selected {
+  background-color: #d1fae5; /* Tailwind green-100 */
 }
+
+/* Wenn .selected, dann kein Hover-Wechsel mehr */
+.schedule-item.selected:hover {
+  background-color: #d1fae5; /* Tailwind green-100 */
+}
+
+tr.schedule-item.selected:hover {
+  background-color: #d1fae5 !important;
+}
+
 
 /* Verstecke die Einzel-Checkboxen */
 .delete-checkbox {

@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scheduleTableBody.innerHTML = '';
         data.forEach(item => {
             const row = document.createElement('tr');
-            row.className = 'schedule-item hover:bg-gray-50';
+            row.className = 'schedule-item';
             row.innerHTML = `
               <td class="px-6 py-4 whitespace-nowrap">
                 <input type="checkbox" class="delete-checkbox" data-class-id="${item.class}" />

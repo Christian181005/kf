@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="push after merge with branch mp1">
+    <list default="true" id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="sending email, basically done (Text window functions not working correctly yet)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/html/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747289940593</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="sending email, basically done (Text window functions not working correctly yet)">
+      <option name="closed" value="true" />
+      <created>1747299427306</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1747299427306</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +356,8 @@
     <MESSAGE value="Add edit functionality for appointments and connect to Flask API for saving data" />
     <MESSAGE value="cm" />
     <MESSAGE value="push after merge with branch mp1" />
-    <option name="LAST_COMMIT_MESSAGE" value="push after merge with branch mp1" />
+    <MESSAGE value="sending email, basically done (Text window functions not working correctly yet)" />
+    <option name="LAST_COMMIT_MESSAGE" value="sending email, basically done (Text window functions not working correctly yet)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$test.coverage" NAME="test Coverage Results" MODIFIED="1743060270462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

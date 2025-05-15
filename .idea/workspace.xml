@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="cm">
+    <list default="true" id="0474958e-0a41-4856-9eef-95edad4e34de" name="Changes" comment="push after merge with branch mp1">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entire-API-Data/output_data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/json/output_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/html/json/output_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/klassenfotos_terminplan (1).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/struktur.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747289792385</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="push after merge with branch mp1">
+      <option name="closed" value="true" />
+      <created>1747289940593</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1747289940593</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,7 +355,8 @@
     <MESSAGE value="edit function implemented" />
     <MESSAGE value="Add edit functionality for appointments and connect to Flask API for saving data" />
     <MESSAGE value="cm" />
-    <option name="LAST_COMMIT_MESSAGE" value="cm" />
+    <MESSAGE value="push after merge with branch mp1" />
+    <option name="LAST_COMMIT_MESSAGE" value="push after merge with branch mp1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kf$main.coverage" NAME="main Coverage Results" MODIFIED="1744009425065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

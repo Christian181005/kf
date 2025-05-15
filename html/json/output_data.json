@@ -596,5 +596,29 @@
     "date": 20241016,
     "start": 1605,
     "end": 1615
+  },
+  {
+    "name": "2A",
+    "class_id": null,
+    "date": "2025-05-03",
+    "start": "09:20 - 09:30",
+    "end": "09:20 - 09:30",
+    "kv": "Peter Schmidt",
+    "room_kl": "C117"
+  },
+  {
+    "name": "2A",
+    "class_id": 1747293313220,
+    "kv": "Anna Müller",
+    "wl": "Can not access required information with API",
+    "room_kl": [
+      "C116"
+    ],
+    "room_kv": "Unknown",
+    "notified_te": [],
+    "priority": 2,
+    "date": 20250523,
+    "start": 920,
+    "end": 930
   }
 ]

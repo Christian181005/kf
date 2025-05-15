@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassenfotos Planungstool</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
-    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS -->
+    <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png"> <!-- favicon -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Font Awesome -->
     <script>
         tailwind.config = {
             theme: {
@@ -61,25 +60,15 @@
 
                 <button id="openPopup"
                         class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
-                         Termin hinzufügen
+                    Terminplan generieren
                 </button>
 
 
                 <button id="refreshBtn"
-                        class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
-                    <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
+                        class=" w-full  justify-center bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
+                    Daten aktualisieren
                 </button>
-                <a href="archived_appointments.html"
-                   class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
-                    Archivierte Termine
-                </a>
 
-
-                <div class="relative">
-                    <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
-                         class="rounded-full h-10 w-10 cursor-pointer">
-                    <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
-                </div>
             </div>
         </div>
     </header>
@@ -148,9 +137,6 @@
                             class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
                         <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
                     </button>
-                    <button id="deleteSelected" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                        Archivieren
-                    </button>
                 </div>
             </div>
 
@@ -181,7 +167,7 @@
                         </th>
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aktionen
+
                         </th>
                     </tr>
                     </thead>
@@ -318,27 +304,32 @@
         <div class="p-6 overflow-y-auto max-h-[70vh]">
             <div class="mb-6">
                 <label class="block text-gray-700 mb-2">Klasse</label>
-                <input type="text" id="editClass" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary" readonly>
+                <input type="text" id="editClass"
+                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary" readonly>
             </div>
 
             <div class="mb-6">
                 <label class="block text-gray-700 mb-2">Datum</label>
-                <input type="date" id="editDate" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                <input type="date" id="editDate"
+                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
             </div>
 
             <div class="mb-6">
                 <label class="block text-gray-700 mb-2">Uhrzeit</label>
-                <input type="time" id="editTime" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                <input type="time" id="editTime"
+                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
             </div>
 
             <div class="mb-6">
                 <label class="block text-gray-700 mb-2">Ort</label>
-                <input type="text" id="editLocation" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                <input type="text" id="editLocation"
+                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
             </div>
 
             <div class="mb-6">
                 <label class="block text-gray-700 mb-2">Verantwortlich</label>
-                <input type="text" id="editResponsible" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
+                <input type="text" id="editResponsible"
+                       class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
             </div>
         </div>
 
@@ -355,7 +346,7 @@
 
 
 <script>
-     // Edit Modal Funktionen
+    // Edit Modal Funktionen
     document.addEventListener('DOMContentLoaded', () => {
         const editModal = document.getElementById('editModal');
         const closeEditModal = document.getElementById('closeEditModal');
@@ -382,6 +373,10 @@
         // Öffne Modal mit Daten
         function openEditModal(item) {
             document.getElementById('editClass').value = item.class;
+            document.getElementById('editDate').value = reverseDateForInput(item.date);
+            document.getElementById('editTime').value = extractStartTime(item.time);
+            document.getElementById('editLocation').value = item.location;
+            document.getElementById('editResponsible').value = item.responsible;
 
             // Konvertiere das Datum in das Format YYYY-MM-DD für das date input Feld
             if (item.date && item.date !== "Kein Termin") {
@@ -402,68 +397,68 @@
         }
 
         saveEditBtn.addEventListener('click', async () => {
-    if (!currentEditingItem) return;
+            if (!currentEditingItem) return;
 
-    try {
-        // Lade aktuelle Daten
-        const response = await fetch('json/output_data.json');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
+            try {
+                // Lade aktuelle Daten
+                const response = await fetch('json/output_data.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
 
-        // Finde den zu bearbeitenden Eintrag
-        const itemIndex = data.findIndex(item => item.name === currentEditingItem.class);
-        if (itemIndex === -1) throw new Error('Eintrag nicht gefunden');
+                // Finde den zu bearbeitenden Eintrag
+                const itemIndex = data.findIndex(item => item.name === currentEditingItem.class);
+                if (itemIndex === -1) throw new Error('Eintrag nicht gefunden');
 
-        // Aktualisiere die Daten
-        const dateValue = document.getElementById('editDate').value;
-        const timeValue = document.getElementById('editTime').value;
-        const locationValue = document.getElementById('editLocation').value;
-        const responsibleValue = document.getElementById('editResponsible').value;
+                // Aktualisiere die Daten
+                const dateValue = document.getElementById('editDate').value;
+                const timeValue = document.getElementById('editTime').value;
+                const locationValue = document.getElementById('editLocation').value;
+                const responsibleValue = document.getElementById('editResponsible').value;
 
-        // Konvertiere Datum zurück in das Format YYYYMMDD
-        if (dateValue) {
-            const [year, month, day] = dateValue.split('-');
-            data[itemIndex].d1 = `${year}${month}${day}`;
-        }
+                // Konvertiere Datum zurück in das Format YYYYMMDD
+                if (dateValue) {
+                    const [year, month, day] = dateValue.split('-');
+                    data[itemIndex].d1 = `${year}${month}${day}`;
+                }
 
-        // Aktualisiere Uhrzeit
-        if (timeValue) {
-            data[itemIndex].nr1 = timeValue;
-        }
+                // Aktualisiere Uhrzeit
+                if (timeValue) {
+                    data[itemIndex].nr1 = timeValue;
+                }
 
-        // Aktualisiere Ort und Verantwortlichen
-        data[itemIndex].room_kl = locationValue;
-        data[itemIndex].kv = responsibleValue;
+                // Aktualisiere Ort und Verantwortlichen
+                data[itemIndex].room_kl = locationValue;
+                data[itemIndex].kv = responsibleValue;
 
-        // Sende die aktualisierten Daten an den Server
-        const saveResponse = await fetch('/api/save_data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
+                // Sende die aktualisierten Daten an den Server
+                const saveResponse = await fetch('/api/save_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
 
-        const result = await saveResponse.json();
+                const result = await saveResponse.json();
 
-        if (!result.success) {
-            throw new Error(result.message);
-        }
+                if (!result.success) {
+                    throw new Error(result.message);
+                }
 
-        // Zeige Erfolgsmeldung
-        showNotification('Änderungen erfolgreich gespeichert!', 'green-500', 'fa-check-circle');
+                // Zeige Erfolgsmeldung
+                showNotification('Änderungen erfolgreich gespeichert!', 'green-500', 'fa-check-circle');
 
-        // Schließe das Modal
-        editModal.classList.add('hidden');
+                // Schließe das Modal
+                editModal.classList.add('hidden');
 
-        // Aktualisiere die Tabelle
-        const tableData = prepareTableData(data);
-        renderScheduleTable(tableData);
+                // Aktualisiere die Tabelle
+                const tableData = prepareTableData(data);
+                renderScheduleTable(tableData);
 
-    } catch (error) {
-        console.error('Fehler beim Speichern:', error);
-        showNotification('Fehler beim Speichern: ' + error.message, 'red-500', 'fa-exclamation-circle');
-    }
+            } catch (error) {
+                console.error('Fehler beim Speichern:', error);
+                showNotification('Fehler beim Speichern: ' + error.message, 'red-500', 'fa-exclamation-circle');
+            }
 
         });
     });
@@ -474,12 +469,8 @@
     // Function to load JSON data
     async function loadJsonData() {
         try {
-            //  const response = await fetch('/var/www/json/output_data.json');
-            const response = await fetch('json/output_data.json');
-            // const response = await fetch('../json/output_data.json');
 
-            //    const jsonPath = '../json/output_data.json';
-            // console.log('Lade Daten von:', jsonPath); // Pfad in Konsole ausgeben
+            const response = await fetch('json/output_data.json');
 
             if (!response.ok) throw new Error('Network response was not ok');
             return await response.json();
@@ -489,39 +480,66 @@
         }
     }
 
-    // Function to convert date format
+    // Function to convert date format from YYYYMMDD to DD.MM.YYYY
     function formatDate(dateStr) {
-        if (!dateStr) return "Kein Termin";
-        return `${dateStr.substr(6, 2)}.${dateStr.substr(4, 2)}.${dateStr.substr(0, 4)}`;
+        if (!dateStr || dateStr === "Kein Termin") return "Kein Termin";
+
+        // Handle both number (20241016) and string ("20241016") formats
+        const dateString = typeof dateStr === 'number' ? dateStr.toString() : dateStr;
+
+        // Extract parts
+        const year = dateString.substr(0, 4);
+        const month = dateString.substr(4, 2);
+        const day = dateString.substr(6, 2);
+
+        return `${day}.${month}.${year}`;
     }
 
-    // Function to prepare table data with scheduling logic
+    // Function to convert time format from minutes (e.g., 800) to HH:MM (08:00)
+    function formatTime(minutes) {
+        if (!minutes) return "Kein Termin";
+
+        // Handle both number (800) and string ("800") formats
+        const minutesStr = typeof minutes === 'number' ? minutes.toString() : minutes;
+
+        // Pad with leading zeros if needed
+        const padded = minutesStr.padStart(4, '0');
+        const hours = padded.substr(0, 2);
+        const mins = padded.substr(2, 2);
+
+        return `${hours}:${mins}`;
+    }
+
+    // Function to create time slot from start and end times
+    function createTimeSlot(start, end) {
+        if (!start || !end) return "Kein Termin";
+
+        const startTime = formatTime(start);
+        const endTime = formatTime(end);
+
+        return `${startTime} - ${endTime}`;
+    }
+
+    // Modified prepareTableData function
     function prepareTableData(data) {
-        // Filter out invalid entries and apply scheduling rules
         return data
-            .filter(item => item.name && item.class_id) // Filter out items without names or IDs
+            .filter(item => item.name && item.class_id)
             .map(item => {
                 const isGraduating = item.name.startsWith('5');
                 const duration = isGraduating ? 15 : 10;
                 const kvEmail = item.kv ? `kv${item.name.toLowerCase()}@htl-steyr.ac.at` : null;
                 const classEmail = `klasse${item.name.toLowerCase()}@htl-steyr.ac.at`;
 
-                // Determine time slot based on priority
-                let timeSlot = "Kein Termin";
-                if (item.nr1 && item.d1) {
-                    timeSlot = item.nr1;
-                } else if (item.nr2 && item.d2) {
-                    timeSlot = item.nr2;
-                } else if (item.nr3 && item.d3) {
-                    timeSlot = item.nr3;
-                }
+                // Format date and time
+                const date = formatDate(item.date);
+                const time = createTimeSlot(item.start, item.end);
 
                 return {
                     class: item.name,
-                    date: formatDate(item.d1 || item.d2 || item.d3),
-                    time: timeSlot,
+                    date: date,
+                    time: time,
                     duration: duration,
-                    location: item.room_kl || "Nicht festgelegt",
+                    location: Array.isArray(item.room_kl) ? item.room_kl[0] : item.room_kl || "Nicht festgelegt",
                     responsible: item.kv || "Nicht festgelegt",
                     isGraduating: isGraduating,
                     kvEmail: kvEmail,
@@ -532,10 +550,25 @@
                 };
             })
             .sort((a, b) => {
-                // Sort by priority first, then by class name
                 if (a.priority !== b.priority) return a.priority - b.priority;
                 return a.class.localeCompare(b.class);
             });
+    }
+
+    // Function to reverse date format from DD.MM.YYYY to YYYY-MM-DD for date input
+    function reverseDateForInput(d) {
+        if (!d || d === "Kein Termin") return '';
+        const parts = d.split('.');
+        if (parts.length === 3) {
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return '';
+    }
+
+    // Function to extract start time from time slot for time input
+    function extractStartTime(timeSlot) {
+        if (!timeSlot || timeSlot === "Kein Termin") return '';
+        return timeSlot.split(' - ')[0];
     }
 
     // Function to generate CSV from schedule data
@@ -808,19 +841,6 @@ Ihr Fotografie-Team
                     <button class="text-blue-600 hover:text-blue-800 mr-3 py-2 px-4 text-2xl edit-btn" data-class='${JSON.stringify(item)}'>
                       <i class="fas fa-edit"></i>
                     </button>
-
-                    <button class="text-primary hover:text-secondary mr-3 py-2 px-4 text-2xl email-btn" data-class="${item.class}" data-kv="${item.kvEmail}" data-wl="${item.wlEmail}" data-classemail="${item.classEmail}">
-                        <i class="fas fa-envelope"></i>
-                    </button>
-
-
-
-
-<!--
-                    <button class="text-gray-600 hover:text-gray-900">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
--->
                 </td>
             `;
             scheduleTableBody.appendChild(row);
@@ -917,245 +937,354 @@ Ihr Fotografie-Team
     }
 
     const toolbar = document.getElementById('toolbar');
-    const deleteBtn = document.getElementById('deleteSelected');
+
 
     document.addEventListener('change', () => {
         const selected = document.querySelectorAll('.delete-checkbox:checked');
         toolbar.classList.toggle('hidden', selected.length === 0);
     });
 
-    // In index.html
-    deleteBtn.addEventListener('click', async () => {
-        const selected = Array.from(document.querySelectorAll('.delete-checkbox:checked'))
-            .map(cb => cb.dataset.classId);
 
-        if (selected.length === 0) {
-            showNotification('Bitte wählen Sie Termine zum Archivieren aus', 'red-500', 'fa-exclamation-circle');
-            return;
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+
+        const openPopup = document.getElementById('openPopup');
+        const closePopup = document.getElementById('closePopup');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const autoSchedule = document.getElementById('autoSchedule');
+        const confirmAutoModal = document.getElementById('confirmAutoModal');
+        const closeAutoModal = document.getElementById('closeAutoModal');
+        const cancelAuto = document.getElementById('cancelAuto');
+        const confirmAuto = document.getElementById('confirmAuto');
+        const manualSchedule = document.getElementById('manualSchedule');
+        const manualScheduleModal = document.getElementById('manualScheduleModal');
+        const closeManualModal = document.getElementById('closeManualModal');
+        const cancelManual = document.getElementById('cancelManual');
+        const appointmentForm = document.getElementById('appointmentForm');
+        openPopup.addEventListener('click', () => {
+            popupOverlay.classList.remove('hidden');
+            setTimeout(() => popupOverlay.classList.add('popup-enter-active'), 10);
+        });
+        closePopup.addEventListener('click', () => {
+            popupOverlay.classList.remove('popup-enter-active');
+            setTimeout(() => popupOverlay.classList.add('hidden'), 300);
+        });
+        autoSchedule.addEventListener('click', () => {
+            popupOverlay.classList.remove('popup-enter-active');
+            setTimeout(() => {
+                popupOverlay.classList.add('hidden');
+                confirmAutoModal.classList.remove('hidden');
+            }, 300);
+        });
+        manualSchedule.addEventListener('click', () => {
+            popupOverlay.classList.remove('popup-enter-active');
+            setTimeout(() => {
+                popupOverlay.classList.add('hidden');
+                manualScheduleModal.classList.remove('hidden');
+            }, 300);
+        });
+        [closeAutoModal, cancelAuto].forEach(btn => btn.addEventListener('click', () => confirmAutoModal.classList.add('hidden')));
+        [closeManualModal, cancelManual].forEach(btn => btn.addEventListener('click', () => manualScheduleModal.classList.add('hidden')));
+        confirmAuto.addEventListener('click', () => {
+            alert('Automatische Terminplanung wird durchgeführt...');
+            confirmAutoModal.classList.add('hidden');
+        });
+        appointmentForm.addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Termin erfolgreich erstellt!');
+            manualScheduleModal.classList.add('hidden');
+        });
+
+
+        const editModal = document.getElementById('editModal');
+        const editForm = document.getElementById('editForm');
+        const editDate = document.getElementById('editDate');
+        const editTime = document.getElementById('editTime');
+        const editLocation = document.getElementById('editLocation');
+        const editResponsible = document.getElementById('editResponsible');
+        const editClass = document.getElementById('editClass');
+        const cancelEdit = document.getElementById('cancelEdit');
+
+        // Event: Öffne Bearbeitenmodal
+        document.addEventListener('click', e => {
+            const btn = e.target.closest('.edit-btn');
+            console.log('Edit button clicked?', btn);
+            if (btn) {
+                let data = JSON.parse(btn.dataset.class);
+                editClass.value = data.class;
+                editDate.value = reverseDate(data.date);
+                editTime.value = data.time
+            }
+        })
+
+
+        // Event: Abbrechen
+        cancelEdit.addEventListener('click', () => {
+            editModal.classList.add('hidden');
+        });
+
+        // Event: Speichern
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const cls = editClass.value;
+
+            try {
+                const res = await fetch('json/output_data.json');
+                const json = await res.json();
+                const index = json.findIndex(item => item.name === cls);
+                if (index === -1) throw new Error('Klasse nicht gefunden');
+
+                json[index].d1 = editDate.value;
+                json[index].nr1 = editTime.value;
+                json[index].room_kl = editLocation.value;
+                json[index].kv = editResponsible.value;
+
+                // Neue Datei als Download anbieten
+                downloadContent(JSON.stringify(json, null, 2), 'output_data.json', 'application/json');
+
+                showNotification('Änderungen gespeichert – neue Datei heruntergeladen.', 'green-500', 'fa-save');
+                editModal.classList.add('hidden');
+
+                // Ansicht aktualisieren
+                const tableData = prepareTableData(json);
+                renderScheduleTable(tableData);
+
+            } catch (err) {
+                console.error('Bearbeiten-Fehler:', err);
+                showNotification('Fehler beim Speichern', 'red-500', 'fa-exclamation-circle');
+            }
+        });
+
+        function reverseDate(d) {
+            const parts = d.split('.');
+            return parts.length === 3 ? parts[2] + parts[1] + parts[0] : '';
         }
-
-        try {
-            const [currentRes, archiveRes] = await Promise.all([
-                fetch('json/output_data.json'),
-                fetch('json/archive.json')
-            ]);
-
-            if (!currentRes.ok || !archiveRes.ok) throw new Error('Daten konnten nicht geladen werden');
-
-            const currentData = await currentRes.json();
-            const archiveData = await archiveRes.json();
-
-            const toArchive = currentData.filter(item => selected.includes(item.name));
-            const remaining = currentData.filter(item => !selected.includes(item.name));
-            const updatedArchive = [...archiveData, ...toArchive];
-
-            // Biete Dateien als Download an
-            downloadContent(JSON.stringify(remaining, null, 2), 'output_data.json', 'application/json');
-            downloadContent(JSON.stringify(updatedArchive, null, 2), 'archive.json', 'application/json');
-
-            showNotification(`${toArchive.length} Termine archiviert. Dateien wurden heruntergeladen.`, 'green-500', 'fa-check-circle');
-
-            // Aktualisiere Ansicht im Browser
-            const tableData = prepareTableData(remaining);
-            renderScheduleTable(tableData);
-            toolbar.classList.add('hidden');
-
-        } catch (err) {
-            console.error('Fehler beim Archivieren:', err);
-            showNotification('Fehler beim Archivieren: ' + err.message, 'red-500', 'fa-exclamation-circle');
-        }
-    });
-
-
-  document.addEventListener('DOMContentLoaded', () => {
-      const editModal = document.getElementById('editModal');
-      const editForm = document.getElementById('editForm');
-      const editDate = document.getElementById('editDate');
-      const editTime = document.getElementById('editTime');
-      const editLocation = document.getElementById('editLocation');
-      const editResponsible = document.getElementById('editResponsible');
-      const editClass = document.getElementById('editClass');
-      const cancelEdit = document.getElementById('cancelEdit');
-
-      // Event: Öffne Bearbeitenmodal
-      document.addEventListener('click', e => {
-          const btn = e.target.closest('.edit-btn');
-          console.log('Edit button clicked?', btn);
-          if (btn) {
-              let data = JSON.parse(btn.dataset.class);
-              editClass.value = data.class;
-              editDate.value = reverseDate(data.date);
-              editTime.value = data.time
-          }
-      })
-
-
-      // Event: Abbrechen
-      cancelEdit.addEventListener('click', () => {
-          editModal.classList.add('hidden');
-      });
-
-      // Event: Speichern
-      editForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const cls = editClass.value;
-
-          try {
-              const res = await fetch('json/output_data.json');
-              const json = await res.json();
-              const index = json.findIndex(item => item.name === cls);
-              if (index === -1) throw new Error('Klasse nicht gefunden');
-
-              json[index].d1 = editDate.value;
-              json[index].nr1 = editTime.value;
-              json[index].room_kl = editLocation.value;
-              json[index].kv = editResponsible.value;
-
-              // Neue Datei als Download anbieten
-              downloadContent(JSON.stringify(json, null, 2), 'output_data.json', 'application/json');
-
-              showNotification('Änderungen gespeichert – neue Datei heruntergeladen.', 'green-500', 'fa-save');
-              editModal.classList.add('hidden');
-
-              // Ansicht aktualisieren
-              const tableData = prepareTableData(json);
-              renderScheduleTable(tableData);
-
-          } catch (err) {
-              console.error('Bearbeiten-Fehler:', err);
-              showNotification('Fehler beim Speichern', 'red-500', 'fa-exclamation-circle');
-          }
-      });
-
-      function reverseDate(d) {
-          const parts = d.split('.');
-          return parts.length === 3 ? parts[2] + parts[1] + parts[0] : '';
-      }
-  })
+    })
 </script>
 
- <!-- Manual Schedule Modal -->
-    <div id="manualScheduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+<!-- Main Popup -->
+<div id="popupOverlay" class="fixed inset-0 popup-overlay hidden flex items-center justify-center z-50">
+    <div class="popup-content bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+        <div class="p-6">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-dark">Manuellen Termin erstellen</h3>
-                <button id="closeManualModal" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+                <h3 class="text-xl font-bold text-dark">Terminplanung Methode</h3>
+                <button id="closePopup" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <form id="appointmentForm" class="space-y-4">
-                <!-- Klassen Auswahl -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Klasse</label>
-                    <select name="klasse" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>1A</option>
-                        <option>1B</option>
-                        <option>2A</option>
-                        <option>2B</option>
-                        <option>3A</option>
-                    </select>
-                </div>
-                <!-- Datum und Zeitfenster -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Datum</label>
-                        <input name="datum" type="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+
+            <p class="text-gray-600 mb-6">Wählen Sie eine Methode zur Terminplanung aus:</p>
+
+            <div class="space-y-4">
+                <!-- Automatic Button -->
+                <button id="autoSchedule"
+                        class="w-full flex items-center justify-between p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-all">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-blue-100 rounded-full mr-3"><i class="fas fa-robot text-blue-600"></i></div>
+                        <div>
+                            <h4 class="font-medium text-blue-800">Automatisch</h4>
+                            <p class="text-sm text-blue-600">Algorithmus erstellt optimalen Zeitplan</p>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Zeitfenster</label>
-                        <select name="zeitfenster" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                            <option value="">Bitte auswählen</option>
-                            <option>09:00 - 09:10</option>
-                            <option>09:10 - 09:20</option>
-                            <option>09:20 - 09:30</option>
-                            <option>09:30 - 09:40</option>
-                            <option>09:40 - 09:50</option>
-                            <option>09:50 - 10:00</option>
-                        </select>
+                    <i class="fas fa-chevron-right text-blue-400"></i>
+                </button>
+                <!-- Manual Button -->
+                <button id="manualSchedule"
+                        class="w-full flex items-center justify-between p-4 bg-green-50 hover:bg-green-100 border border-green-200 rounded-lg transition-all">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-full mr-3"><i class="fas fa-user-edit text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-green-800">Manuell</h4>
+                            <p class="text-sm text-green-600">Termine individuell erstellen</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Verantwortlicher Auswahl -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Verantwortlicher</label>
-                    <select name="verantwortlicher" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>Max Mustermann</option>
-                        <option>Anna Müller</option>
-                        <option>Peter Schmidt</option>
-                    </select>
-                </div>
-                <!-- Ort Auswahl -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Ort</label>
-                    <select name="ort" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>C116</option>
-                        <option>C117</option>
-                        <option>C118</option>
-                    </select>
-                </div>
-                <!-- Aktion Buttons -->
-                <div class="flex justify-end space-x-3 mt-6">
-                    <button type="button" id="cancelManual" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Abbrechen</button>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary">Termin erstellen</button>
-                </div>
-            </form>
+                    <i class="fas fa-chevron-right text-green-400"></i>
+                </button>
+            </div>
         </div>
     </div>
+</div>
+
+<!-- Automatic Confirmation Modal -->
+<div id="confirmAutoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-red-600">Warnung</h3>
+            <button id="closeAutoModal" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+        </div>
+        <p class="text-gray-700 mb-6"><i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>Diese Aktion
+            überschreibt alle vorhandenen Termine mit dem automatisch generierten Zeitplan. Möchten Sie fortfahren?</p>
+        <div class="flex justify-end space-x-3">
+            <button id="cancelAuto" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                Abbrechen
+            </button>
+            <button id="confirmAuto" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Bestätigen
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Manual Schedule Modal -->
+<div id="manualScheduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-dark">Manuellen Termin erstellen</h3>
+            <button id="closeManualModal" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="appointmentForm" class="space-y-4">
+            <!-- Klassen Auswahl -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Klasse</label>
+                <select name="klasse" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    <option value="">Bitte auswählen</option>
+                    <option>1A</option>
+                    <option>1B</option>
+                    <option>2A</option>
+                    <option>2B</option>
+                    <option>3A</option>
+                </select>
+            </div>
+            <!-- Datum und Zeitfenster -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Datum</label>
+                    <input name="datum" type="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Zeitfenster</label>
+                    <select name="zeitfenster" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        <option value="">Bitte auswählen</option>
+                        <option>09:00 - 09:10</option>
+                        <option>09:10 - 09:20</option>
+                        <option>09:20 - 09:30</option>
+                        <option>09:30 - 09:40</option>
+                        <option>09:40 - 09:50</option>
+                        <option>09:50 - 10:00</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Verantwortlicher Auswahl -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Verantwortlicher</label>
+                <select name="verantwortlicher" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    <option value="">Bitte auswählen</option>
+                    <option>Max Mustermann</option>
+                    <option>Anna Müller</option>
+                    <option>Peter Schmidt</option>
+                </select>
+            </div>
+            <!-- Ort Auswahl -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Ort</label>
+                <select name="ort" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    <option value="">Bitte auswählen</option>
+                    <option>C116</option>
+                    <option>C117</option>
+                    <option>C118</option>
+                </select>
+            </div>
+            <!-- Aktion Buttons -->
+            <div class="flex justify-end space-x-3 mt-6">
+                <button type="button" id="cancelManual"
+                        class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Abbrechen
+                </button>
+                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary">Termin
+                    erstellen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
 
 
-const appointmentForm = document.getElementById('appointmentForm');
-const manualScheduleModal = document.getElementById('manualScheduleModal');
+    const appointmentForm = document.getElementById('appointmentForm');
+    const manualScheduleModal = document.getElementById('manualScheduleModal');
 
 
+  // Event Listener für das Öffnen des Popups
 document.getElementById('openPopup')?.addEventListener('click', () => {
-    manualScheduleModal.classList.remove('hidden');
+    document.getElementById('popupOverlay').classList.remove('hidden');
 });
+
+// Event Listener für das manuelle Termin-Formular
+document.getElementById('manualSchedule')?.addEventListener('click', () => {
+    document.getElementById('popupOverlay').classList.add('hidden');
+    document.getElementById('manualScheduleModal').classList.remove('hidden');
+});
+
+// Event Listener für das Schließen der Modals
 document.getElementById('closeManualModal')?.addEventListener('click', () => {
-    manualScheduleModal.classList.add('hidden');
+    document.getElementById('manualScheduleModal').classList.add('hidden');
 });
+
 document.getElementById('cancelManual')?.addEventListener('click', () => {
-    manualScheduleModal.classList.add('hidden');
+    document.getElementById('manualScheduleModal').classList.add('hidden');
 });
 
+// Funktion zur Konvertierung des Datums in das richtige Format (YYYYMMDD)
+function convertDateToNumber(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return parseInt(`${year}${month}${day}`, 10);
+}
 
+// Funktion zur Konvertierung der Zeit in Minuten (z.B. "09:20" → 920)
+function convertTimeToMinutes(timeString) {
+    if (!timeString) return 0;
+    const [hours, minutes] = timeString.split(':');
+    return parseInt(hours) * 100 + parseInt(minutes);
+}
 
-    appointmentForm.addEventListener('submit', async (e) => {
+// Event Listener für das Formular-Submit
+document.getElementById('appointmentForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(appointmentForm);
+    const formData = new FormData(e.target);
+    const zeitfenster = formData.get('zeitfenster');
+    const [startTime, endTime] = zeitfenster.split(' - ');
 
-    const data = {
-        klasse: formData.get('klasse'),
-        datum: formData.get('datum'),
-        zeitfenster: formData.get('zeitfenster'),
-        verantwortlicher: formData.get('verantwortlicher'),
-        ort: formData.get('ort')
+    const newAppointment = {
+        name: formData.get('klasse'),
+        class_id: Date.now(), // Temporäre ID, sollte durch echte ID ersetzt werden
+        kv: formData.get('verantwortlicher'),
+        wl: "Can not access required information with API",
+        room_kl: [formData.get('ort')],
+        room_kv: "Unknown",
+        notified_te: [],
+        priority: 2,
+        date: convertDateToNumber(formData.get('datum')),
+        start: convertTimeToMinutes(startTime),
+        end: convertTimeToMinutes(endTime)
     };
 
-    try {
-        const response = await fetch('/api/add_appointment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+        try {
+            const response = await fetch('/api/add_appointment', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(newAppointment)
+            });
 
-        if (response.ok) {
-            alert('Termin erfolgreich erstellt!');
-            manualScheduleModal.classList.add('hidden');
-            appointmentForm.reset();
-        } else {
-            alert('Fehler beim Erstellen des Termins.');
+            if (response.ok) {
+                alert('Termin erfolgreich erstellt!');
+                manualScheduleModal.classList.add('hidden');
+                appointmentForm.reset();
+            } else {
+                alert('Fehler beim Erstellen des Termins.');
+            }
+        } catch (error) {
+            alert('Serverfehler: ' + error.message);
         }
-    } catch (error) {
-        alert('Serverfehler: ' + error.message);
-    }
-});
+    });
 
 </script>
-
-
 
 
 </body>

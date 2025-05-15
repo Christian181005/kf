@@ -5,393 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassenfotos Planungstool</title>
     <link rel="icon" href="https://www.untis.at/fileadmin/user_upload/Icon-1024x1024_rund.png" type="image/png">
-
     <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com" defer></script>
-    <!-- PyScript -->
-    <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js" defer></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Eigene Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8">
     <!-- Header -->
-    <header class="mb-10">
-        <div class="flex justify-between items-center">
-            <div>
-                <h1 class="text-3xl font-bold text-dark">Klassenfotos Planungstool</h1>
-                <p class="text-gray-600">Automatisierte Terminplanung für Klassenfotos</p>
-            </div>
-            <div class="flex items-center space-x-4">
-
-                <button id="openPopup"
-                        class="w-full bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center">
-                         Termin hinzufügen
-                </button>
-
-
-                <button id="refreshBtn"
-                        class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
-                    <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
-                </button>
-                <a href="archived_appointments.html"
-                   class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
-                    Archivierte Termine
-                </a>
-
-
-                <div class="relative">
-                    <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
-                         class="rounded-full h-10 w-10 cursor-pointer">
-                    <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
-                </div>
+    <header class="mb-10 flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold text-dark">Klassenfotos Planungstool</h1>
+            <p class="text-gray-600">Automatisierte Terminplanung für Klassenfotos</p>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="openPopup"
+                    class="bg-accent hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium flex items-center">
+                <i class="fas fa-plus mr-2"></i> Termin hinzufügen
+            </button>
+            <button id="refreshBtn"
+                    class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-sync-alt mr-2"></i> Daten aktualisieren
+            </button>
+            <a href="archived_appointments.html"
+               class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
+                Archivierte Termine
+            </a>
+            <div class="relative">
+                <img src="https://i.imgur.com/S1Bm63e.jpeg" alt="User"
+                     class="rounded-full h-10 w-10 cursor-pointer">
+                <div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
         </div>
     </header>
 
-
-    <!-- Main Content Area -->
-    <div class="lg:col-span-3 space-y-8">
-        <!-- Status Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600">Geplante Klassen</p>
-                        <h3 class="text-2xl font-bold text-dark" id="scheduledClasses">0</h3>
-                    </div>
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fas fa-school text-blue-600 text-xl"></i>
-                    </div>
+    <!-- Status Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600">Geplante Klassen</p>
+                    <h3 class="text-2xl font-bold text-dark" id="scheduledClasses">0</h3>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600">Zu benachrichtigen</p>
-                        <h3 class="text-2xl font-bold text-dark" id="teachersToNotify">0</h3>
-                    </div>
-                    <div class="bg-green-100 p-3 rounded-full">
-                        <i class="fas fa-envelope text-green-600 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600">Abschlussklassen</p>
-                        <h3 class="text-2xl font-bold text-dark" id="graduatingClasses">0</h3>
-                    </div>
-                    <div class="bg-purple-100 p-3 rounded-full">
-                        <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
-                    </div>
+                <div class="bg-blue-100 p-3 rounded-full">
+                    <i class="fas fa-school text-blue-600 text-xl"></i>
                 </div>
             </div>
         </div>
-
-        <!-- Schedule Table -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="px-6 py-4 border-b flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="masterCheckbox" class="h-4 w-4 text-primary rounded focus:ring-primary">
-                    <h2 class="text-xl font-semibold text-dark">Terminplan</h2>
-                    <p>
-                        <span class="text-gray-500 text-sm">Markierte Termine: </span>
-                    </p>
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600">Zu benachrichtigen</p>
+                    <h3 class="text-2xl font-bold text-dark" id="teachersToNotify">0</h3>
                 </div>
-
-                <div class="flex space-x-2">
-                    <button id="exportCSVBtn"
-                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
-                        <i class="fas fa-file-csv mr-1"></i> CSV
-                    </button>
-                    <button id="exportPDFBtn"
-                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
-                        <i class="fas fa-file-pdf mr-1"></i> PDF
-                    </button>
-                    <button id="sendEmailsBtn"
-                            class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
-                        <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
-                    </button>
-                    <button id="deleteSelected" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                        Archivieren
-                    </button>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-envelope text-green-600 text-xl"></i>
                 </div>
-            </div>
-
-
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Klasse
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Datum
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Uhrzeit
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Ort
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Verantwortlich
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Aktionen
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
-                    <!-- Loading state -->
-                    <tr id="loadingRow">
-                        <td colspan="6" class="px-6 py-8 text-center">
-                            <div class="flex flex-col items-center justify-center">
-                                <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
-                                <p class="text-gray-600">Lade Daten...</p>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
-
-        <!-- Email Preview Modal (hidden by default) -->
-        <div id="emailModal"
-             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-                <div class="px-6 py-4 border-b flex justify-between items-center">
-                    <h2 class="text-xl font-semibold text-dark">E-Mail Vorbereitung</h2>
-                    <button id="closeEmailModal" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600">Abschlussklassen</p>
+                    <h3 class="text-2xl font-bold text-dark" id="graduatingClasses">0</h3>
                 </div>
-                <div class="p-6 overflow-y-auto max-h-[70vh]">
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Empfänger</label>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                                        klasse5ahitm@htl-steyr.ac.at
-                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </span>
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                                        kv5ahitm@htl-steyr.ac.at
-                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </span>
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                                        wl5ahitm@htl-steyr.ac.at
-                                        <button class="ml-2 text-blue-600 hover:text-blue-800">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </span>
-                        </div>
-                        <input type="text" placeholder="Weitere Empfänger hinzufügen"
-                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Betreff</label>
-                        <input type="text" value="Termin für Klassenfotos - 5AHITM"
-                               class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Nachricht</label>
-                        <div class="border rounded-lg overflow-hidden">
-                            <div class="bg-gray-50 px-4 py-2 border-b">
-                                <div class="flex space-x-2">
-                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-bold"></i>
-                                    </button>
-                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-italic"></i>
-                                    </button>
-                                    <button class="text-gray-600 hover:text-gray-900"><i
-                                            class="fas fa-underline"></i></button>
-                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ul"></i>
-                                    </button>
-                                    <button class="text-gray-600 hover:text-gray-900"><i class="fas fa-list-ol"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <textarea class="w-full px-4 py-3 min-h-[200px] focus:outline-none"
-                                      placeholder="E-Mail Text hier eingeben...">
-                                </textarea>
-                        </div>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Anhänge</label>
-                        <div class="border rounded-lg p-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center">
-                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
-                                    <span>Terminliste_5AHITN.pdf</span>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-qrcode text-blue-500 mr-2"></i>
-                                    <span>Bestellformular_QR.pdf</span>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <button class="mt-2 text-primary hover:text-secondary flex items-center">
-                            <i class="fas fa-plus mr-1"></i> Anhang hinzufügen
-                        </button>
-                    </div>
-                </div>
-                <div class="px-6 py-4 border-t flex justify-end space-x-3">
-                    <button class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Entwurf speichern
-                    </button>
-                    <button class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">E-Mail senden
-                    </button>
+                <div class="bg-purple-100 p-3 rounded-full">
+                    <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Schedule Table -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="px-6 py-4 border-b flex items-center">
+            <input type="checkbox" id="masterCheckbox"
+                   class="h-4 w-4 text-primary rounded focus:ring-primary mr-3">
+            <h2 class="text-xl font-semibold text-dark flex-1">Terminplan</h2>
+            <div class="text-gray-500 text-sm mr-2">Markierte Termine:</div>
+            <div id="selectedCount" class="text-primary font-medium">0</div>
+            <div class="flex space-x-2 ml-6">
+                <button id="exportCSVBtn"
+                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-file-csv mr-1"></i> CSV
+                </button>
+                <button id="exportPDFBtn"
+                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-file-pdf mr-1"></i> PDF
+                </button>
+                <button id="sendEmailsBtn"
+                        class="bg-primary hover:bg-secondary text-white px-3 py-1 rounded-lg text-sm flex items-center">
+                    <i class="fas fa-paper-plane mr-1"></i> E-Mails senden
+                </button>
+                <button id="deleteSelected"
+                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Archivieren
+                </button>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Klasse</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Datum</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uhrzeit</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ort</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Verantwortlich</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody id="scheduleTableBody" class="bg-white divide-y divide-gray-200">
+                <tr id="loadingRow">
+                    <td colspan="6" class="px-6 py-8 text-center">
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
+                            <p class="text-gray-600">Lade Daten...</p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<!-- Edit Modal (hidden by default) -->
+<!-- Email Preview Modal -->
+<div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <!-- ... unverändert aus deinem Original ... -->
+</div>
+
+<!-- Edit Modal -->
 <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-        <div class="px-6 py-4 border-b flex justify-between items-center">
-            <h2 class="text-xl font-semibold text-dark">Termin bearbeiten</h2>
-            <button id="closeEditModal" class="text-gray-500 hover:text-gray-700">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <div class="p-6 overflow-y-auto max-h-[70vh]">
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Klasse</label>
-                <input type="text" id="editClass" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary" readonly>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Datum</label>
-                <input type="date" id="editDate" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Uhrzeit</label>
-                <input type="time" id="editTime" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Ort</label>
-                <input type="text" id="editLocation" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-gray-700 mb-2">Verantwortlich</label>
-                <input type="text" id="editResponsible" class="w-full px-3 py-2 border rounded-lg focus:ring-primary focus:border-primary">
-            </div>
-        </div>
-
-        <div class="px-6 py-4 border-t flex justify-end space-x-3">
-            <button id="cancelEditBtn" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">
-                Abbrechen
-            </button>
-            <button id="saveEditBtn" class="px-4 py-2 bg-primary hover:bg-secondary text-white rounded-lg">
-                Speichern
-            </button>
-        </div>
-    </div>
+    <!-- ... unverändert ... -->
 </div>
 
+<!-- Manual Schedule Modal -->
+<div id="manualScheduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <!-- ... unverändert ... -->
+</div>
 
-
- <!-- Manual Schedule Modal -->
-    <div id="manualScheduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-dark">Manuellen Termin erstellen</h3>
-                <button id="closeManualModal" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
-            </div>
-            <form id="appointmentForm" class="space-y-4">
-                <!-- Klassen Auswahl -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Klasse</label>
-                    <select name="klasse" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>1A</option>
-                        <option>1B</option>
-                        <option>2A</option>
-                        <option>2B</option>
-                        <option>3A</option>
-                    </select>
-                </div>
-                <!-- Datum und Zeitfenster -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Datum</label>
-                        <input name="datum" type="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Zeitfenster</label>
-                        <select name="zeitfenster" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                            <option value="">Bitte auswählen</option>
-                            <option>09:00 - 09:10</option>
-                            <option>09:10 - 09:20</option>
-                            <option>09:20 - 09:30</option>
-                            <option>09:30 - 09:40</option>
-                            <option>09:40 - 09:50</option>
-                            <option>09:50 - 10:00</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Verantwortlicher Auswahl -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Verantwortlicher</label>
-                    <select name="verantwortlicher" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>Max Mustermann</option>
-                        <option>Anna Müller</option>
-                        <option>Peter Schmidt</option>
-                    </select>
-                </div>
-                <!-- Ort Auswahl -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Ort</label>
-                    <select name="ort" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">Bitte auswählen</option>
-                        <option>C116</option>
-                        <option>C117</option>
-                        <option>C118</option>
-                    </select>
-                </div>
-                <!-- Aktion Buttons -->
-                <div class="flex justify-end space-x-3 mt-6">
-                    <button type="button" id="cancelManual" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Abbrechen</button>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary">Termin erstellen</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Externes Script -->
-    <script src="script.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>

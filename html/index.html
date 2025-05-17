@@ -1000,46 +1000,65 @@ Ihr Fotografie-Team
         });
         [closeAutoModal, cancelAuto].forEach(btn => btn.addEventListener('click', () => confirmAutoModal.classList.add('hidden')));
         [closeManualModal, cancelManual].forEach(btn => btn.addEventListener('click', () => manualScheduleModal.classList.add('hidden')));
-        confirmAuto.addEventListener('click', async () => {
-            try {
-                confirmAutoModal.classList.add('hidden');
 
+    confirmAuto.addEventListener('click', async () => {
+        try {
+            confirmAutoModal.classList.add('hidden');
 
+            // 1. Alle Termine sofort entfernen
+            scheduleTableBody.innerHTML = '';
 
-                // Zeige Ladeindikator
-                showNotification('Automatische Terminplanung wird durchgeführt...', 'blue-500', 'fa-spinner fa-spin');
+            // 2. Ladebalken anzeigen
+            const loadingRow = document.createElement('tr');
+            loadingRow.id = 'loadingRow';
+            loadingRow.innerHTML = `
+                <td colspan="6" class="px-6 py-8 text-center">
+                    <div class="flex flex-col items-center justify-center">
+                        <i class="fas fa-circle-notch loading-spinner text-3xl text-primary mb-2"></i>
+                        <p class="text-gray-600">Terminplan wird generiert...</p>
+                    </div>
+                </td>
+            `;
+            scheduleTableBody.appendChild(loadingRow);
 
-                // API aufrufen, um die Skripte zu starten
-                const response = await fetch('/api/generate_schedule', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+            // Zeige Lade-Notification
+            showNotification('Automatische Terminplanung wird durchgeführt...', 'blue-500', 'fa-spinner fa-spin');
 
-                const result = await response.json();
-
-                if (result.success) {
-                    showNotification('Terminplan erfolgreich generiert!', 'green-500', 'fa-check-circle');
-
-
-                    // Kleine Verzögerung, um sicherzustellen, dass die Datei geschrieben wurde
-                    setTimeout(async () => {
-                        // Daten neu laden
-                        const jsonData = await loadJsonData();
-                        if (jsonData) {
-                            const tableData = prepareTableData(jsonData);
-                            renderScheduleTable(tableData);
-                        }
-                    }, 2000);
-                } else {
-                    showNotification('Fehler: ' + result.message, 'red-500', 'fa-exclamation-circle');
+            // API aufrufen, um die Skripte zu starten
+            const response = await fetch('/api/generate_schedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-            } catch (error) {
-                console.error('Fehler:', error);
-                //showNotification('Fehler beim Generieren des Terminplans', 'red-500', 'fa-exclamation-circle');
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Kleine Verzögerung, um sicherzustellen, dass die Datei geschrieben wurde
+                setTimeout(async () => {
+                    // Daten neu laden
+                    const jsonData = await loadJsonData();
+                    if (jsonData) {
+                        const tableData = prepareTableData(jsonData);
+                        renderScheduleTable(tableData);
+
+                        // 4. Erfolgs-Notification anzeigen
+                        showNotification('Terminplan erfolgreich generiert!', 'green-500', 'fa-check-circle');
+                    }
+                }, 2000);
+            } else {
+                showNotification('Fehler: ' + result.message, 'red-500', 'fa-exclamation-circle');
+                renderErrorState();
             }
-        });
+        } catch (error) {
+            console.error('Fehler:', error);
+            showNotification('Fehler beim Generieren des Terminplans', 'red-500', 'fa-exclamation-circle');
+            renderErrorState();
+        }
+    });
+
+
         appointmentForm.addEventListener('submit', e => {
             e.preventDefault();
             alert('Termin erfolgreich erstellt!');

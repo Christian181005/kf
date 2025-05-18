@@ -378,15 +378,15 @@
     "class_id": 25,
     "kv": "PANG",
     "wl": "Can not access required information with API",
-    "room_kl": [
-      "C115"
-    ],
+    "room_kl": "C115",
     "room_kv": "C115",
     "notified_te": [],
     "priority": 1,
     "date": 20241017,
     "start": 1140,
-    "end": 1150
+    "end": 1150,
+    "d1": "20250510",
+    "nr1": "17:43"
   },
   {
     "name": "2AHEL",

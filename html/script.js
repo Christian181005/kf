@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteBtn = document.getElementById('deleteSelected');
     const scheduleTableBody = document.getElementById('scheduleTableBody');
     const loadingRow = document.getElementById('loadingRow');
+    const selectedCount = document.getElementById('selectedCount');
 
     // Email modal elements
     const emailSubject = document.getElementById('emailSubject');
@@ -85,13 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         notification.innerHTML = `<i class="fas ${icon} mr-2"></i><span>${message}</span>`;
         document.body.appendChild(notification);
         setTimeout(() => notification.remove(), 3000);
-    // Hilfsfunktionen
-    function showNotification(msg, color, icon) {
-        const n = document.createElement('div');
-        n.className = `fixed bottom-4 right-4 bg-${color} text-white px-4 py-2 rounded-lg shadow-lg flex items-center`;
-        n.innerHTML = `<i class="fas ${icon} mr-2"></i><span>${msg}</span>`;
-        document.body.appendChild(n);
-        setTimeout(() => n.remove(), 3000);
     }
 
     function downloadContent(content, filename, type) {
@@ -125,18 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function prepareTableData(data) {
         return data
             .filter(i => i.name && i.class_id)
-            .map(i => {
-                const isGrad  = i.name.startsWith('5');
-                const dur     = isGrad ? 15 : 10;
-                const kvMail  = i.kv ? `kv${i.name.toLowerCase()}@htl-steyr.ac.at` : null;
-                const wlMail  = i.wl && i.wl!=="Can not access required information with API"
-                                ? `wl${i.name.toLowerCase()}@htl-steyr.ac.at`
-                                : null;
-                const clsMail = `klasse${i.name.toLowerCase()}@htl-steyr.ac.at`;
-                let slot      = "Kein Termin";
-                if (i.nr1&&i.d1) slot = i.nr1;
-                else if (i.nr2&&i.d2) slot = i.nr2;
-                else if (i.nr3&&i.d3) slot = i.nr3;
+            .map(item => {
+                const isGraduating = item.name.startsWith('5');
+                const duration = isGraduating ? 15 : 10;
+                const timeSlot = item.nr1 && item.d1 ? item.nr1 :
+                    (item.nr2 && item.d2 ? item.nr2 :
+                        (item.nr3 && item.d3 ? item.nr3 : "Kein Termin"));
+                const kvEmail = item.kv ? `kv${item.name.toLowerCase()}@htl-steyr.ac.at` : null;
+                const wlEmail = item.wl && item.wl !== "Can not access required information with API"
+                    ? `wl${item.name.toLowerCase()}@htl-steyr.ac.at`
+                    : null;
+                const classEmail = `klasse${item.name.toLowerCase()}@htl-steyr.ac.at`;
+
                 return {
                     class: item.name,
                     date: formatDate(item.d1 || item.d2 || item.d3),
@@ -161,9 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateStatistics(data) {
-        scheduledClasses.textContent   = data.filter(i=>i.date!=="Kein Termin").length;
-        teachersToNotify.textContent   = data.reduce((s,i)=>s + (!!i.kvEmail) + (!!i.wlEmail), 0);
-        graduatingClasses.textContent  = data.filter(i=>i.isGraduating).length;
+        const graduatingCount = data.filter(i => i.isGraduating).length;
+        const scheduledCount = data.filter(i => i.date !== "Kein Termin").length;
+        const teachersCount = data.reduce((sum, i) => sum + (!!i.kvEmail) + (!!i.wlEmail), 0);
+        scheduledClasses.textContent = scheduledCount;
+        teachersToNotify.textContent = teachersCount;
+        graduatingClasses.textContent = graduatingCount;
     }
 
     function updateSelectedCount() {
@@ -250,14 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSelectedCount();
         }
     });
-    function updateStatistics(data) {
-        const graduatingCount = data.filter(i => i.isGraduating).length;
-        const scheduledCount = data.filter(i => i.date !== "Kein Termin").length;
-        const teachersCount = data.reduce((sum, i) => sum + (!!i.kvEmail) + (!!i.wlEmail), 0);
-        scheduledClasses.textContent = scheduledCount;
-        teachersToNotify.textContent = teachersCount;
-        graduatingClasses.textContent = graduatingCount;
-    }
 
     // Archivieren
     deleteBtn.addEventListener('click', async () => {
@@ -570,6 +559,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 Daten konnten nicht geladen werden.
             </td></tr>`;
     })();
-
-    // Funktionen für E‑Mail‑Modal (generateEmailContent, populateEmailModal, addRecipient) übernehmen aus index.html…
 });
